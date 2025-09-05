@@ -5,9 +5,25 @@
 
 :::{#content}
 
-[misc](https://jackanory101.github.io/misc/)
+- [misc](https://jackanory101.github.io/misc/)
 
-[ai-images](https://jackanory101.github.io/ai-images/)
+<style>
+#content ul {
+	list-style: none;
+}
+.submenu {
+	font-size:1.8rem;
+}
+</style>
+
+:::{.submenu}
+   - [autotyper](https://jackanory101.github.io/misc/misc/autotyper.html)
+   - [hey siri](https://jackanory101.github.io/misc/misc/hey-siri-voice-chat.html)
+   - [ouroboros](https://jackanory101.github.io/misc/ouroboros/index.html)
+   - [townacarra](https://jackanory101.github.io/misc/townacarra/index.html)
+:::
+
+- [ai-images](https://jackanory101.github.io/ai-images/)
 
 :::
 
