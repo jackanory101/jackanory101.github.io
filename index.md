@@ -18,7 +18,6 @@
 
 :::{.submenu}
    - [autotyper](https://jackanory101.github.io/misc/misc/autotyper.html)
-   - [hey siri](https://jackanory101.github.io/misc/misc/hey-siri-voice-chat.html)
    - [ouroboros](https://jackanory101.github.io/misc/ouroboros/index.html)
    - [townacarra](https://jackanory101.github.io/misc/townacarra/index.html)
 :::
@@ -113,7 +112,7 @@
   .banner-container {
     width: 100%;
     overflow: hidden;
-    background-color: rgba(34, 34, 34, 0.5); /* slightly transparent */
+    background-color: rgba(34, 34, 34, 0.3); /* slightly transparent */
     color: #fff;
     white-space: nowrap;
     box-sizing: border-box;
