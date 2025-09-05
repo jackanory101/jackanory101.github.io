@@ -92,11 +92,6 @@
   document.getElementById('last-updated').textContent =
     lastUpdated.toLocaleDateString();
 </script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Browser Info Banner</title>
 <style>
     @font-face {
         font-family: 'Orbitron';
