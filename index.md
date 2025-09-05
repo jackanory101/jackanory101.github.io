@@ -65,6 +65,7 @@
 		width: 600px;
 		margin: 100px auto 0 auto; /* top/bottom 0, left/right auto */
 		text-align: center;
+	  font-style: italic;
 
     }
 	#footer {
@@ -93,13 +94,6 @@
     lastUpdated.toLocaleDateString();
 </script>
 <style>
-    @font-face {
-        font-family: 'Orbitron';
-        src: url('fonts/Orbitron-VariableFont_wght.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-    }
-
   .banner-container {
     width: 100%;
     overflow: hidden;
