@@ -97,10 +97,7 @@
   .banner-container {
     width: 100%;
     overflow: hidden;
-    background-color: #222;
-/* Slightly transparent black */
-background-color: rgba(34, 34, 34, 0.5); /* 0.8 = 80% opacity */
-
+    background-color: rgba(34, 34, 34, 0.5); /* slightly transparent */
     color: #fff;
     white-space: nowrap;
     box-sizing: border-box;
@@ -108,15 +105,21 @@ background-color: rgba(34, 34, 34, 0.5); /* 0.8 = 80% opacity */
     position: fixed;
     top: 0;
     z-index: 1000;
+    cursor: pointer; /* show that it's clickable */
   }
 
   .banner {
     display: inline-block;
     padding-left: 100%;
     animation: scroll 120s linear infinite;
-	  /*font-family: 'Orbitron';*/
-	  color: #C0C0C0;
-	  font-size:14px;
+    color: #C0C0C0;
+    font-size:14px;
+    /* Allow pause via JS */
+    animation-play-state: running;
+  }
+
+  .banner.paused {
+    animation-play-state: paused;
   }
 
   @keyframes scroll {
@@ -124,7 +127,20 @@ background-color: rgba(34, 34, 34, 0.5); /* 0.8 = 80% opacity */
     100% { transform: translateX(-100%); }
   }
 </style>
+
+<div class="banner-container" id="banner-container">
+  <div class="banner" id="browser-info"></div>
+</div>
+
 <script>
+const banner = document.getElementById('browser-info');
+const container = document.getElementById('banner-container');
+
+// Toggle pause/resume on click
+container.addEventListener('click', () => {
+  banner.classList.toggle('paused');
+});
+
 const info = [];
 
 // ------------------ Banner Update Function ------------------
