@@ -11,7 +11,7 @@
    - [autotyper](https://jackanory101.github.io/misc/misc/autotyper.html)
    - [ouroboros](https://jackanory101.github.io/misc/ouroboros/index.html)
    - [townacarra](https://jackanory101.github.io/misc/townacarra/index.html)
-   - [git guide](https://jackanory101.github.io/misc/git-bare-repo-dotfiles-guide.html)
+   - [git guide](https://jackanory101.github.io/misc/misc/git-bare-repo-dotfiles-guide.html)
 :::
 
 - [ai-images](https://jackanory101.github.io/ai-images/)
