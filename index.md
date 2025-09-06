@@ -7,19 +7,11 @@
 
 - [misc](https://jackanory101.github.io/misc/)
 
-<style>
-#content ul {
-	list-style: none;
-}
-.submenu {
-	font-size:1.8rem;
-}
-</style>
-
 :::{.submenu}
    - [autotyper](https://jackanory101.github.io/misc/misc/autotyper.html)
    - [ouroboros](https://jackanory101.github.io/misc/ouroboros/index.html)
    - [townacarra](https://jackanory101.github.io/misc/townacarra/index.html)
+   - [git guide](https://jackanory101.github.io/misc/git-bare-repo-dotfiles-guide.html)
 :::
 
 - [ai-images](https://jackanory101.github.io/ai-images/)
@@ -31,6 +23,15 @@
 &copy; 2025 JACKANORY101 | Last updated: <span id="last-updated"></span>
 
 :::
+
+<style>
+#content ul {
+	list-style: none;
+}
+.submenu {
+	font-size:1.8rem;
+}
+</style>
 
 <style>
     @font-face {
