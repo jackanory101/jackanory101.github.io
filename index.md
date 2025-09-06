@@ -12,6 +12,7 @@
    - [ouroboros](https://jackanory101.github.io/misc/ouroboros/index.html)
    - [townacarra](https://jackanory101.github.io/misc/townacarra/index.html)
    - [git guide](https://jackanory101.github.io/misc/misc/git-bare-repo-dotfiles-guide.html)
+   - [bob jagger](https://jackanory101.github.io/misc/misc/mick-jagger.html)
 :::
 
 - [ai-images](https://jackanory101.github.io/ai-images/)
