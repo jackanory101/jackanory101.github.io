@@ -95,6 +95,17 @@
       text-align: center;
       padding: 15px;
       background-color: rgba(0,0,0,0.6);
+	  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.6) 0%,
+    rgba(0,0,0,0) 100%
+  );
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.6) 0%,
+    rgba(0,0,0,0.6) 80%,
+    rgba(0,0,0,0) 100%
+  );
       font-size: 0.9em;
       z-index: 2;
 	  text-align: right;
@@ -115,10 +126,16 @@
     width: 100%;
     overflow: hidden;
     background-color: rgba(34, 34, 34, 0.3); /* slightly transparent */
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.2) 0%,
+    rgba(0,0,0,0.3) 80%,
+    rgba(0,0,0,0) 100%
+  );
     color: #fff;
     white-space: nowrap;
     box-sizing: border-box;
-    padding: 10px 0;
+    padding: 10px 0 20px 0;
     position: fixed;
     top: 0;
     z-index: 1000;
