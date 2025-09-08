@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -21,8 +21,18 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+	/* override style defined above for columns.lua */
+	div.columns { display: inherit ; gap: inherit ; }
+	/* override style defined above for numbered source code */
+	pre.numberSource { margin-left: inherit !important ; border-left: none !important ; padding-left: inherit !important ; }
   </style>
-  <link rel="stylesheet" href="../styles/baskerville-panam.css" />
+  <link rel="stylesheet" href="/_styles/baskerville-panam.css" />
+  <link id="stylesheet" rel="stylesheet" href="place-holder" />
+  <style>
+  /* Styles added by the columns.lua pandoc filter */
+    .columns :first-child {margin-top: 0;}
+    .column-span + * {margin-top: 0;}
+  </style>
 </head>
 <body>
 <header id="title-block-header">
