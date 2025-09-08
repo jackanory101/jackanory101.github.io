@@ -9,7 +9,7 @@
 - [autotyper](pages/misc/autotyper.html)
 - [ouroboros](pages/ouroboros/index.html)
 - [townacarra](pages/townacarra/index.html)
-- [git guide](pages/misc/git-bare-repo-dotfiles-guide.html)
+- [git guide](pages/misc/git-github-how-to-guide-02.html)
 - [bob jagger](pages/misc/mick-jagger.html)
 - [ai-images](pages/ai-images/index.html)
 :::
