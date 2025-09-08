@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="../../_styles/index-style2.css" />
+<link rel="stylesheet" href="/_styles/index-style2.css" />
 
 # AI Images
 
