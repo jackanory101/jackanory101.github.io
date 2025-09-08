@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoTyper Guide</title>
+<style>
+  /* Import local fonts */
+  @font-face {
+    font-family: 'Exo2';
+    src: url('../../_fonts/Exo2-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Orbitron';
+    src: url('../../_fonts/Orbitron-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
+  /* Reset and basic layout */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Exo2', sans-serif;
+    background: linear-gradient(135deg, #0d1b3d, #ff8a00); /* dark blue to orange */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    /*text-align: center;*/
+  }
+body > * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+
+  header,h1,h2,h3 {
+    font-family: 'Orbitron', sans-serif;
+  }
+  header {
+    font-size: 3rem;
+    margin: 2rem 0 1rem 0;
+  }
+
+  h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+
+  p {
+    font-family: 'Exo2', sans-serif;
+    font-size: 1rem;
+    max-width: 800px;
+  }
+
+  video {
+    margin: 2rem 0;
+    max-width: 90%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+	/* override style defined above for columns.lua */
+	div.columns { display: inherit ; gap: inherit ; }
+	/* override style defined above for numbered source code */
+	pre.numberSource { margin-left: inherit !important ; border-left: none !important ; padding-left: inherit !important ; }
+
+</style>
+</head>
+<body>
+
+<header>AutoTyper</header>
+
+<video width="640" height="360" controls>
+	<source src="../../_media/autotyper.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
+
+<div id="main">
+<h1 id="autotype-user-guide">AutoType — User Guide</h1>
+<p><strong>AutoType</strong> is a typing simulator. It takes text from a
+file and types it into another program (like Vim, Notepad, or a
+terminal) while playing key click sounds.</p>
+<p>You can run it as:</p>
+<ul class="incremental">
+<li>A <strong>Python script</strong> → <code>autotype.py</code></li>
+<li>A <strong>standalone executable</strong> →
+<code>autotype.exe</code></li>
+</ul>
+<p>The tool makes typing look and sound natural by:</p>
+<ul class="incremental">
+<li>Adding slight randomness to speed.</li>
+<li>Using different sounds for normal keys vs. space/Enter.</li>
+<li>Making occasional typos (then correcting them).</li>
+<li>Adding pauses, like a real person thinking.</li>
+</ul>
+<hr />
+<h2 id="how-to-use">How to Use</h2>
+<ol class="incremental" type="1">
+<li><p>Put your text into a file (default:
+<code>text_to_type.txt</code>).</p></li>
+<li><p>Run AutoType:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> autotype.py</span></code></pre></div>
+<p>or if you have the executable:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">autotype.exe</span></span></code></pre></div>
+<p>You can also specify a file:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">autotype.py</span> mytext.txt</span></code></pre></div></li>
+<li><p>After starting, you’ll have a few seconds
+(<code>FOCUS_DELAY</code>) to switch to the target window.</p></li>
+<li><p>AutoType will type everything automatically.</p></li>
+</ol>
+<hr />
+<h2 id="configuration-config.json">Configuration
+(<code>config.json</code>)</h2>
+<p>AutoType is fully customizable. You can change typing speed,
+randomness, pauses, and sounds.</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 46%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>What it does</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>BASE_INTERVAL</code></td>
+<td>Base delay between keystrokes (seconds).</td>
+<td><code>0.03</code></td>
+</tr>
+<tr class="even">
+<td><code>INTERVAL_VARIATION</code></td>
+<td>Random variation multiplier (min, max).</td>
+<td><code>[0.9, 1.3]</code></td>
+</tr>
+<tr class="odd">
+<td><code>NEWLINE_PAUSE</code></td>
+<td>Pause after pressing Enter (min, max seconds).</td>
+<td><code>[0.4, 0.8]</code></td>
+</tr>
+<tr class="even">
+<td><code>TYPO_PROBABILITY</code></td>
+<td>Chance of making and correcting a typo.</td>
+<td><code>0.02</code></td>
+</tr>
+<tr class="odd">
+<td><code>THINKING_PROBABILITY</code></td>
+<td>Chance of a longer “thinking pause”.</td>
+<td><code>0.01</code></td>
+</tr>
+<tr class="even">
+<td><code>THINKING_PAUSE_RANGE</code></td>
+<td>Duration of thinking pauses (min, max seconds).</td>
+<td><code>[1.0, 2.5]</code></td>
+</tr>
+<tr class="odd">
+<td><code>TYPO_CHARS</code></td>
+<td>Letters used when making a typo.</td>
+<td><code>"abcdefghijklmnopqrstuvwxyz"</code></td>
+</tr>
+<tr class="even">
+<td><code>FOCUS_DELAY</code></td>
+<td>Seconds to wait before typing starts.</td>
+<td><code>2</code></td>
+</tr>
+<tr class="odd">
+<td><code>DEFAULT_FILE</code></td>
+<td>Text file used if none is specified.</td>
+<td><code>"text_to_type.txt"</code></td>
+</tr>
+<tr class="even">
+<td><code>KEY_SOUND_FILE</code></td>
+<td>Sound for normal keys.</td>
+<td><code>"sounds/key_click.wav"</code></td>
+</tr>
+<tr class="odd">
+<td><code>SPACE_ENTER_SOUND_FILE</code></td>
+<td>Sound for Space and Enter.</td>
+<td><code>"sounds/spacebar.wav"</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="notes">Notes</h2>
+<ul class="incremental">
+<li><p>Sounds are optional — if missing, typing is silent.</p></li>
+<li><p>Pauses:</p>
+<ul class="incremental">
+<li><code>NEWLINE_PAUSE</code> happens after Enter.</li>
+<li><code>THINKING_PAUSE_RANGE</code> only happens between words or
+punctuation (never in the middle of a word).</li>
+</ul></li>
+<li><p>Typing speed is variable but always realistic — it won’t go too
+fast or too slow.</p></li>
+</ul>
+</div>
+
+
+</body>
+</html>
+

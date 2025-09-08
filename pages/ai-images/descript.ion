@@ -1,0 +1,6 @@
+fix-index-items.vim Run this on index.md MD file to clean up titles to links
+fix-index-items.vim_bak Run this on html file to clean up links titles
+generate-index.vim Generate markdown index
+highlight-deleted-in-index.vim Run of html index to mark DELETED
+highlight-new-in-index.vim Run this on html file index to mark NEW
+highlight-new-remove.vim Run this on html index to remove NEW

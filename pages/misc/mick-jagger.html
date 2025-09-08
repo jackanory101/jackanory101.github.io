@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sandude - Bob Jagger</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0d1b3d, #ff8a00);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  h1 {
+    margin-bottom: 30px;
+    font-size: 2em;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  }
+  .audio-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px 0; /* add vertical space */
+    box-sizing: border-box;
+  }
+  audio {
+    width: 100%;
+    height: auto; /* allow mobile to size properly */
+    outline: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+</style>
+</head>
+<body>
+
+<h1>Sandude - Bob Jagger</h1>
+
+<div class="audio-container">
+  <audio controls>
+    <source src="../../_media/Sandude - Bob Jagger.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+</body>
+</html>

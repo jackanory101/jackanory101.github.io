@@ -1,0 +1,89 @@
+html {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #090707;
+}
+
+body {
+	background:transparent;
+	font-size:20px;
+	position: relative;
+	z-index: 10;
+}
+
+html::before {
+    content: '';
+    position: absolute;
+    top: -550px;
+    left: -500px;
+    width: 243%;
+    height: 250%;
+    background: repeating-conic-gradient(
+        #99737396 14deg,
+        #664646a3 15deg,
+        transparent 15deg,
+        #a26c6c6e 30deg
+    );
+    animation: rotate-bg 80s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes rotate-bg {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+div#main {
+    margin: auto auto;
+    color: white;
+    text-align: center;
+    margin-top: 200px;
+	background:transparent;
+}
+h1 {
+    margin-bottom: 40px;
+}
+p {
+}
+a:link,a:visited,a:hover,a:visited:hover,a:hover:hover {
+	/* border-bottom: none; */
+	/* border-bottom-style: none; */
+	color: white;
+	text-decoration: none;
+}
+a {
+    transition: color 0.3s ease !important; /* Smooth transition for color change */
+}
+
+/* Style for links when hovered */
+a:hover,a:visited:hover {
+    text-decoration: underline !important; /* Add underline */
+    text-decoration-style: dotted !important; /* Make the underline dotted */
+    text-decoration-thickness: 2px !important; /* Optionally, set thickness of the underline */
+    color: #fff !important;
+}
+.new-item {
+    color: #e19634;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 0.5em;
+	text-decoration:none !important;
+}   
+.deleted {
+	text-decoration: line-through;
+	/*font-size: 0.9em;*/
+	color:#aaa !important;
+    font-style: italic;
+}
+.deleted a {
+	color:#aaa !important;
+}
+.new-item.deleted {
+	font-size:0.5em !important;
+	color: #f4791f !important;
+}
+				
