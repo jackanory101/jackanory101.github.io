@@ -35,7 +35,7 @@
 <style>
     @font-face {
         font-family: 'Exo 2';
-        src: url('_fonts/Exo2-VariableFont_wght.ttf') format('truetype');
+        src: url('/_fonts/Exo2-VariableFont_wght.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
     }
@@ -49,7 +49,7 @@
     /* Background image container */
     body {
       /* Replace the URL with your image */
-      background-image: url('_media/blossom.jpg');
+      background-image: url('/_media/blossom.jpg');
       background-size: cover;      /* Cover the whole window */
       background-position: center; /* Center the image */
       background-repeat: no-repeat;
