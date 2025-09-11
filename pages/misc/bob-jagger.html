@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Audio Visualizer</title>
+<style>
+  body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial; background:#071427; color:#e6eef6; padding:18px;}
+  figure{margin:12px 0;}
+  audio.inline{display:block;margin:6px 0;}
+  .viz-container{margin:6px 0 18px 0; border-radius:8px; overflow:hidden; background:linear-gradient(180deg,#00111a,#001a26); padding:8px}
+  canvas.visualizer{display:block; width:100%; height:120px; border-radius:6px; background:transparent}
+  .viz-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  button, select, label { background:transparent; color:inherit; border:1px solid rgba(255,255,255,0.06); padding:6px 8px; border-radius:6px; cursor:pointer }
+  .note{font-size:13px;color:#94a3b8;margin-top:8px}
+</style>
+</head>
+<body>
+
+<!--<h3>Bob Jagger</h3>-->
+
+<figure>
+  <audio class="inline" controls>
+    <source src="../../_media/Sandude - Bob Jagger.mp3" type="audio/mp3">
+  </audio>
+  <figcaption>Bob Jagger</figcaption>
+</figure>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+  let audioCtx = null;
+
+  const visuals = new WeakMap();
+
+  function ensureAudioCtx() {
+    if (!audioCtx) audioCtx = new AudioCtxClass();
+    return audioCtx;
+  }
+
+  function attachVisualizer(audioEl) {
+    const container = document.createElement('div');
+    container.className = 'viz-container';
+
+    const canvas = document.createElement('canvas');
+    canvas.className = 'visualizer';
+    container.appendChild(canvas);
+
+    const controls = document.createElement('div');
+    controls.className = 'viz-controls';
+
+    const enableBtn = document.createElement('button');
+    enableBtn.textContent = 'Enable Visualizer';
+    controls.appendChild(enableBtn);
+
+    const monitorToggle = document.createElement('button');
+    monitorToggle.textContent = 'Monitor: ON';
+    controls.appendChild(monitorToggle);
+
+    const info = document.createElement('span');
+    info.style.marginLeft = '8px';
+    info.style.color = '#94a3b8';
+    info.textContent = 'FFT: -';
+	  info.style.fontSize = '10px';
+	  info.style.paddingTop = '10px';
+
+    controls.appendChild(info);
+
+    container.appendChild(controls);
+    audioEl.insertAdjacentElement('afterend', container);
+
+    const state = {
+      canvas, ctx: canvas.getContext('2d'),
+      analyser: null,
+      sourceNode: null,
+      raf: null,
+      dataArray: null,
+      bufferLen: 0,
+      gainNode: null,
+      monitor: true,
+    };
+    visuals.set(audioEl, state);
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      state.ctx.setTransform(1,0,0,1,0,0);
+      state.ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function draw() {
+      state.raf = requestAnimationFrame(draw);
+      if (!state.analyser) return;
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      state.analyser.getByteFrequencyData(state.dataArray);
+      state.ctx.clearRect(0,0,w,h);
+      const bars = Math.min(128, state.bufferLen);
+      const barWidth = w / bars;
+      let x = 0;
+      for (let i = 0; i < bars; i++) {
+        const v = state.dataArray[i] / 255;
+        const barHeight = v * h;
+        const hue = Math.round((i / bars) * 260);
+        state.ctx.fillStyle = `hsl(${hue} 85% ${20 + v*50}%)`;
+        state.ctx.fillRect(x, h - barHeight, barWidth - 1, barHeight);
+        x += barWidth;
+      }
+    }
+
+    async function setupAudioNodes() {
+      try {
+        ensureAudioCtx();
+        if (audioCtx.state === 'suspended') await audioCtx.resume();
+
+        if (state.sourceNode) {
+          try { state.sourceNode.disconnect(); } catch(e){}
+          try { state.analyser.disconnect(); } catch(e){}
+          try { state.gainNode.disconnect(); } catch(e){}
+          cancelAnimationFrame(state.raf);
+        }
+
+        audioEl.crossOrigin = 'anonymous';
+        const src = audioCtx.createMediaElementSource(audioEl);
+
+        const analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        const bufferLen = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLen);
+
+        const gainNode = audioCtx.createGain();
+        gainNode.gain.value = 1;
+
+        src.connect(gainNode);
+        src.connect(analyser);
+        if (state.monitor) gainNode.connect(audioCtx.destination);
+
+        state.sourceNode = src;
+        state.analyser = analyser;
+        state.gainNode = gainNode;
+        state.dataArray = dataArray;
+        state.bufferLen = bufferLen;
+
+        if (state.raf) cancelAnimationFrame(state.raf);
+        draw();
+        info.textContent = `FFT bins: ${bufferLen} • sr: ${audioCtx.sampleRate}Hz`;
+        enableBtn.disabled = true;
+      } catch (err) {
+        info.textContent = 'Could not attach (CORS or file://).';
+        console.error('setupAudioNodes error:', err);
+      }
+    }
+
+    enableBtn.addEventListener('click', async () => {
+      await setupAudioNodes();
+      try { if (audioEl.paused) await audioEl.play(); } catch (e) {}
+    });
+
+    monitorToggle.addEventListener('click', () => {
+      state.monitor = !state.monitor;
+      if (state.gainNode) {
+        if (state.monitor) {
+          state.gainNode.connect(audioCtx.destination);
+        } else {
+          try { state.gainNode.disconnect(audioCtx.destination); } catch(e){}
+        }
+      }
+      monitorToggle.textContent = 'Monitor: ' + (state.monitor ? 'ON' : 'OFF');
+    });
+
+    audioEl.addEventListener('play', async () => {
+      if (audioCtx && audioCtx.state === 'suspended') {
+        try { await audioCtx.resume(); } catch(_) {}
+      }
+      if (!state.analyser) {
+        setupAudioNodes();
+      }
+    });
+
+    //audioEl.addEventListener('pause', () => {
+      //if (state.raf) { cancelAnimationFrame(state.raf); state.raf = null; }
+    //});
+  }
+
+  Array.from(document.querySelectorAll('audio')).forEach(a => attachVisualizer(a));
+});
+</script>
+
+<div class="note">
+  <!--Stop starting messes with Visualizer - need to fix!-->
+  Sandude -- Animal Pause -- Master E -- July 2024
+  <br>
+  
+  <code>
+codec_name=mp3
+sample_rate=44100
+channels=2
+<br>
+
+duration=0:04:55.183673
+bit_rate=128000
+  </code><br>
+  
+</div>
+</body>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+	background: radial-gradient(circle, #8a8aff 0%, #000000 50%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  h1 {
+    margin-bottom: 30px;
+    font-size: 2em;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  }
+  .audio-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px 0; /* add vertical space */
+    box-sizing: border-box;
+  }
+  audio {
+	  width:100%;
+	min-width:400px;
+    max-width: 800px;
+    height: auto; /* allow mobile to size properly */
+    outline: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+</style>
+
+</html>
