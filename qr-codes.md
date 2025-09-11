@@ -4,19 +4,32 @@
 :::
 
 :::{#content}
-- [ai-images](pages/ai-images/index.html)
-- [townacarra](pages/townacarra/index.html)
-- [ouroboros](pages/ouroboros/index.html)
-- [qr codes](qr-codes.html)
-- [misc](pages/misc/)
+![townacarra](/_media/qrcodes/townacarra.png)
 
-<!--:::{.submenu}-->
-<!--- [autotyper](pages/misc/autotyper.html)-->
-<!--- [git guide](pages/misc/git-github-how-to-guide-02.html)-->
-<!--- [bob jagger](pages/misc/bob-jagger.html)-->
-<!--:::-->
+![ai-images](/_media/qrcodes/ai-images.png)
+
+![bob-jagger](/_media/qrcodes/bob-jagger.png)
+
+![autotyper](/_media/qrcodes/autotyper.png)
+
+![ouroboros](/_media/qrcodes/ouroboros.png)
+
+![Vegan recipes](/_media/qrcodes/qr-recipes.png)
 
 :::
+
+<style> figcaption { 
+color: #90c8ced9;
+}
+figure {
+background-color: #638cb033;
+border: 1px solid #000;
+}
+
+
+
+
+</style>
 
 :::{#footer}
 
@@ -278,3 +291,4 @@ if (navigator.plugins && navigator.plugins.length > 0) {
 info.push(...browserInfo);
 updateBanner();
 </script>
+
