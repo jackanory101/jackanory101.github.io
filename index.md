@@ -12,7 +12,7 @@
 :::{.submenu}
 - [autotyper](pages/misc/autotyper.html)
 - [git guide](pages/misc/git-github-how-to-guide-02.html)
-- [bob jagger](pages/misc/mick-jagger.html)
+- [bob jagger](pages/misc/bob-jagger.html)
 :::
 
 
