@@ -9,11 +9,11 @@
 - [ouroboros](pages/ouroboros/index.html)
 - [misc](pages/misc/)
 
-:::{.submenu}
-- [autotyper](pages/misc/autotyper.html)
-- [git guide](pages/misc/git-github-how-to-guide-02.html)
-- [bob jagger](pages/misc/bob-jagger.html)
-:::
+<!--:::{.submenu}-->
+<!--- [autotyper](pages/misc/autotyper.html)-->
+<!--- [git guide](pages/misc/git-github-how-to-guide-02.html)-->
+<!--- [bob jagger](pages/misc/bob-jagger.html)-->
+<!--:::-->
 
 
 :::
