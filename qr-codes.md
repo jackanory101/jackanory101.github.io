@@ -4,6 +4,9 @@
 :::
 
 :::{#content}
+
+![[jackanory101 index](./)](/_media/qrcodes/jackanory101.png)
+
 ![[townacarra](./pages/townacarra/index.html)](/_media/qrcodes/townacarra.png)
 
 ![[ai-images](./pages/ai-images/index.html)](/_media/qrcodes/ai-images.png)
