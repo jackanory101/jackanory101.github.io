@@ -1,74 +1,31 @@
-<!DOCTYPE html>
-<html lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>index</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-	/* override style defined above for columns.lua */
-	div.columns { display: inherit ; gap: inherit ; }
-	/* override style defined above for numbered source code */
-	pre.numberSource { margin-left: inherit !important ; border-left: none !important ; padding-left: inherit !important ; }
-  </style>
-  <link rel="stylesheet" href="/_styles/baskerville-panam.css" />
-  <link id="stylesheet" rel="stylesheet" href="place-holder" />
-  <style>
-  /* Styles added by the columns.lua pandoc filter */
-    .columns :first-child {margin-top: 0;}
-    .column-span + * {margin-top: 0;}
-  </style>
-</head>
-<body>
-<div id="main">
-<div class="banner-container">
-<div id="browser-info" class="banner">
+:::{.banner-container}
+:::{.banner #browser-info}
+:::
+:::
 
-</div>
-</div>
-<div id="content">
-<ul class="incremental">
-<li><a href="qr-codes.html">qr codes</a></li>
-<li><a href="pages/ai-images/index.html">ai images</a></li>
-<li><a href="pages/townacarra/index.html">townacarra</a></li>
-<li><a href="pages/ouroboros/index.html">ouroboros</a></li>
-<li><a href="pages/pano-cassie/">pano cassie</a></li>
-<li><a href="pages/misc/autotyper.html">autotyper</a></li>
-<li><a href="pages/misc/git-github-how-to-guide-02.html">git/github
-guide</a></li>
-<li><a href="pages/misc/bob-jagger.html">bob jagger</a></li>
-<li><a href="pages/misc/tv-video.html">video tv demo</a></li>
-<li><a href="pages/misc/links.html">misc links</a></li>
-</ul>
+:::{#content}
+- [Historical rainfall Perth BOM](https://www.bom.gov.au/climate/maps/rainfall/?variable=rainfall&map=totals&period=daily&region=nat&year=2025&month=09&day=12){target="\_blank"}
+- [Vegan dinner](./recipes-1.html){target="\_blank"}
+
+
+
+
 <!--:::{.submenu}-->
 <!--- [autotyper](pages/misc/autotyper.html)-->
-<!--- [git guide](pages/misc/git-github-how-to-guide-02.html)-->
-<!--- [bob jagger](pages/misc/bob-jagger.html)-->
 <!--:::-->
-</div>
-<div id="footer">
-<p>© 2025 JACKANORY101 | Last updated: <span
-id="last-updated"></span></p>
-</div>
-<div id="banner-container" class="banner-container">
-<div id="browser-info" class="banner">
 
+:::
+
+:::{#footer}
+
+&copy; 2025 JACKANORY101 | Last updated: <span id="last-updated"></span>
+
+:::
+
+<div class="banner-container" id="banner-container">
+  <div class="banner" id="browser-info"></div>
 </div>
-</div>
+
 <style>
 /* ------------------ Font ------------------ */
 @font-face {
@@ -119,7 +76,7 @@ body::before {
     margin: 15% auto 0 auto;
     text-align: center;
     font-style: italic;
-    padding-bottom:100px;
+	padding-bottom:100px;
 }
 
 /* Lists and submenu */
@@ -192,12 +149,15 @@ body::before {
     100% { transform: translateX(-100%); }
 }
 </style>
+
+
 <script>
   // Get the last modified date of the current document
   const lastModified = new Date(document.lastModified);
   document.getElementById('last-updated').textContent =
     lastModified.toLocaleDateString();
 </script>
+
 <script>
 const banner = document.getElementById('browser-info');
 const container = document.getElementById('banner-container');
@@ -287,6 +247,6 @@ if (navigator.plugins && navigator.plugins.length > 0) {
 info.push(...browserInfo);
 updateBanner();
 </script>
-</div>
-</body>
-</html>
+
+
+

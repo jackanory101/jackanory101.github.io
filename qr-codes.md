@@ -4,19 +4,21 @@
 :::
 
 :::{#content}
-![townacarra](/_media/qrcodes/townacarra.png)
+![[townacarra](./pages/townacarra/index.html)](/_media/qrcodes/townacarra.png)
 
-![ai-images](/_media/qrcodes/ai-images.png)
+![[ai-images](./pages/ai-images/index.html)](/_media/qrcodes/ai-images.png)
 
-![bob-jagger](/_media/qrcodes/bob-jagger.png)
+![[bob jagger](./pages/misc/bob-jagger.html)](/_media/qrcodes/bob-jagger.png)
 
-![autotyper](/_media/qrcodes/autotyper.png)
+![[autotyper](./pages/misc/autotyper.html)](/_media/qrcodes/autotyper.png)
 
-![ouroboros](/_media/qrcodes/ouroboros.png)
+![[ouroboros](./pages/ouroboros/index.html)](/_media/qrcodes/ouroboros.png)
 
-![vid in tv demo](/_media/qrcodes/vid-in-tv-demo.png)
+![[vid in tv demo](./pages/misc/tv-video.html)](/_media/qrcodes/vid-in-tv-demo.png)
 
-![pano cassie](/_media/qrcodes/pano-cassie.png)
+![[pano cassie](./pages/pano-cassie/)](/_media/qrcodes/pano-cassie.png)
+
+![[Vegan dinner](./pages/misc/recipes-1.html)](/_media/qrcodes/recipes.png)
 :::
 
 :::{#footer}

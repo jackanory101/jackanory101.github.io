@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Fawkes" />
-  <title>qr-codes</title>
+  <title>links</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -43,52 +43,20 @@
 </div>
 </div>
 <div id="content">
-<figure>
-<img src="/_media/qrcodes/townacarra.png" alt="townacarra" />
-<figcaption aria-hidden="true"><a
-href="./pages/townacarra/index.html">townacarra</a></figcaption>
-</figure>
-<figure>
-<img src="/_media/qrcodes/ai-images.png" alt="ai-images" />
-<figcaption aria-hidden="true"><a
-href="./pages/ai-images/index.html">ai-images</a></figcaption>
-</figure>
-<figure>
-<img src="/_media/qrcodes/bob-jagger.png" alt="bob jagger" />
-<figcaption aria-hidden="true"><a
-href="./pages/misc/bob-jagger.html">bob jagger</a></figcaption>
-</figure>
-<figure>
-<img src="/_media/qrcodes/autotyper.png" alt="autotyper" />
-<figcaption aria-hidden="true"><a
-href="./pages/misc/autotyper.html">autotyper</a></figcaption>
-</figure>
-<figure>
-<img src="/_media/qrcodes/ouroboros.png" alt="ouroboros" />
-<figcaption aria-hidden="true"><a
-href="./pages/ouroboros/index.html">ouroboros</a></figcaption>
-</figure>
-<figure>
-<img src="/_media/qrcodes/vid-in-tv-demo.png" alt="vid in tv demo" />
-<figcaption aria-hidden="true"><a href="./pages/misc/tv-video.html">vid
-in tv demo</a></figcaption>
-</figure>
-<figure>
-<img src="/_media/qrcodes/pano-cassie.png" alt="pano cassie" />
-<figcaption aria-hidden="true"><a href="./pages/pano-cassie/">pano
-cassie</a></figcaption>
-</figure>
-<figure>
-<img src="/_media/qrcodes/recipes.png" alt="Vegan dinner" />
-<figcaption aria-hidden="true"><a
-href="./pages/misc/recipes-1.html">Vegan dinner</a></figcaption>
-</figure>
+<ul class="incremental">
+<li><a
+href="https://www.bom.gov.au/climate/maps/rainfall/?variable=rainfall&amp;map=totals&amp;period=daily&amp;region=nat&amp;year=2025&amp;month=09&amp;day=12"
+target="_blank">Historical rainfall Perth BOM</a></li>
+<li><a href="./recipes-1.html" target="_blank">Vegan dinner</a></li>
+</ul>
+<!--:::{.submenu}-->
+<!--- [autotyper](pages/misc/autotyper.html)-->
+<!--:::-->
 </div>
 <div id="footer">
 <p>© 2025 JACKANORY101 | Last updated: <span
 id="last-updated"></span></p>
 </div>
-<p><span id="last-updated"></span></p>
 <div id="banner-container" class="banner-container">
 <div id="browser-info" class="banner">
 
@@ -133,57 +101,21 @@ body::before {
     z-index: 0;
 }
 
-/* ------------------ Content and Figures ------------------ */
+/* ------------------ Content ------------------ */
 #content {
     position: relative;
     z-index: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    padding: 16px;
-    padding-bottom: 100px;
-    box-sizing: border-box;
-    max-width: 1200px;
-    width: 100%;
-    margin: 100px auto 0 auto;
-}
-
-#content figure {
-    flex: 0 1 200px;
-    margin: 0;
-    box-sizing: border-box;
-    background-color: #638cb033;
-    border: 1px solid #000;
-}
-
-#content figure img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-#content figure figcaption {
+    font-size: 2.5rem;
+    color: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 15% auto 0 auto;
     text-align: center;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    color: #90c8ced9; /* kept your original color */
+    font-style: italic;
+    padding-bottom:100px;
 }
 
-/* Optional: smaller screens adjust figure size */
-@media (max-width: 640px) {
-    #content figure {
-        flex: 0 1 45%;
-    }
-}
-
-@media (max-width: 400px) {
-    #content figure {
-        flex: 0 1 100%;
-    }
-}
-
-/* Lists and submenu inside content */
+/* Lists and submenu */
 #content ul {
     list-style: none;
 }
@@ -241,7 +173,7 @@ body::before {
     animation: scroll 120s linear infinite;
     color: #C0C0C0;
     font-size: 14px;
-    animation-play-state: running; /* allow JS pause */
+    animation-play-state: running;
 }
 
 .banner.paused {
@@ -272,7 +204,7 @@ const info = [];
 
 // ------------------ Banner Update Function ------------------
 function updateBanner() {
-  banner.textContent = info.join('    -----❤️-----    ');
+  document.getElementById('browser-info').textContent = info.join('    -----❤️-----    ');
 }
 
 // ------------------ Fetch Public IP ------------------
@@ -280,7 +212,7 @@ fetch('https://api.ipify.org?format=json')
   .then(res => res.json())
   .then(data => {
     const ip = data.ip;
-    info.unshift(`Public IP: ${ip}`);
+    info.unshift(`Public IP: ${ip}`); // add to the front
     updateBanner();
 
     // ------------------ Rough IP Geolocation ------------------
@@ -288,36 +220,8 @@ fetch('https://api.ipify.org?format=json')
   })
   .then(res => res.json())
   .then(geo => {
-    let ipLocationText = 'IP Location: unavailable';
     if (geo) {
-      ipLocationText = `IP Location: ${geo.city || 'N/A'}, ${geo.region || 'N/A'}, ${geo.country_name || 'N/A'}`;
-    }
-
-    // Insert IP Location at index 1 (after Public IP)
-    info.splice(1, 0, ipLocationText);
-    updateBanner();
-
-    // ------------------ Precise Geolocation ------------------
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          const lat = position.coords.latitude.toFixed(4);
-          const lon = position.coords.longitude.toFixed(4);
-          const accuracy = position.coords.accuracy.toFixed(0);
-          const preciseText = `Precise Location: ${lat}, ${lon} (±${accuracy}m)`;
-
-          // Insert immediately after IP Location (index 2)
-          info.splice(2, 0, preciseText);
-          updateBanner();
-        },
-        error => {
-          info.splice(2, 0, 'Precise Location: unavailable');
-          updateBanner();
-        },
-        { enableHighAccuracy: true, maximumAge: 30000, timeout: 5000 }
-      );
-    } else {
-      info.splice(2, 0, 'Precise Location: not supported');
+      info.splice(1, 0, `IP Location: ${geo.city || 'N/A'}, ${geo.region || 'N/A'}, ${geo.country_name || 'N/A'}`);
       updateBanner();
     }
   })
@@ -358,7 +262,7 @@ if (Intl && Intl.DateTimeFormat) {
   browserInfo.push(`Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`);
 }
 
-// Connection info
+// Connection info (if supported)
 const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
 if (connection) {
   if (connection.effectiveType) browserInfo.push(`Connection Type: ${connection.effectiveType}`);
@@ -366,13 +270,13 @@ if (connection) {
   if (connection.rtt) browserInfo.push(`RTT: ${connection.rtt} ms`);
 }
 
-// Optional plugins
+// Optional plugins / mime types (legacy)
 if (navigator.plugins && navigator.plugins.length > 0) {
   const pluginNames = Array.from(navigator.plugins).map(p => p.name).join(', ');
   browserInfo.push(`Plugins: ${pluginNames}`);
 }
 
-// Append other browser info after IP & precise location
+// Append browser info after IP & location
 info.push(...browserInfo);
 updateBanner();
 </script>

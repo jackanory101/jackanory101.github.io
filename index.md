@@ -4,12 +4,22 @@
 :::
 
 :::{#content}
+- [qr codes](qr-codes.html)
 - [ai images](pages/ai-images/index.html)
 - [townacarra](pages/townacarra/index.html)
 - [ouroboros](pages/ouroboros/index.html)
 - [pano cassie](pages/pano-cassie/)
-- [qr codes](qr-codes.html)
-- [misc](pages/misc/)
+- [autotyper](pages/misc/autotyper.html)
+- [git/github guide](pages/misc/git-github-how-to-guide-02.html)
+- [bob jagger](pages/misc/bob-jagger.html)
+- [video tv demo](pages/misc/tv-video.html)
+- [misc links](pages/misc/links.html)
+
+
+
+
+
+
 
 <!--:::{.submenu}-->
 <!--- [autotyper](pages/misc/autotyper.html)-->
@@ -72,13 +82,14 @@ body::before {
 #content {
     position: relative;
     z-index: 1;
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: white;
     width: 90%;
     max-width: 600px;
     margin: 15% auto 0 auto;
     text-align: center;
     font-style: italic;
+	padding-bottom:100px;
 }
 
 /* Lists and submenu */
