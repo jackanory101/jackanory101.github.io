@@ -14,8 +14,7 @@
 
 ![ouroboros](/_media/qrcodes/ouroboros.png)
 
-![Vegan recipes](/_media/qrcodes/qr-recipes.png)
-
+![vid in tv demo](/_media/qrcodes/vid-in-tv-demo.png)
 :::
 
 <style> figcaption { 
