@@ -15,6 +15,8 @@
 ![ouroboros](/_media/qrcodes/ouroboros.png)
 
 ![vid in tv demo](/_media/qrcodes/vid-in-tv-demo.png)
+
+![pano cassie](/_media/qrcodes/pano-cassie.png)
 :::
 
 <style> figcaption { 
