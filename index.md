@@ -25,115 +25,98 @@
 
 :::
 
+<div class="banner-container" id="banner-container">
+  <div class="banner" id="browser-info"></div>
+</div>
+
 <style>
+/* ------------------ Font ------------------ */
+@font-face {
+    font-family: 'Exo 2';
+    src: url('/_fonts/Exo2-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ------------------ Global Styles ------------------ */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Exo 2';
+}
+
+/* ------------------ Body Background ------------------ */
+body {
+    background-image: url('/_media/blossom.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    max-width: 100%;
+}
+
+/* Dark overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+}
+
+/* ------------------ Content ------------------ */
+#content {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    color: white;
+    width: 90%;
+    max-width: 600px;
+    margin: 15% auto 0 auto;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Lists and submenu */
 #content ul {
-	list-style: none;
+    list-style: none;
 }
+
 .submenu {
-	font-size:1.8rem;
+    font-size: 1.8rem;
 }
-</style>
 
-<style>
-    @font-face {
-        font-family: 'Exo 2';
-        src: url('/_fonts/Exo2-VariableFont_wght.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-    }
+/* ------------------ Footer ------------------ */
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: right;
+    padding: 15px;
+    font-size: 0.9em;
+    z-index: 2;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.6) 0%,
+        rgba(0,0,0,0.6) 80%,
+        rgba(0,0,0,0) 100%
+    );
+}
 
-    /* Make html and body take up full height and remove default margin */
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
+#footer p {
+    margin-right: 100px;
+}
 
-    /* Background image container */
-    body {
-      /* Replace the URL with your image */
-      background-image: url('/_media/blossom.jpg');
-      background-size: cover;      /* Cover the whole window */
-      background-position: center; /* Center the image */
-      background-repeat: no-repeat;
-      background-attachment: fixed; /* Keep static on scroll */
-      position: relative;
-	  max-width:100%;
-	  font-family: 'Exo 2';
-    }
-
-    /* Dark overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black overlay */
-      z-index: 0;
-    }
-
-    /* Content above overlay */
-    #content {
-      position: relative;
-      z-index: 1;
-	  font-size: 3rem;
-      color: white;
-  width: 90%;          /* 90% of screen width */
-  max-width: 600px;    /* but don’t exceed 600px */
-  margin: 15% auto 0 auto; /* top margin relative to screen height */
-
-		text-align: center;
-	  font-style: italic;
-
-    }
-	#footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-	  font-family: 'Exo 2';
-      color: white;
-      text-align: center;
-      padding: 15px;
-      background-color: rgba(0,0,0,0.6);
-	  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.6) 0%,
-    rgba(0,0,0,0) 100%
-  );
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.6) 0%,
-    rgba(0,0,0,0.6) 80%,
-    rgba(0,0,0,0) 100%
-  );
-      font-size: 0.9em;
-      z-index: 2;
-	  text-align: right;
-    }
-	#footer p {
-		margin-right:100px;
-	}
-  </style>
-<script>
-  // Set last updated date to 8 days ago
-  const lastUpdated = new Date();
-  lastUpdated.setDate(lastUpdated.getDate() - 8); // subtract 8 days
-  document.getElementById('last-updated').textContent =
-    lastUpdated.toLocaleDateString();
-</script>
-<style>
-  .banner-container {
+/* ------------------ Banner ------------------ */
+.banner-container {
     width: 100%;
     overflow: hidden;
-    background-color: rgba(34, 34, 34, 0.3); /* slightly transparent */
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.2) 0%,
-    rgba(0,0,0,0.3) 80%,
-    rgba(0,0,0,0) 100%
-  );
     color: #fff;
     white-space: nowrap;
     box-sizing: border-box;
@@ -141,32 +124,41 @@
     position: fixed;
     top: 0;
     z-index: 1000;
-    cursor: pointer; /* show that it's clickable */
-  }
+    cursor: pointer;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.3) 80%,
+        rgba(0,0,0,0) 100%
+    );
+}
 
-  .banner {
+.banner {
     display: inline-block;
     padding-left: 100%;
     animation: scroll 120s linear infinite;
     color: #C0C0C0;
-    font-size:14px;
-    /* Allow pause via JS */
+    font-size: 14px;
     animation-play-state: running;
-  }
+}
 
-  .banner.paused {
+.banner.paused {
     animation-play-state: paused;
-  }
+}
 
-  @keyframes scroll {
+@keyframes scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
-  }
+}
 </style>
 
-<div class="banner-container" id="banner-container">
-  <div class="banner" id="browser-info"></div>
-</div>
+
+<script>
+  // Get the last modified date of the current document
+  const lastModified = new Date(document.lastModified);
+  document.getElementById('last-updated').textContent =
+    lastModified.toLocaleDateString();
+</script>
 
 <script>
 const banner = document.getElementById('browser-info');
@@ -207,28 +199,6 @@ fetch('https://api.ipify.org?format=json')
     info.unshift('Public IP or Geo: unavailable');
     updateBanner();
   });
-
-// ------------------ Precise Geolocation ------------------
-if ('geolocation' in navigator) {
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      const lat = position.coords.latitude.toFixed(4);
-      const lon = position.coords.longitude.toFixed(4);
-      const accuracy = position.coords.accuracy.toFixed(0);
-      info.splice(2, 0, `Precise Location: ${lat}, ${lon} (±${accuracy}m)`); // insert after IP & rough geo
-      updateBanner();
-    },
-    error => {
-      console.warn('Geolocation denied or unavailable:', error.message);
-      info.splice(2, 0, 'Precise Location: unavailable');
-      updateBanner();
-    },
-    { enableHighAccuracy: true, maximumAge: 30000, timeout: 5000 }
-  );
-} else {
-  info.splice(2, 0, 'Precise Location: not supported');
-  updateBanner();
-}
 
 // ------------------ Other Browser / Navigator Info ------------------
 const browserInfo = [];
@@ -279,3 +249,5 @@ if (navigator.plugins && navigator.plugins.length > 0) {
 info.push(...browserInfo);
 updateBanner();
 </script>
+
+
