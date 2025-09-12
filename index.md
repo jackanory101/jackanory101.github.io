@@ -4,7 +4,7 @@
 :::
 
 :::{#content}
-- [ai-images](pages/ai-images/index.html)
+- [ai images](pages/ai-images/index.html)
 - [townacarra](pages/townacarra/index.html)
 - [ouroboros](pages/ouroboros/index.html)
 - [pano cassie](pages/pano-cassie/)
