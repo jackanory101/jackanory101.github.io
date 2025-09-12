@@ -1,0 +1,182 @@
+<!doctype html>
+<!--Find opacity for tv-frame in CSS and enable (i.e. lower transparency of TV), then adjust .tv-screen to fit video inside tv screen-->
+<!--.tv-container width can then be adjusted to change size of tv and video together.-->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>TV Video with Detached Controls and Zoom</title>
+<style>
+  body {
+    background:#111;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+    color:#fff;
+    font-family:'Courier New', monospace;
+  }
+.tv-container {
+	position: relative;
+	width: 1243px;
+	max-width: 90vw;
+}
+.tv-screen {
+	position: absolute;
+	top: 11%;
+	left: -34%;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	border-radius: 4px;
+	transform-origin: center center;
+	transform: scale(var(--zoom, 0.3));
+}
+
+  .tv-screen video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+.tv-frame {
+	width: 100%;
+	display: block;
+	position: relative;
+	z-index: 2;
+	pointer-events: none;
+	/* opacity: 20%; */
+}
+
+  .controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    background:#222;
+    padding:12px 20px;
+    border-radius:12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+  }
+
+  .controls button {
+    background: linear-gradient(145deg,#666,#222);
+    border: 2px solid #aaa;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    font-weight:bold;
+    font-size:18px;
+    color:#fff;
+    box-shadow: inset -2px -2px 4px rgba(255,255,255,0.2),
+                inset 2px 2px 4px rgba(0,0,0,0.6);
+    transition: all 0.1s;
+  }
+
+  .controls button:hover {
+    box-shadow: inset -2px -2px 6px rgba(255,255,255,0.3),
+                inset 2px 2px 6px rgba(0,0,0,0.8);
+  }
+
+  .controls label {
+    display: flex;
+    align-items: center;
+    gap:6px;
+    font-size:14px;
+    user-select: none;
+  }
+
+  .controls input[type="range"] {
+    -webkit-appearance: none;
+    width: 180px;
+    height: 8px;
+    background: #444;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(145deg,#666,#222);
+    border: 2px solid #aaa;
+    border-radius: 50%;
+    box-shadow: inset -2px -2px 4px rgba(255,255,255,0.2),
+                inset 2px 2px 4px rgba(0,0,0,0.6);
+    cursor: pointer;
+  }
+
+  .controls input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(145deg,#666,#222);
+    border: 2px solid #aaa;
+    border-radius: 50%;
+    box-shadow: inset -2px -2px 4px rgba(255,255,255,0.2),
+                inset 2px 2px 4px rgba(0,0,0,0.6);
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <div class="tv-container">
+    <img src="/_media/tv.png" class="tv-frame" alt="TV frame">
+    <div class="tv-screen">
+      <video id="video" src="/_media/boat-people.mp4" autoplay muted loop playsinline></video>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="playPause">▶</button>
+    <button id="muteBtn">🔇</button> <!-- starts muted -->
+    <label>Vol<input type="range" id="volume" min="0" max="1" step="0.01" value="0.5"></label>
+    <label>Seek<input type="range" id="seek" min="0" max="100" value="0"></label>
+  </div>
+
+<script>
+const video = document.getElementById('video');
+const playPause = document.getElementById('playPause');
+const muteBtn = document.getElementById('muteBtn');
+const volume = document.getElementById('volume');
+const seek = document.getElementById('seek');
+
+// Ensure mute button shows correct initial state
+muteBtn.textContent = video.muted ? "🔇" : "🔊";
+
+// Play/pause toggle
+playPause.addEventListener('click', ()=>{
+  if(video.paused){
+    video.play();
+    playPause.textContent = "⏸";
+  } else {
+    video.pause();
+    playPause.textContent = "▶";
+  }
+});
+
+// Mute/unmute toggle
+muteBtn.addEventListener('click', ()=>{
+  video.muted = !video.muted;
+  muteBtn.textContent = video.muted ? "🔇" : "🔊";
+});
+
+// Volume control
+volume.addEventListener('input', ()=> video.volume = volume.value);
+
+// Seek control
+video.addEventListener('timeupdate', ()=>{
+  if(!seek.dragging) seek.value = (video.currentTime / video.duration) * 100;
+});
+seek.addEventListener('input', ()=>{
+  seek.dragging = true;
+  video.currentTime = (seek.value / 100) * video.duration;
+});
+seek.addEventListener('change', ()=> seek.dragging=false);
+</script>
+</body>
+</html>
+
