@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>Some apps</title>
-	</head>
-	<video class="inline" width="100%" controls autoplay muted loop poster="">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Some apps</title>
+    <style>
+        /* Make video responsive */
+        video.inline {
+            display: block;
+            max-width: 90%;   /* never bigger than 90% of viewport width */
+            height: auto;     /* maintain aspect ratio */
+            margin: 20px auto; /* center horizontally with some top/bottom spacing */
+            border-radius: 8px; /* optional rounded corners */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* subtle shadow */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7; /* optional background */
+        }
+    </style>
+	</body>
+	<video class="inline" width="1280px" controls autoplay muted loop poster="">
 		<source src="/_media/some-apps.mp4" type="video/mp4">
 	</video>
 	
