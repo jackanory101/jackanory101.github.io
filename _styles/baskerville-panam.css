@@ -683,7 +683,7 @@ hr{border:0px;border-top:1px solid #bbb;width:100%;height:0px}
 
 hr+h1{border-top:none;padding-top:0px}
 
-ul,ol{font-size:90%;margin-top:10px;margin-bottom:15px;padding-left:30px}
+ul,ol{font-size:90%;margin-top:10px;margin-bottom:15px;padding-left:30px;text-align:left;}
 
 ul{list-style:circle}
 

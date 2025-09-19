@@ -14,6 +14,7 @@
 - [bob jagger](pages/misc/bob-jagger.html)
 - [video tv demo](pages/misc/tv-video.html)
 - [misc links](pages/misc/links.html)
+- [some nice apps](pages/misc/some-apps.html)
 
 
 
