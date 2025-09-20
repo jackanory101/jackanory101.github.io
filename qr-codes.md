@@ -21,7 +21,6 @@
 
 ![[pano cassie](./pages/pano-cassie/)](/_media/qrcodes/pano-cassie.png)
 
-![[Vegan dinner](./pages/misc/recipes-1.html)](/_media/qrcodes/recipes.png)
 :::
 
 :::{#footer}
