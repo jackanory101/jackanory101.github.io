@@ -10,11 +10,9 @@
 - [ouroboros](pages/ouroboros/index.html)
 - [pano cassie](pages/pano-cassie/)
 - [autotyper](pages/misc/autotyper.html)
-- [git/github guide](pages/misc/git-github-how-to-guide-02.html)
 - [bob jagger](pages/misc/bob-jagger.html)
 - [video tv demo](pages/misc/tv-video.html)
-- [misc links](pages/misc/links.html)
-- [some nice apps (make sure to unmute video!)](pages/misc/some-apps.html)
+- [Time mag: Greatest People in Health](pages/misc/time-people-of-year.html)
 
 
 
