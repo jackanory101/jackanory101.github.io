@@ -12,7 +12,7 @@
 - [autotyper](pages/misc/autotyper.html)
 - [bob jagger](pages/misc/bob-jagger.html)
 - [video tv demo](pages/misc/tv-video.html)
-
+- [bibliomancy](pages/misc/bibliomancy.html)
 
 
 
