@@ -95,26 +95,63 @@ let fitMode = true;
 let baseAudioSpeed = 0.68; // adjustable with < >
 
 // Load images from images.txt
+// Load images from images.txt (sequentially to avoid 404s on GitHub Pages)
 fetch('images.txt')
   .then(r => r.text())
-  .then(text => {
+  .then(async text => {
     const filenames = text.split(/\r?\n/).filter(line => line.trim() !== "");
-    if(filenames.length===0) overlay.textContent = "No images found in images.txt";
+    if (filenames.length === 0) {
+      overlay.textContent = "No images found in images.txt";
+      return;
+    }
+
     let loaded = 0;
-    filenames.forEach(src=>{
+    for (const src of filenames) {
       const img = new Image();
       img.src = src;
-      img.onload = ()=>{
-        loaded++;
-        if(loaded === filenames.length) {
-          overlay.textContent = "Ready";
-          start();
-        }
-      };
+      await new Promise((resolve, reject) => {
+        img.onload = () => {
+          loaded++;
+          overlay.textContent = `Loading ${loaded}/${filenames.length}...`;
+          resolve();
+        };
+        img.onerror = () => {
+          overlay.textContent = `Error loading: ${src}`;
+          resolve(); // continue even if one fails
+        };
+      });
       images.push(img);
-    });
+    }
+
+    overlay.textContent = "Ready";
+    start();
   })
-  .catch(err=> overlay.textContent = "Failed to load images.txt");
+  .catch(err => overlay.textContent = "Failed to load images.txt: " + err);
+
+//
+//
+//
+//
+//fetch('images.txt')
+  //.then(r => r.text())
+  //.then(text => {
+    //const filenames = text.split(/\r?\n/).filter(line => line.trim() !== "");
+    //if(filenames.length===0) overlay.textContent = "No images found in images.txt";
+    //let loaded = 0;
+    //filenames.forEach(src=>{
+      //const img = new Image();
+      //img.src = src;
+      //img.onload = ()=>{
+        //loaded++;
+        //if(loaded === filenames.length) {
+          //overlay.textContent = "Ready";
+          //start();
+        //}
+      //};
+      //images.push(img);
+    //});
+  //})
+  //.catch(err=> overlay.textContent = "Failed to load images.txt");
 
 canvas.addEventListener("wheel", e=>{
   zoomSpeed += e.deltaY * -0.001;
