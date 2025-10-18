@@ -95,7 +95,7 @@ let fitMode = true;
 let baseAudioSpeed = 0.68; // adjustable with < >
 
 // Load images from images.txt
-// Load images from images.txt (sequentially to avoid 404s on GitHub Pages)
+// Load images from images.txt SEQUENTIALLY
 fetch('images.txt')
   .then(r => r.text())
   .then(async text => {
@@ -107,26 +107,29 @@ fetch('images.txt')
 
     let loaded = 0;
     for (const src of filenames) {
-      const img = new Image();
-      img.src = src;
       await new Promise((resolve, reject) => {
+        const img = new Image();
         img.onload = () => {
           loaded++;
-          overlay.textContent = `Loading ${loaded}/${filenames.length}...`;
+          overlay.textContent = `Loaded ${loaded}/${filenames.length}`;
+          images.push(img);
           resolve();
         };
         img.onerror = () => {
-          overlay.textContent = `Error loading: ${src}`;
-          resolve(); // continue even if one fails
+          console.warn("Failed to load:", src);
+          overlay.textContent = `Error loading ${src}`;
+          // resolve anyway to keep going
+          resolve();
         };
+        img.src = src.trim();
       });
-      images.push(img);
     }
 
-    overlay.textContent = "Ready";
+    overlay.textContent = "All images loaded — Ready!";
     start();
   })
   .catch(err => overlay.textContent = "Failed to load images.txt: " + err);
+
 
 //
 //
