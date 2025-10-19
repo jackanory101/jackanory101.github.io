@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Infinite Zoom Journey + Audio (Mobile-Friendly)</title>
+<title>Infinite Zoom Journey + Audio</title>
 <style>
 html, body {
   margin: 0;
@@ -52,6 +52,10 @@ h1 {
   color: white;
   font-family: Arial;
   font-size: 18px;
+  text-shadow:
+    0 0 2px rgba(0,0,0,0.9),
+    0 0 6px rgba(0,0,0,0.75),
+    0 0 10px rgba(0,0,0,0.6);
 }
 </style>
 </head>
@@ -61,11 +65,12 @@ h1 {
   Hello world!
   <br>
   <ol>
-    <li>Grab your mouse or drag on screen, then hit &lt;F11&gt;! (Fullscreen!)</li>
-    <li>Hit <b>spacebar</b> or tap to start/stop the zoom. Audio begins when you interact.</li>
-    <li>Use '&lt;' and '&gt;' keys to adjust audio speed.</li>
-    <li>Try dragging or scrolling to speed the zoom up or down!</li>
-    <li>Change AUDIO top-right: Ambient, Forest & Space.</li>
+	  <li>Hit fullscreen button at top-right of screen.</li>
+	  <li>Hit the spacebar or jab finger on screen to stop video and play audio.</li>
+	  <li>Hit spacebar/jab finger again. Video will begin to play.</li>
+	  <li>Try the '&lt;' and '&gt;' (also up/down arrow) keys to speed up and slow down the audio! Fun eh?</li>
+	  <li>Now grab the video with your mouse/finger and speed the video up and down!</li>
+	  <li>CHANGE AUDIO top-right: Ambient, Forest & Space. Give it a couple of seconds to load.</li>
   </ol>
 </h1>
 
@@ -75,6 +80,8 @@ h1 {
   <option value="ambient.mp3">Ambient</option>
   <option value="forest.mp3">Forest</option>
   <option value="space.mp3">Space</option>
+  <option value="sand.mp3">Sand</option>
+  <option value="fire.mp3">Fire</option>
 </select>
 <button id="fullscreenBtn">Fullscreen</button>
 
@@ -106,7 +113,7 @@ let dragging = false;
 let lastY = 0;
 let paused = false;
 let fitMode = true;
-let baseAudioSpeed = 0.68;
+let baseAudioSpeed = 0.72;
 
 /* ====== IMAGE LOAD ====== */
 fetch('images.txt')
