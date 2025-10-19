@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Infinite Zoom Journey + Audio</title>
+<title>Infinite Zoom Journey + Audio (Mobile-Friendly)</title>
 <style>
 html, body {
   margin: 0;
@@ -28,7 +28,7 @@ canvas {
   padding: 4px 8px;
   border-radius: 4px;
 }
-#audioSelect {
+#audioSelect, #fullscreenBtn {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -36,35 +36,36 @@ canvas {
   font-family: monospace;
   font-size: 14px;
 }
-h1 {
+#fullscreenBtn {
+  right: 140px;
+  background: rgba(0,0,0,0.5);
   color: white;
-  text-shadow: 0 0 6px rgba(0,0,0,0.85);
-  color: #fff;
-  /* multiple shadows around the text to form a more even halo */
-  text-shadow:
-    0 0 2px rgba(0,0,0,0.9),
-    0 0 6px rgba(0,0,0,0.75),
-    0 0 10px rgba(0,0,0,0.6);
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+h1 {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  z-index: 999;
+  color: white;
+  font-family: Arial;
+  font-size: 18px;
 }
 </style>
 </head>
 <body>
-<style type="text/css" media="screen">
-h1 {
-	font-family: Arial;
-	font-size:18px;
-}
-</style>
-<h1 style="position:absolute; top:50px; left:50px; z-index:999; color:white;">
-	Hello world!
+
+<h1>
+  Hello world!
   <br>
   <ol>
-	  <li>Grab your mouse and hit &lt;F11&gt;! Fullscreen. Yeah!</li>
-	  <li>Hit the spacebar to stop the video. Audio will begin to play.</li>
-	  <li>Hit the spacebar again. Video will begin again to play.</li>
-	  <li>Try the '&lt;' and '&gt;' (also up/down arrow) keys to speed up and slow down the audio! Fun eh?</li>
-	  <li>Now grab the video with your mouse and speed the video up and down!</li>
-	  <li>CHANGE AUDIO top-right: Ambient, Forest & Space. Give it a couple of seconds to load.</li>
+    <li>Grab your mouse or drag on screen, then hit &lt;F11&gt;! (Fullscreen!)</li>
+    <li>Hit <b>spacebar</b> or tap to start/stop the zoom. Audio begins when you interact.</li>
+    <li>Use '&lt;' and '&gt;' keys to adjust audio speed.</li>
+    <li>Try dragging or scrolling to speed the zoom up or down!</li>
+    <li>Change AUDIO top-right: Ambient, Forest & Space.</li>
   </ol>
 </h1>
 
@@ -74,9 +75,8 @@ h1 {
   <option value="ambient.mp3">Ambient</option>
   <option value="forest.mp3">Forest</option>
   <option value="space.mp3">Space</option>
-  <option value="sand.mp3">Sand</option>
-  <option value="fire.mp3">Fire</option>
 </select>
+<button id="fullscreenBtn">Fullscreen</button>
 
 <script>
 /* ========== SETTINGS ========== */
@@ -91,8 +91,10 @@ const overlay = document.getElementById("overlay");
 let w,h;
 
 function resize() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
+  const dpr = window.devicePixelRatio || 1;
+  w = canvas.width = window.innerWidth * dpr;
+  h = canvas.height = window.innerHeight * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 window.addEventListener("resize", resize);
 resize();
@@ -104,70 +106,27 @@ let dragging = false;
 let lastY = 0;
 let paused = false;
 let fitMode = true;
-let baseAudioSpeed = 0.79; // adjustable with < >
+let baseAudioSpeed = 0.68;
 
-// Load images from images.txt
-// Load images from images.txt SEQUENTIALLY
+/* ====== IMAGE LOAD ====== */
 fetch('images.txt')
   .then(r => r.text())
-  .then(async text => {
+  .then(text => {
     const filenames = text.split(/\r?\n/).filter(line => line.trim() !== "");
-    if (filenames.length === 0) {
-      overlay.textContent = "No images found in images.txt";
-      return;
-    }
-
+    if(filenames.length===0) overlay.textContent = "No images found in images.txt";
     let loaded = 0;
-    for (const src of filenames) {
-      await new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => {
-          loaded++;
-          overlay.textContent = `Loaded ${loaded}/${filenames.length}`;
-          images.push(img);
-          resolve();
-        };
-        img.onerror = () => {
-          console.warn("Failed to load:", src);
-          overlay.textContent = `Error loading ${src}`;
-          // resolve anyway to keep going
-          resolve();
-        };
-        img.src = src.trim();
-      });
+    function loadNext(i) {
+      if (i >= filenames.length) { overlay.textContent = "Ready"; start(); return; }
+      const img = new Image();
+      img.onload = () => { images.push(img); loadNext(i+1); };
+      img.onerror = () => { console.warn("Image failed:", filenames[i]); loadNext(i+1); };
+      img.src = filenames[i];
     }
-
-    overlay.textContent = "All images loaded — Ready!";
-    start();
+    loadNext(0);
   })
-  .catch(err => overlay.textContent = "Failed to load images.txt: " + err);
+  .catch(err=> overlay.textContent = "Failed to load images.txt");
 
-
-//
-//
-//
-//
-//fetch('images.txt')
-  //.then(r => r.text())
-  //.then(text => {
-    //const filenames = text.split(/\r?\n/).filter(line => line.trim() !== "");
-    //if(filenames.length===0) overlay.textContent = "No images found in images.txt";
-    //let loaded = 0;
-    //filenames.forEach(src=>{
-      //const img = new Image();
-      //img.src = src;
-      //img.onload = ()=>{
-        //loaded++;
-        //if(loaded === filenames.length) {
-          //overlay.textContent = "Ready";
-          //start();
-        //}
-      //};
-      //images.push(img);
-    //});
-  //})
-  //.catch(err=> overlay.textContent = "Failed to load images.txt");
-
+/* ====== CONTROLS ====== */
 canvas.addEventListener("wheel", e=>{
   zoomSpeed += e.deltaY * -0.001;
   e.preventDefault();
@@ -190,6 +149,21 @@ canvas.addEventListener("mousemove", e=>{
   }
 });
 
+// ---- Touch support ----
+let touchStartY = 0;
+canvas.addEventListener("touchstart", e => {
+  dragging = true;
+  touchStartY = e.touches[0].clientY;
+}, {passive: true});
+canvas.addEventListener("touchend", () => { dragging = false; });
+canvas.addEventListener("touchmove", e => {
+  if (dragging) {
+    let dy = e.touches[0].clientY - touchStartY;
+    zoomSpeed += dy * -0.01;
+    touchStartY = e.touches[0].clientY;
+  }
+}, {passive: true});
+
 window.addEventListener("keydown", e=>{
   if(e.code === "ArrowUp") zoomSpeed += 0.1;
   else if(e.code === "ArrowDown") zoomSpeed -= 0.1;
@@ -199,7 +173,7 @@ window.addEventListener("keydown", e=>{
   else if(e.key === "<") baseAudioSpeed /= 1.05;
 });
 
-/* ===== Web Audio Setup ===== */
+/* ===== AUDIO ===== */
 const audioCtx = new (window.AudioContext||window.webkitAudioContext)();
 let forwardBuffer = null;
 let reversedBuffer = null;
@@ -229,19 +203,14 @@ function loadAudio(src) {
       for (let c = 0; c < decoded.numberOfChannels; c++) {
         reversedBuffer.getChannelData(c).set(decoded.getChannelData(c).slice().reverse());
       }
-      overlay.textContent = "Audio loaded. Click or press a key to start.";
-      if (audioUnlocked) {
-        startAudio(forwardBuffer);
-      }
+      overlay.textContent = "Audio loaded. Tap or press key to start.";
+      if (audioUnlocked) startAudio(forwardBuffer);
     })
     .catch(err => overlay.textContent = "Audio load error: " + err);
 }
-
 loadAudio(document.getElementById("audioSelect").value);
 
-document.getElementById("audioSelect").addEventListener("change", e => {
-  loadAudio(e.target.value);
-});
+document.getElementById("audioSelect").addEventListener("change", e => loadAudio(e.target.value));
 
 function unlockAudio() {
   if (audioUnlocked) return;
@@ -251,9 +220,11 @@ function unlockAudio() {
   overlay.textContent = "Ready";
   window.removeEventListener("keydown", unlockAudio);
   window.removeEventListener("mousedown", unlockAudio);
+  window.removeEventListener("touchstart", unlockAudio);
 }
 window.addEventListener("keydown", unlockAudio);
 window.addEventListener("mousedown", unlockAudio);
+window.addEventListener("touchstart", unlockAudio);
 
 function setPlaybackDirection(reverse) {
   if (!forwardBuffer || !reversedBuffer) return;
@@ -263,85 +234,61 @@ function setPlaybackDirection(reverse) {
   startAudio(reverse ? reversedBuffer : forwardBuffer);
 }
 
-/* ===== Main Draw Loop ===== */
+/* ===== MAIN DRAW LOOP ===== */
 function drawImageFitAspect(img){
   const imgAspect = img.width / img.height;
   let drawW, drawH;
-
   if(fitMode){
-    if(imgAspect > TARGET_ASPECT){
-      drawH = h;
-      drawW = h * TARGET_ASPECT;
-    } else {
-      drawW = w;
-      drawH = w / TARGET_ASPECT;
-    }
+    if(imgAspect > TARGET_ASPECT){ drawH = h; drawW = h * TARGET_ASPECT; }
+    else { drawW = w; drawH = w / TARGET_ASPECT; }
   } else {
-    if(imgAspect > TARGET_ASPECT){
-      drawW = w;
-      drawH = w / imgAspect;
-    } else {
-      drawH = h;
-      drawW = h * imgAspect;
-    }
+    if(imgAspect > TARGET_ASPECT){ drawW = w; drawH = w / imgAspect; }
+    else { drawH = h; drawW = h * imgAspect; }
   }
   ctx.drawImage(img, -drawW/2, -drawH/2, drawW, drawH);
 }
 
 function drawOverlay(){
   overlay.textContent =
-    `${fitMode? "FIT":"FILL"} | drift: ${(BASE_DRIFT+zoomSpeed).toFixed(3)} | ` +
-    `audio x${baseAudioSpeed.toFixed(2)} ${playingReverse ? "(rev)" : ""}`;
+    `${fitMode? "FIT":"FILL"} | drift: ${(BASE_DRIFT+zoomSpeed).toFixed(3)} | audio x${baseAudioSpeed.toFixed(2)} ${playingReverse ? "(rev)" : ""}`;
 }
 
 function draw(){
   ctx.clearRect(0,0,w,h);
   if(!paused) zoom += BASE_DRIFT + zoomSpeed;
   zoomSpeed *= 0.9;
-
   const total = images.length;
   if(total===0) return;
-
   const zIndex = ((zoom % total)+total)%total;
   const i0 = Math.floor(zIndex);
   const i1 = (i0+1)%total;
   const t = zIndex - i0;
-
   const img0 = images[i0];
   const img1 = images[i1];
-
   const scale0 = Math.pow(SCALE_FACTOR, -t);
   const scale1 = Math.pow(SCALE_FACTOR, 1-t);
 
-  ctx.save();
-  ctx.translate(w/2,h/2);
-  ctx.scale(scale0,scale0);
-  ctx.globalAlpha = 1 - t*0.5;
-  drawImageFitAspect(img0);
-  ctx.restore();
-
-  ctx.save();
-  ctx.translate(w/2,h/2);
-  ctx.scale(scale1,scale1);
-  ctx.globalAlpha = t + 0.3;
-  drawImageFitAspect(img1);
-  ctx.restore();
-
+  ctx.save(); ctx.translate(w/2,h/2);
+  ctx.scale(scale0,scale0); ctx.globalAlpha = 1 - t*0.5; drawImageFitAspect(img0); ctx.restore();
+  ctx.save(); ctx.translate(w/2,h/2);
+  ctx.scale(scale1,scale1); ctx.globalAlpha = t + 0.3; drawImageFitAspect(img1); ctx.restore();
   ctx.globalAlpha = 1;
   drawOverlay();
 
   if (sourceNode) {
-    // Update audio speed & direction
     setPlaybackDirection(zoomSpeed < -0.02);
     sourceNode.playbackRate.value = Math.max(0.1, baseAudioSpeed * (1 + zoomSpeed));
   }
-
   requestAnimationFrame(draw);
 }
 
-function start(){
-  draw();
-}
+function start(){ draw(); }
+
+/* ===== FULLSCREEN BUTTON ===== */
+document.getElementById("fullscreenBtn").addEventListener("click", () => {
+  if (document.fullscreenElement) document.exitFullscreen();
+  else document.body.requestFullscreen();
+});
 </script>
 </body>
 </html>
