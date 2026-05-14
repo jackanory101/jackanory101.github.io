@@ -9,7 +9,6 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
   background: #000;
   overflow: hidden;
   font-family: system-ui, sans-serif;
@@ -17,6 +16,8 @@ html, body {
 
 /* ===================== BASE FIELD ===================== */
 body {
+  min-height: 100dvh;
+
   background: radial-gradient(circle at center,
     #0f0f0f 0%,
     #000 70%,
@@ -25,17 +26,25 @@ body {
 
 /* ===================== STAGE ===================== */
 .stage {
-  height: 100vh;
+  min-height: 100dvh;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: center;
+  justify-content: flex-start;
+
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+
+  box-sizing: border-box;
 }
 
 /* ===================== PROJECTOR ===================== */
 .projector {
   width: min(1100px, 92vw);
-  height: 72vh;
+
+  height: min(72vh, 900px);
 
   position: relative;
   overflow: hidden;
@@ -65,7 +74,7 @@ body {
   transition: filter 0.25s ease;
 }
 
-/* ===================== VIGNETTE (SUBTLE) ===================== */
+/* ===================== VIGNETTE ===================== */
 .projector::before {
   content: "";
   position: absolute;
@@ -118,26 +127,43 @@ body {
 /* ===================== DUST ===================== */
 .dust {
   position: fixed;
+
   width: 2px;
   height: 2px;
+
   background: rgba(255,255,255,0.2);
+
   border-radius: 50%;
   pointer-events: none;
+
   animation: float linear infinite;
+
   z-index: 7;
 }
 
 @keyframes float {
-  from { transform: translateY(100vh); opacity: 0; }
-  10% { opacity: 0.4; }
-  to { transform: translateY(-10vh); opacity: 0; }
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.4;
+  }
+
+  to {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
 }
 
 /* ===================== CONTROLS ===================== */
 .controls {
   margin-top: 14px;
+
   text-align: center;
   color: white;
+
   z-index: 9999;
   position: relative;
 }
@@ -145,9 +171,12 @@ body {
 button {
   padding: 8px 14px;
   margin: 0 6px;
+
   border: 1px solid rgba(255,255,255,0.35);
+
   background: black;
   color: white;
+
   cursor: pointer;
 }
 
@@ -164,12 +193,34 @@ button {
   100% { transform: scale(1.00); }
 }
 
-/* ===================== HEAVY DEFOCUS STATE ===================== */
+/* ===================== HEAVY DEFOCUS ===================== */
 .blur {
   filter:
     blur(18px)
     contrast(1.1)
     brightness(1.05) !important;
+}
+
+/* ===================== LANDSCAPE MOBILE FIX ===================== */
+@media (orientation: landscape) and (max-height: 600px) {
+
+  .projector {
+    height: 58vh;
+  }
+
+  .controls {
+    margin-top: 6px;
+  }
+
+  button {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  #label {
+    font-size: 11px;
+    margin-top: 4px;
+  }
 }
 </style>
 </head>
@@ -182,12 +233,14 @@ button {
 
   <div class="projector">
     <div class="flicker"></div>
+
     <img id="viewer" src="" />
   </div>
 
   <div class="controls">
     <button onclick="prev()">◀ Prev</button>
     <button onclick="next()">Next ▶</button>
+
     <div id="label"></div>
   </div>
 
@@ -206,22 +259,29 @@ let index = 0;
 const img = document.getElementById("viewer");
 const label = document.getElementById("label");
 
+/* ===================== IMAGE DISPLAY ===================== */
 function show(i) {
   index = (i + frames.length) % frames.length;
+
   img.src = frames[index];
-  label.textContent = `${index + 1} / ${frames.length} — ${frames[index]}`;
+
+  label.textContent =
+    `${index + 1} / ${frames.length} — ${frames[index]}`;
 
   triggerFocusEvent();
 }
 
-/* ===================== HEAVY OCCASIONAL DEFOCUS ===================== */
+/* ===================== RANDOM HEAVY DEFOCUS ===================== */
 function triggerFocusEvent() {
-  const shouldBlur = Math.random() < 0.35; // 35% chance per frame change
+
+  const shouldBlur = Math.random() < 0.35;
 
   if (shouldBlur) {
+
     img.classList.add("blur");
 
-    const duration = 300 + Math.random() * 1200;
+    const duration =
+      300 + Math.random() * 1200;
 
     setTimeout(() => {
       img.classList.remove("blur");
@@ -229,53 +289,102 @@ function triggerFocusEvent() {
   }
 }
 
-/* ===================== NAV ===================== */
-function next() { show(index + 1); }
-function prev() { show(index - 1); }
+/* ===================== NAVIGATION ===================== */
+function next() {
+  show(index + 1);
+}
+
+function prev() {
+  show(index - 1);
+}
+
+/* keyboard support */
+document.addEventListener("keydown", (e) => {
+
+  if (e.key === "ArrowRight") {
+    next();
+  }
+
+  if (e.key === "ArrowLeft") {
+    prev();
+  }
+});
 
 show(0);
 
-/* ===================== DUST ===================== */
+/* ===================== DUST GENERATOR ===================== */
 function spawnDust() {
+
   const d = document.createElement("div");
+
   d.className = "dust";
 
-  d.style.left = Math.random() * window.innerWidth + "px";
-  d.style.animationDuration = (5 + Math.random() * 10) + "s";
+  d.style.left =
+    Math.random() * window.innerWidth + "px";
+
+  d.style.animationDuration =
+    (5 + Math.random() * 10) + "s";
 
   document.body.appendChild(d);
 
-  setTimeout(() => d.remove(), 12000);
+  setTimeout(() => {
+    d.remove();
+  }, 12000);
 }
 
 setInterval(spawnDust, 250);
 
-/* ===================== SCRATCH CANVAS ===================== */
-const canvas = document.getElementById("scratchCanvas");
-const ctx = canvas.getContext("2d");
+/* ===================== SCRATCHES ===================== */
+const canvas =
+  document.getElementById("scratchCanvas");
+
+const ctx =
+  canvas.getContext("2d");
 
 function resize() {
+
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
+
 window.addEventListener("resize", resize);
+
 resize();
 
 function drawScratches() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
 
   for (let i = 0; i < 6; i++) {
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
 
-    const len = 120 + Math.random() * 400;
+    const x =
+      Math.random() * canvas.width;
 
-    ctx.strokeStyle = "rgba(255,255,255,0.05)";
+    const y =
+      Math.random() * canvas.height;
+
+    const len =
+      120 + Math.random() * 400;
+
+    ctx.strokeStyle =
+      "rgba(255,255,255,0.05)";
+
     ctx.lineWidth = 1;
 
     ctx.beginPath();
+
     ctx.moveTo(x, y);
-    ctx.lineTo(x + (Math.random() - 0.5) * 10, y + len);
+
+    ctx.lineTo(
+      x + (Math.random() - 0.5) * 10,
+      y + len
+    );
+
     ctx.stroke();
   }
 }
