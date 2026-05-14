@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pico AI and Gödel - Page 1</title>
+
+<style>
+
+:root{
+  --bg:#0f1117;
+  --text:#f1f5ff;
+  --muted:#9aa4b2;
+  --accent:#6ea8ff;
+  --shadow:0 10px 30px rgba(0,0,0,.45);
+  --radius:18px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:radial-gradient(circle at top,#1b2230 0%,#0f1117 45%);
+  color:var(--text);
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(16px);
+  background:rgba(15,17,23,.78);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:22px 16px;
+  text-align:center;
+}
+
+header h1 {
+  font-family: monospace;
+  font-size: 34px;
+}
+
+header p {
+  font-size: 16px;
+}
+
+header p#description {
+  font-size:20px;
+}
+
+.container{
+  max-width:1400px;
+  margin:auto;
+  padding:28px 20px 60px;
+}
+
+.pager{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin:20px 0 28px;
+  flex-wrap:wrap;
+}
+
+.pager a,
+.pager strong{
+  min-width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  text-decoration:none;
+}
+
+.pager a{
+  color:var(--muted);
+  background:rgba(255,255,255,.05);
+}
+
+.pager strong{
+  background:var(--accent);
+  color:#fff;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:24px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:var(--shadow);
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.card:hover img{
+  transform:scale(1.02);
+  transition:.25s ease;
+}
+
+.caption{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:10px;
+  font-size:.82rem;
+  color:#fff;
+  background:linear-gradient(to top,rgba(0,0,0,.85),transparent);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.lb-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.lb-content{
+  position:relative;
+  max-width:94vw;
+  max-height:94vh;
+}
+
+.lb-content img{
+  max-width:100%;
+  max-height:92vh;
+  border-radius:18px;
+}
+
+.lb-close,
+.lb-prev,
+.lb-next{
+  position:absolute;
+  border:none;
+  cursor:pointer;
+  color:#fff;
+  background:rgba(255,255,255,.12);
+}
+
+.lb-close{
+  top:-16px;
+  right:-16px;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+}
+
+.lb-prev,
+.lb-next{
+  top:50%;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+}
+
+.lb-prev{ left:-78px; }
+.lb-next{ right:-78px; }
+
+.lb-counter{
+  position:absolute;
+  left:50%;
+  bottom:-40px;
+  transform:translateX(-50%);
+}
+
+@media (max-width:900px){
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+  }
+
+  .lb-prev{ left:10px; }
+  .lb-next{ right:10px; }
+
+}
+
+@media (max-width:600px){
+
+  .grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .container{
+    padding:18px 12px 50px;
+  }
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+<h1>Pico AI and Gödel</h1>
+<p id='description'>A godel gallery</p>
+<p>20 image(s) total</p>
+</header>
+
+<div class="container">
+
+<div class="pager">
+</div>
+
+<div class="grid">
+<div class="card">
+  <a class="gallery-item"
+     href="001-260509-113558.jpg"
+     data-index="0"
+     data-name="001-260509-113558.jpg">
+
+    <img src="thumbs/001-260509-113558.jpg" alt="001-260509-113558.jpg" />
+
+  </a>
+
+  <div class="caption">001-260509-113558.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="002-Pico AI - v1.00_review-tom.jpg"
+     data-index="1"
+     data-name="002-Pico AI - v1.00_review-tom.jpg">
+
+    <img src="thumbs/002-Pico AI - v1.00_review-tom.jpg" alt="002-Pico AI - v1.00_review-tom.jpg" />
+
+  </a>
+
+  <div class="caption">002-Pico AI - v1.00_review-tom.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="003-Pico AI - v1.00_review_response-neverSent.jpg"
+     data-index="2"
+     data-name="003-Pico AI - v1.00_review_response-neverSent.jpg">
+
+    <img src="thumbs/003-Pico AI - v1.00_review_response-neverSent.jpg" alt="003-Pico AI - v1.00_review_response-neverSent.jpg" />
+
+  </a>
+
+  <div class="caption">003-Pico AI - v1.00_review_response-neverSent.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="004-Pico AI - v1.00_review_response_response_2-zabe.jpg"
+     data-index="3"
+     data-name="004-Pico AI - v1.00_review_response_response_2-zabe.jpg">
+
+    <img src="thumbs/004-Pico AI - v1.00_review_response_response_2-zabe.jpg" alt="004-Pico AI - v1.00_review_response_response_2-zabe.jpg" />
+
+  </a>
+
+  <div class="caption">004-Pico AI - v1.00_review_response_response_2-zabe.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="005-Pico AI - v1.00_review_response_response-tom.jpg"
+     data-index="4"
+     data-name="005-Pico AI - v1.00_review_response_response-tom.jpg">
+
+    <img src="thumbs/005-Pico AI - v1.00_review_response_response-tom.jpg" alt="005-Pico AI - v1.00_review_response_response-tom.jpg" />
+
+  </a>
+
+  <div class="caption">005-Pico AI - v1.00_review_response_response-tom.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Godel-1.jpg"
+     data-index="5"
+     data-name="Godel-1.jpg">
+
+    <img src="thumbs/Godel-1.jpg" alt="Godel-1.jpg" />
+
+  </a>
+
+  <div class="caption">Godel-1.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Godel-2.jpg"
+     data-index="6"
+     data-name="Godel-2.jpg">
+
+    <img src="thumbs/Godel-2.jpg" alt="Godel-2.jpg" />
+
+  </a>
+
+  <div class="caption">Godel-2.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Godel-3.jpg"
+     data-index="7"
+     data-name="Godel-3.jpg">
+
+    <img src="thumbs/Godel-3.jpg" alt="Godel-3.jpg" />
+
+  </a>
+
+  <div class="caption">Godel-3.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Godel-4.jpg"
+     data-index="8"
+     data-name="Godel-4.jpg">
+
+    <img src="thumbs/Godel-4.jpg" alt="Godel-4.jpg" />
+
+  </a>
+
+  <div class="caption">Godel-4.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Godel-5.jpg"
+     data-index="9"
+     data-name="Godel-5.jpg">
+
+    <img src="thumbs/Godel-5.jpg" alt="Godel-5.jpg" />
+
+  </a>
+
+  <div class="caption">Godel-5.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Godel-6.jpg"
+     data-index="10"
+     data-name="Godel-6.jpg">
+
+    <img src="thumbs/Godel-6.jpg" alt="Godel-6.jpg" />
+
+  </a>
+
+  <div class="caption">Godel-6.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Godel-7.jpg"
+     data-index="11"
+     data-name="Godel-7.jpg">
+
+    <img src="thumbs/Godel-7.jpg" alt="Godel-7.jpg" />
+
+  </a>
+
+  <div class="caption">Godel-7.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Godel-Wendy-1.png"
+     data-index="12"
+     data-name="Godel-Wendy-1.png">
+
+    <img src="thumbs/Godel-Wendy-1.png" alt="Godel-Wendy-1.png" />
+
+  </a>
+
+  <div class="caption">Godel-Wendy-1.png</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Godel-Wendy-2.png"
+     data-index="13"
+     data-name="Godel-Wendy-2.png">
+
+    <img src="thumbs/Godel-Wendy-2.png" alt="Godel-Wendy-2.png" />
+
+  </a>
+
+  <div class="caption">Godel-Wendy-2.png</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Zabe-Godel-1.jpg"
+     data-index="14"
+     data-name="Zabe-Godel-1.jpg">
+
+    <img src="thumbs/Zabe-Godel-1.jpg" alt="Zabe-Godel-1.jpg" />
+
+  </a>
+
+  <div class="caption">Zabe-Godel-1.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Zabe-Godel-2.jpg"
+     data-index="15"
+     data-name="Zabe-Godel-2.jpg">
+
+    <img src="thumbs/Zabe-Godel-2.jpg" alt="Zabe-Godel-2.jpg" />
+
+  </a>
+
+  <div class="caption">Zabe-Godel-2.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Zabe-Godel-3.jpg"
+     data-index="16"
+     data-name="Zabe-Godel-3.jpg">
+
+    <img src="thumbs/Zabe-Godel-3.jpg" alt="Zabe-Godel-3.jpg" />
+
+  </a>
+
+  <div class="caption">Zabe-Godel-3.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Zabe-Godel-4.jpg"
+     data-index="17"
+     data-name="Zabe-Godel-4.jpg">
+
+    <img src="thumbs/Zabe-Godel-4.jpg" alt="Zabe-Godel-4.jpg" />
+
+  </a>
+
+  <div class="caption">Zabe-Godel-4.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Zabe-Godel-5.jpg"
+     data-index="18"
+     data-name="Zabe-Godel-5.jpg">
+
+    <img src="thumbs/Zabe-Godel-5.jpg" alt="Zabe-Godel-5.jpg" />
+
+  </a>
+
+  <div class="caption">Zabe-Godel-5.jpg</div>
+</div>
+<div class="card">
+  <a class="gallery-item"
+     href="Zabe-Godel-7.jpg"
+     data-index="19"
+     data-name="Zabe-Godel-7.jpg">
+
+    <img src="thumbs/Zabe-Godel-7.jpg" alt="Zabe-Godel-7.jpg" />
+
+  </a>
+
+  <div class="caption">Zabe-Godel-7.jpg</div>
+</div>
+</div>
+</div>
+
+<div class="lb-overlay" id="lightbox">
+  <div class="lb-content">
+
+    <button class="lb-close" id="lbClose">✕</button>
+    <button class="lb-prev" id="lbPrev">◀</button>
+
+    <img id="lbImage" src="" alt="" />
+
+    <button class="lb-next" id="lbNext">▶</button>
+
+    <div class="lb-counter" id="lbCounter"></div>
+
+  </div>
+</div>
+
+<script>
+
+const items = Array.from(document.querySelectorAll('.gallery-item'));
+const images = items.map(it => ({
+  src: it.href,
+  name: it.dataset.name
+}));
+
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImage');
+const lbClose = document.getElementById('lbClose');
+const lbPrev = document.getElementById('lbPrev');
+const lbNext = document.getElementById('lbNext');
+const lbCounter = document.getElementById('lbCounter');
+
+let curIndex = -1;
+
+function showAt(index){
+
+  if(index < 0 || index >= images.length){
+    return;
+  }
+
+  curIndex = index;
+
+  lbImg.src = images[index].src;
+
+  lbCounter.textContent =
+    (index + 1) + ' / ' + images.length;
+
+  lb.style.display = 'flex';
+}
+
+function closeLB(){
+  lb.style.display = 'none';
+  lbImg.src = '';
+  curIndex = -1;
+}
+
+function prevLB(){
+  if(curIndex > 0){
+    showAt(curIndex - 1);
+  }
+}
+
+function nextLB(){
+  if(curIndex < images.length - 1){
+    showAt(curIndex + 1);
+  }
+}
+
+items.forEach((el, idx) => {
+  el.addEventListener('click', function(ev){
+    ev.preventDefault();
+    showAt(idx);
+  });
+});
+
+lbClose.addEventListener('click', closeLB);
+lbPrev.addEventListener('click', prevLB);
+lbNext.addEventListener('click', nextLB);
+
+lb.addEventListener('click', function(ev){
+  if(ev.target === lb){
+    closeLB();
+  }
+});
+
+document.addEventListener('keydown', function(ev){
+
+  if(curIndex === -1){
+    return;
+  }
+
+  if(ev.key === 'Escape'){
+    closeLB();
+  }
+  else if(ev.key === 'ArrowLeft'){
+    prevLB();
+  }
+  else if(ev.key === 'ArrowRight'){
+    nextLB();
+  }
+
+});
+
+</script>
+
+</body>
+</html>
