@@ -223,6 +223,152 @@ button {
   }
 }
 </style>
+
+<!--sound garden box lower right-->
+<style>
+
+/* ===================== SOUND GARDEN LINK ===================== */
+
+.sound-garden-link {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+
+  z-index: 999999;
+
+  text-decoration: none;
+}
+
+/* ===================== BOX CORE ===================== */
+
+.sound-garden-box {
+  width: 260px;
+  max-width: 260px;
+
+  color: white;
+
+  padding: 11px 13px;
+
+  border: 1px solid rgba(255,255,255,0.95);
+
+  background: rgba(0,0,0,0.72);
+
+  border-radius: 8px;
+
+  font-size: 12px;
+  line-height: 1.35;
+
+  position: relative;
+  overflow: hidden;
+
+  backdrop-filter: blur(10px);
+
+  transform: translateZ(0);
+
+  animation: sg-pulse 2.6s ease-in-out infinite;
+
+  box-shadow:
+    0 0 12px rgba(255,255,255,0.22),
+    0 0 40px rgba(255,255,255,0.12),
+    0 0 80px rgba(255,255,255,0.05),
+    inset 0 0 10px rgba(255,255,255,0.05);
+}
+
+/* ===================== TITLE / TEXT ===================== */
+
+.sound-garden-box .title {
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+
+  margin-bottom: 6px;
+
+  opacity: 0.95;
+}
+
+.sound-garden-box .desc {
+  opacity: 0.78;
+}
+
+/* ===================== BREATHING FIELD ===================== */
+
+@keyframes sg-pulse {
+  0% {
+    transform: translateY(0px) scale(1);
+
+    box-shadow:
+      0 0 10px rgba(255,255,255,0.18),
+      0 0 30px rgba(255,255,255,0.08),
+      inset 0 0 10px rgba(255,255,255,0.03);
+  }
+
+  50% {
+    transform: translateY(-1px) scale(1.015);
+
+    box-shadow:
+      0 0 28px rgba(255,255,255,0.32),
+      0 0 70px rgba(255,255,255,0.14),
+      inset 0 0 14px rgba(255,255,255,0.06);
+  }
+
+  100% {
+    transform: translateY(0px) scale(1);
+
+    box-shadow:
+      0 0 12px rgba(255,255,255,0.20),
+      0 0 35px rgba(255,255,255,0.10),
+      inset 0 0 10px rgba(255,255,255,0.04);
+  }
+}
+
+/* ===================== SCANLINE / ENERGY SWEEP ===================== */
+
+.sound-garden-box::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.10) 50%,
+    transparent 60%
+  );
+
+  animation: sg-scan 3.2s linear infinite;
+
+  pointer-events: none;
+}
+
+@keyframes sg-scan {
+  0% {
+    transform: translateX(-60%);
+  }
+
+  100% {
+    transform: translateX(60%);
+  }
+}
+
+/* ===================== HOVER REACTION ===================== */
+
+.sound-garden-link:hover .sound-garden-box {
+  transform: translateY(-2px) scale(1.03);
+
+  border-color: rgba(255,255,255,1);
+
+  box-shadow:
+    0 0 18px rgba(255,255,255,0.35),
+    0 0 90px rgba(255,255,255,0.18),
+    inset 0 0 12px rgba(255,255,255,0.06);
+}
+
+.sound-garden-link:hover .desc {
+  opacity: 0.95;
+}
+
+
+</style>
 </head>
 
 <body>
@@ -392,5 +538,14 @@ function drawScratches() {
 setInterval(drawScratches, 140);
 </script>
 
+<a class="sound-garden-link" href="../godel-music/index.html">
+  <div class="sound-garden-box">
+    <div class="title">Sound Garden Node</div>
+    <div class="desc">
+      Godel Music — an adjacent harmonic artifact within the Pico AI Sound Garden.
+      Where memory collapses into rhythm and recursion learns to hum.
+    </div>
+  </div>
+</a>
 </body>
 </html>
