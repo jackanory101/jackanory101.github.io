@@ -279,7 +279,7 @@ figure::before {
 
   transform: translateX(-50%);
 
-  font-size: 14px;
+  font-size: 29px;
 
   letter-spacing: 0.5em;
 
@@ -333,3 +333,392 @@ figure::before {
   </div>
 </body>
 </html>
+
+<script>
+// CONFIG (kept mapPath behavior you had)
+function mapPath(path) {
+  // ★ Normalize slashes first
+  path = path.replace(/\\/g, "/");
+  const lower = path.toLowerCase();
+
+  if (lower.startsWith("d:/bin/fonts/")) {
+    return "/fonts_user/" + path.slice("d:/bin/fonts/".length);
+  } else if (lower.startsWith("c:/windows/fonts/")) {
+    return "/fonts_installed/" + path.slice("c:/windows/fonts/".length);
+  }
+  return path;
+}
+
+function fontNameFromPath(path) {
+  // ★ Normalize slashes first
+  path = path.replace(/\\/g, "/");
+
+  const base = path.split("/").pop();
+  const noExt = base.replace(/\.[^/.]+$/, "");
+  return noExt.replace(/[^a-zA-Z0-9_-]+/g, "_");
+}
+
+// Global state
+const fonts = []; // { name, path }
+let index = 0;
+let targetSelector = "[your el here]";
+
+const styleState = {
+  fontWeight: "normal",
+  fontStyle: "normal",
+  textDecoration: "none",
+  textTransform: "none",
+  color: "#000000",
+  fontSize: 18,
+  letterSpacing: 0,
+  lineHeight: 1.2
+};
+
+// Create UI early so applyFont can update the fontPathDisplay
+const panel = document.createElement("div");
+panel.style.position = "fixed";
+panel.style.top = "10px";
+panel.style.right = "10px";
+panel.style.zIndex = "9999";
+panel.style.display = "flex";
+panel.style.flexDirection = "column";
+panel.style.gap = "4px";
+panel.style.background = "rgba(255,255,255,0.75)";
+panel.style.padding = "6px";
+panel.style.border = "1px solid #888";
+panel.style.borderRadius = "6px";
+panel.style.fontSize = "11px";
+panel.style.color = "black";
+panel.style.fontFamily = "sans-serif";
+panel.style.lineHeight = "1.2";
+
+// === Font path display (exists early) ===
+const fontPathDisplay = document.createElement("div");
+fontPathDisplay.style.position = "fixed";
+fontPathDisplay.style.top = "400px";
+fontPathDisplay.style.right = "10px";
+fontPathDisplay.style.zIndex = "9999";
+fontPathDisplay.style.background = "rgba(255,255,255,0.6)";
+fontPathDisplay.style.color= "black";
+fontPathDisplay.style.padding = "4px 6px";
+fontPathDisplay.style.border = "1px solid #888";
+fontPathDisplay.style.borderRadius = "4px";
+fontPathDisplay.style.fontFamily = "sans-serif";
+fontPathDisplay.style.fontSize = "12px";
+fontPathDisplay.style.whiteSpace = "pre";
+document.body.appendChild(fontPathDisplay);
+
+// Function to apply font with !important
+function applyFont(i) {
+  if (!fonts.length) {
+    fontPathDisplay.textContent = "(no fonts loaded)";
+    return;
+  }
+
+  const targets = document.querySelectorAll(targetSelector);
+  if (!targets.length) {
+    fontPathDisplay.textContent = `(no element matching "${targetSelector}")\n${fonts[i]?.path || ""}`;
+    return;
+  }
+
+  const f = fonts[i];
+
+  targets.forEach(el => {
+    el.style.setProperty("font-family", `'${f.name}', sans-serif`, "important");
+    el.style.setProperty("font-weight", styleState.fontWeight, "important");
+    el.style.setProperty("font-style", styleState.fontStyle, "important");
+    el.style.setProperty("text-decoration", styleState.textDecoration, "important");
+    el.style.setProperty("text-transform", styleState.textTransform, "important");
+    el.style.setProperty("color", styleState.color, "important");
+    el.style.setProperty("font-size", styleState.fontSize + "px", "important");
+    el.style.setProperty("letter-spacing", styleState.letterSpacing + "px", "important");
+    el.style.setProperty("line-height", styleState.lineHeight, "important");
+  });
+
+  fontPathDisplay.textContent = f.path;
+}
+
+// --- Load fonts from a text file containing paths (one per line) ---
+function loadFontListText(text) {
+  // Clean previous fonts and injected style elements if any
+  // (Note: this doesn't revoke URL objects because we're not creating them here.)
+  // If you want to remove previously injected <style> @font-face rules you'd need to track them.
+  fonts.length = 0;
+  // Split lines, trim, filter empty
+  const rawPaths = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+
+  if (!rawPaths.length) {
+    console.warn("No font paths found in loaded text file.");
+    applyFont(0);
+    return;
+  }
+
+  rawPaths.forEach(raw => {
+    const mapped = mapPath(raw);
+    const fontName = fontNameFromPath(mapped);
+
+    const style = document.createElement("style");
+    // Keep all possible formats but since paths may vary we just set url(...) entries
+    style.textContent = `
+      @font-face {
+        font-family: '${fontName}';
+        src: url('${mapped}') format('woff2'),
+             url('${mapped}') format('opentype'),
+             url('${mapped}') format('truetype'),
+             url('${mapped}');
+        font-display: swap;
+      }
+    `;
+    document.head.appendChild(style);
+
+    fonts.push({ name: fontName, path: mapped });
+  });
+
+  index = 0;
+  applyFont(index);
+}
+
+// === FILE INPUT (for selecting the text file of paths) ===
+const fileInput = document.createElement("input");
+fileInput.type = "file";
+fileInput.accept = ".txt,text/plain";
+fileInput.style.fontSize = "12px";
+fileInput.style.padding = "4px";
+fileInput.title = "Select a text file containing font file paths (one per line)";
+fileInput.addEventListener("change", () => {
+  const f = fileInput.files && fileInput.files[0];
+  if (!f) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      loadFontListText(String(ev.target.result || ""));
+    } catch (err) {
+      console.error("Failed to load font list text file:", err);
+    }
+  };
+  reader.onerror = (err) => {
+    console.error("Error reading file:", err);
+  };
+  reader.readAsText(f);
+});
+panel.appendChild(fileInput);
+
+// === Manual single-path input ===
+const singlePathBox = document.createElement("input");
+singlePathBox.type = "text";
+singlePathBox.placeholder = "Paste a font path (e.g. d:/bin/fonts/whatever.ttf)";
+singlePathBox.style.fontSize = "12px";
+singlePathBox.style.padding = "4px";
+singlePathBox.style.width = "260px";
+
+const addSingleBtn = document.createElement("button");
+addSingleBtn.textContent = "Load Path";
+addSingleBtn.style.fontSize = "12px";
+addSingleBtn.style.padding = "4px 6px";
+addSingleBtn.style.cursor = "pointer";
+
+addSingleBtn.addEventListener("click", () => {
+  const raw = singlePathBox.value.trim();
+  if (!raw) return;
+
+  const mapped = mapPath(raw);
+  const fontName = fontNameFromPath(mapped);
+
+  // Inject @font-face rule
+  const style = document.createElement("style");
+  style.textContent = `
+    @font-face {
+      font-family: '${fontName}';
+      src: url('${mapped}') format('woff2'),
+           url('${mapped}') format('opentype'),
+           url('${mapped}') format('truetype'),
+           url('${mapped}');
+      font-display: swap;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Add to global list
+  fonts.push({ name: fontName, path: mapped });
+
+  // Jump to newest font
+  index = fonts.length - 1;
+  applyFont(index);
+
+  // Optional: Clear box
+  singlePathBox.value = "";
+});
+
+const singleRow = document.createElement("div");
+singleRow.style.display = "flex";
+singleRow.style.gap = "4px";
+singleRow.appendChild(singlePathBox);
+singleRow.appendChild(addSingleBtn);
+
+panel.appendChild(singleRow);
+
+
+// === Target selector input ===
+const input = document.createElement("input");
+input.type = "text";
+input.value = targetSelector;
+input.placeholder = "CSS selector (e.g., body, #id, .class)";
+input.style.fontSize = "12px";
+input.style.padding = "4px";
+
+input.addEventListener("change", () => {
+  // allow comma-separated selectors exactly as typed
+  const raw = input.value.trim();
+
+  // If empty, fall back to "body"
+  targetSelector = raw !== "" ? raw : "body";
+
+  applyFont(index);
+});
+
+
+//input.addEventListener("change", () => {
+  //targetSelector = input.value.trim() || "body";
+  //applyFont(index);
+//});
+
+panel.appendChild(input);
+
+// === Buttons row ===
+const btnRow = document.createElement("div");
+btnRow.style.display = "flex";
+btnRow.style.gap = "4px";
+
+function makeButton(labelText, onClick) {
+  const btn = document.createElement("button");
+  btn.textContent = labelText;
+  btn.style.padding = "4px 6px";
+  btn.style.fontSize = "12px";
+  btn.style.cursor = "pointer";
+  btn.addEventListener("click", onClick);
+  return btn;
+}
+
+const prevBtn = makeButton("◀ Prev", () => {
+  if (!fonts.length) return;
+  index = (index - 1 + fonts.length) % fonts.length;
+  applyFont(index);
+});
+
+const nextBtn = makeButton("Next ▶", () => {
+  if (!fonts.length) return;
+  index = (index + 1) % fonts.length;
+  applyFont(index);
+});
+
+const exportBtn = makeButton("Export CSS", () => {
+  if (!fonts.length) return;
+  const currentFont = fonts[index];
+  const css = `
+@font-face {
+  font-family: '${currentFont.name}';
+  src: url('${currentFont.path}') format('woff2'),
+       url('${currentFont.path}') format('opentype'),
+       url('${currentFont.path}') format('truetype'),
+       url('${currentFont.path}');
+}
+
+${targetSelector} {
+  font-family: '${currentFont.name}', sans-serif !important;
+  font-weight: ${styleState.fontWeight} !important;
+  font-style: ${styleState.fontStyle} !important;
+  text-decoration: ${styleState.textDecoration} !important;
+  text-transform: ${styleState.textTransform} !important;
+  color: ${styleState.color} !important;
+  font-size: ${styleState.fontSize}px !important;
+  letter-spacing: ${styleState.letterSpacing}px !important;
+  line-height: ${styleState.lineHeight} !important;
+}
+`.trim();
+
+  const blob = new Blob([css], { type: "text/css" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "exported-style.css";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+btnRow.appendChild(prevBtn);
+btnRow.appendChild(nextBtn);
+btnRow.appendChild(exportBtn);
+panel.appendChild(btnRow);
+
+// === Style controls ===
+const controls = [
+  { label: "Weight", type: "select", options: ["normal", "bold", "lighter", "bolder"], key: "fontWeight" },
+  { label: "Style", type: "select", options: ["normal", "italic", "oblique"], key: "fontStyle" },
+  { label: "Decoration", type: "select", options: ["none", "underline", "line-through", "overline"], key: "textDecoration" },
+  { label: "Transform", type: "select", options: ["none", "uppercase", "lowercase", "capitalize"], key: "textTransform" },
+  { label: "Color", type: "color", key: "color" },
+  { label: "Size", type: "number", min: 8, max: 200, step: 1, key: "fontSize" },
+  { label: "Spacing", type: "number", min: -10, max: 50, step: 0.1, key: "letterSpacing" },
+  { label: "Line height", type: "number", min: 0.5, max: 3, step: 0.1, key: "lineHeight" }
+];
+
+controls.forEach(ctrl => {
+  const wrap = document.createElement("div");
+  wrap.style.display = "flex";
+  wrap.style.alignItems = "center";
+  wrap.style.gap = "4px";
+
+  const label = document.createElement("label");
+  label.textContent = ctrl.label;
+  label.style.minWidth = "70px";
+  wrap.appendChild(label);
+
+  let inputEl;
+  if (ctrl.type === "select") {
+    inputEl = document.createElement("select");
+    ctrl.options.forEach(opt => {
+      const option = document.createElement("option");
+      option.value = opt;
+      option.textContent = opt;
+      inputEl.appendChild(option);
+    });
+    inputEl.value = styleState[ctrl.key];
+  } else {
+    inputEl = document.createElement("input");
+    inputEl.type = ctrl.type;
+    if (ctrl.type === "number") {
+      if (ctrl.min !== undefined) inputEl.min = ctrl.min;
+      if (ctrl.max !== undefined) inputEl.max = ctrl.max;
+      if (ctrl.step !== undefined) inputEl.step = ctrl.step;
+    }
+    inputEl.value = styleState[ctrl.key];
+  }
+
+  inputEl.addEventListener("input", () => {
+    styleState[ctrl.key] = ctrl.type === "number"
+      ? parseFloat(inputEl.value)
+      : inputEl.value;
+    applyFont(index);
+  });
+
+  wrap.appendChild(inputEl);
+  panel.appendChild(wrap);
+});
+
+document.body.appendChild(panel);
+
+// (fontPathDisplay already appended earlier)
+
+// Nothing auto-loaded now — wait for user to choose the text file
+applyFont(index); // show initial state message if nothing loaded
+</script>
+
+
+<style>
+
+</style>
+
+
+
