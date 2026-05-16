@@ -394,6 +394,10 @@ button {
 </head>
 
 <body>
+<a class="home-sigil" href="index.html" aria-label="Home">
+  ∴ ⊢ ⟡ HOME / INDEX ⟡ ⊣ ∴
+</a>
+
 
 <canvas id="scratchCanvas"></canvas>
 
@@ -571,3 +575,136 @@ setInterval(drawScratches, 140);
 </a>
 </body>
 </html>
+
+<style>
+/* ===== HOME SIGIL (GLITCH CONTROL NODE) ===== */
+
+.home-sigil {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+
+  z-index: 50;
+
+  font-family: 'Blackout', system-ui, sans-serif;
+  font-size: 16px;
+
+  letter-spacing: 0.22em;
+  text-decoration: none;
+
+  color: rgba(220, 240, 255, 0.75);
+
+  padding: 10px 14px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(5, 5, 15, 0.35);
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 0 30px rgba(120, 90, 255, 0.18),
+    0 0 60px rgba(0, 200, 255, 0.08),
+    inset 0 0 12px rgba(255,255,255,0.03);
+
+  animation:
+    homeFlicker 3.5s infinite,
+    homeDrift 6s ease-in-out infinite;
+
+  overflow: hidden;
+}
+
+/* ===== MAIN GLITCH TEXT LAYER ===== */
+.home-sigil::before,
+.home-sigil::after {
+  content: attr(aria-label);
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* cyan ghost shift */
+.home-sigil::before {
+  color: rgba(0, 255, 255, 0.35);
+  transform: translate(2px, 0);
+}
+
+/* magenta ghost shift */
+.home-sigil::after {
+  color: rgba(255, 0, 200, 0.25);
+  transform: translate(-2px, 0);
+}
+
+/* ===== HOVER = FULL GLITCH ACTIVATION ===== */
+.home-sigil:hover {
+  color: rgba(255,255,255,0.95);
+  transform: scale(1.08);
+
+  box-shadow:
+    0 0 60px rgba(160, 100, 255, 0.35),
+    0 0 120px rgba(0, 220, 255, 0.18),
+    inset 0 0 18px rgba(255,255,255,0.05);
+
+  animation: homeFlicker 0.6s infinite;
+}
+
+.home-sigil:hover::before {
+  opacity: 1;
+  animation: glitchShiftA 0.25s infinite linear;
+}
+
+.home-sigil:hover::after {
+  opacity: 1;
+  animation: glitchShiftB 0.18s infinite linear;
+}
+
+/* ===== ANIMATIONS ===== */
+
+/* unstable signal flicker */
+@keyframes homeFlicker {
+  0%   { opacity: 0.9; filter: brightness(1); }
+  7%   { opacity: 0.4; }
+  10%  { opacity: 1; }
+  12%  { opacity: 0.2; }
+  15%  { opacity: 0.95; }
+  100% { opacity: 0.85; }
+}
+
+/* subtle drift like floating UI layer */
+@keyframes homeDrift {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-2px); }
+}
+
+/* glitch channel A (cyan) */
+@keyframes glitchShiftA {
+  0%   { transform: translate(2px, 0); clip-path: inset(0 0 80% 0); }
+  25%  { transform: translate(-3px, 1px); clip-path: inset(10% 0 40% 0); }
+  50%  { transform: translate(4px, -1px); clip-path: inset(40% 0 20% 0); }
+  75%  { transform: translate(-2px, 0); clip-path: inset(20% 0 60% 0); }
+  100% { transform: translate(2px, 0); clip-path: inset(0 0 80% 0); }
+}
+
+/* glitch channel B (magenta) */
+@keyframes glitchShiftB {
+  0%   { transform: translate(-2px, 0); clip-path: inset(60% 0 0 0); }
+  25%  { transform: translate(3px, -1px); clip-path: inset(30% 0 30% 0); }
+  50%  { transform: translate(-4px, 1px); clip-path: inset(10% 0 50% 0); }
+  75%  { transform: translate(2px, 0); clip-path: inset(50% 0 10% 0); }
+  100% { transform: translate(-2px, 0); clip-path: inset(60% 0 0 0); }
+}
+</style>
+
+
+
+
