@@ -1,0 +1,229 @@
+<body>
+  <div class="world">
+
+    <div class="sky"></div>
+    <div class="stars"></div>
+    <div class="fog"></div>
+
+    <div class="cathedral">
+      <div class="arches"></div>
+      <div class="stained-glass"></div>
+      <div class="sunbeams"></div>
+
+      <div class="altar">
+
+        <div class="ornament o1"></div>
+        <div class="ornament o2"></div>
+        <div class="ornament o3"></div>
+        <div class="ornament o4"></div>
+
+        <div class="light-core"></div>
+
+        <div class="video-frame">
+          <video controls autoplay loop>
+            <source src="Mischa Maisky plays Bach Cello Suite No.1 in G.webm.mov.mp4" type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</body>
+	<style>
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: black;
+}
+
+/* ===== WORLD SPACE ===== */
+.world {
+  position: relative;
+  height: 100%;
+  perspective: 900px;
+  overflow: hidden;
+}
+
+/* ===== DEEP SKY ===== */
+.sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 40%, #2a0010, #000 70%);
+  transform: scale(1.2);
+}
+
+/* ===== FLOATING DUST ===== */
+.stars {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 2px);
+  background-size: 90px 90px;
+  opacity: 0.12;
+  animation: drift 80s linear infinite;
+}
+
+/* ===== ATMOSPHERIC FOG ===== */
+.fog {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,200,120,0.08), transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(120,0,255,0.06), transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent 60%);
+  filter: blur(60px);
+  animation: breathe 12s ease-in-out infinite;
+}
+
+/* ===== CATHEDRAL STRUCTURE ===== */
+.cathedral {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateX(10deg) translateZ(-50px);
+}
+
+/* ===== ARCH ILLUSION ===== */
+.arches {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background:
+    radial-gradient(ellipse at center,
+      transparent 0%,
+      rgba(255, 215, 140, 0.05) 40%,
+      rgba(0,0,0,0.8) 80%),
+    repeating-radial-gradient(
+      circle at center,
+      rgba(255, 215, 140, 0.06),
+      transparent 120px
+    );
+  opacity: 0.5;
+}
+
+/* ===== STAINED GLASS OVERLAY ===== */
+.stained-glass {
+  position: absolute;
+  inset: 0;
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(255,0,80,0.08),
+      rgba(255,180,0,0.08),
+      rgba(0,200,255,0.06),
+      rgba(180,0,255,0.08),
+      rgba(255,0,80,0.08)
+    );
+  mix-blend-mode: overlay;
+  filter: blur(20px);
+  animation: spin 30s linear infinite;
+  opacity: 0.6;
+}
+
+/* ===== SUNBEAMS THROUGH WINDOWS ===== */
+.sunbeams {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg,
+      transparent 0%,
+      rgba(255, 220, 140, 0.12) 45%,
+      transparent 60%),
+    linear-gradient(65deg,
+      transparent 0%,
+      rgba(255, 180, 80, 0.08) 50%,
+      transparent 65%);
+  filter: blur(8px);
+  animation: beamshift 10s ease-in-out infinite;
+}
+
+/* ===== ALTAR ZONE ===== */
+.altar {
+  position: relative;
+  padding: 50px;
+  border-radius: 24px;
+  transform: translateZ(40px);
+}
+
+/* ===== LIGHT CORE ===== */
+.light-core {
+  position: absolute;
+  inset: -150px;
+  background: radial-gradient(circle,
+    rgba(255, 230, 160, 0.25),
+    rgba(255, 120, 60, 0.1),
+    transparent 60%);
+  animation: pulse 6s ease-in-out infinite;
+  filter: blur(20px);
+}
+
+/* ===== VIDEO FRAME ===== */
+.video-frame {
+  position: relative;
+  z-index: 2;
+  border: 2px solid rgba(255, 215, 140, 0.4);
+  background: rgba(10, 0, 10, 0.6);
+  box-shadow:
+    0 0 80px rgba(255, 180, 80, 0.15),
+    inset 0 0 30px rgba(255, 220, 160, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+video {
+  display: block;
+  max-width: 75vw;
+  max-height: 70vh;
+  border-radius: 12px;
+}
+
+/* ===== ORNAMENTS (NOW FLOATING IN DEPTH) ===== */
+.ornament {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border: 1px solid rgba(255, 215, 140, 0.25);
+  filter: drop-shadow(0 0 20px rgba(255,180,80,0.25));
+  animation: float 10s ease-in-out infinite;
+}
+
+.o1 { top: -120px; left: -120px; }
+.o2 { top: -120px; right: -120px; }
+.o3 { bottom: -120px; left: -120px; }
+.o4 { bottom: -120px; right: -120px; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes drift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-500px); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.9; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.25); opacity: 1; }
+}
+
+@keyframes beamshift {
+  0%, 100% { transform: translateX(-20px); opacity: 0.6; }
+  50% { transform: translateX(20px); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+	</style>
