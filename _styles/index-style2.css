@@ -11,7 +11,6 @@ body {
 	position: relative;
 	z-index: 10;
 }
-
 html::before {
     content: '';
     position: absolute;
@@ -19,16 +18,10 @@ html::before {
     left: -500px;
     width: 243%;
     height: 250%;
-    background: repeating-conic-gradient(
-        #99737396 14deg,
-        #664646a3 15deg,
-        transparent 15deg,
-        #a26c6c6e 30deg
-    );
+background: repeating-conic-gradient( #77595996 14deg, #973131a3 15deg, transparent 15deg, #6e3b3b6e 30deg );
     animation: rotate-bg 80s linear infinite;
     transform-origin: center;
 }
-
 @keyframes rotate-bg {
     0% {
         transform: rotate(0deg);
