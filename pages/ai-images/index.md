@@ -1,3 +1,4 @@
+<!--Question is, what do those two stylesheets do?-->
 <link rel="stylesheet" href="../../_styles/index-style2.css" />
 <link rel="stylesheet" href="/_styles/index-style2.css" />
 
