@@ -1,2 +1,0 @@
-	let lastScrollY=0;function showLightbox(src){lastScrollY=window.scrollY;const lb=document.getElementById("lightbox");const img=document.getElementById("lightbox-img");img.src=src;lb.classList.add("visible");document.body.style.overflow="hidden";}function closeLightbox(event){if(event.target.id==="lightbox"||event.target.id==="lightbox-close"){ const lb=document.getElementById("lightbox");lb.classList.remove("visible");document.body.style.overflow="";window.scrollTo(0,lastScrollY);}}
-
