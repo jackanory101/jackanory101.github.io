@@ -1,0 +1,544 @@
+/* ================================
+   BASE PAGE
+   ================================ */
+
+body {
+  margin: 0;
+  background: #e9e4d8;
+  font-family: "Courier New", monospace;
+}
+
+/* ================================
+   OUTER PAPER (physical sheet)
+   ================================ */
+
+#paper {
+  width: 1250px;
+  margin: 40px auto;
+
+  position: relative;
+
+  transform: rotate(0.35deg) translateY(1px);
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.22);
+}
+
+/* ================================
+   INNER PAPER (writing surface)
+   ================================ */
+@font-face {
+  font-family: 'SpecialElite-Regular';
+  src: url('file:///D:/bin/fonts/DISPLAY/TYPEWRITER/Special_Elite/SpecialElite-Regular.ttf')
+}
+
+
+#main {
+  background: #fff;
+
+
+  padding: 60px 50px 60px 50px;
+  padding-right: 460px; /* IMPORTANT: reserve note column */
+  padding-bottom: 300px;
+
+  min-height: 700px;
+
+  position: relative;
+
+  font-size: 18px;
+  line-height: 28px;
+
+  color: rgba(20, 20, 20, 0.92);
+  text-shadow: 0 0 1.2px rgba(0,0,0,0.35);
+
+  overflow: visible;
+
+  font-family: 'SpecialElite-Regular', sans-serif !important;
+  color: #454242 !important;
+  font-size: 18px !important;
+  letter-spacing: 0px !important;
+  line-height: 1.5 !important;
+
+
+
+
+
+
+
+}
+
+/* ================================
+   RULED LINES (writing area only)
+   ================================ */
+
+#main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  right: 260px; /* excludes notes area */
+
+  pointer-events: none;
+
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 28px,
+    rgba(0, 120, 255, 0.15) 29px
+  );
+}
+
+/* ================================
+   MARGIN LINE (left red line)
+   ================================ */
+
+#main::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40px;
+
+  width: 2px;
+
+  background: rgba(255, 0, 0, 0.2);
+
+  pointer-events: none;
+}
+
+
+
+/* ================================
+   LISTS
+   ================================ */
+
+#main ul,
+#main ol {
+  padding-left: 28px;
+  margin: 0;
+}
+
+#main li {
+  margin: 0;
+}
+
+/* ================================
+   MARKER HIGHLIGHT FOR BOLD
+   ================================ */
+
+#main strong {
+	font-weight: bold;
+}
+#main b {
+  font-weight: inherit;
+	font-weight: bold;
+
+  background: linear-gradient(
+    #FFEB3B69 55%,
+    #ffcb0082 25%
+  );
+
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* ================================
+   TABLES (graph paper sheet)
+   ================================ */
+
+#main table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+
+  margin: 26px 0;
+
+  background-color: #fbfbf7;
+
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+
+  background-size: 20px 20px;
+
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.10),
+    0 6px 10px rgba(0,0,0,0.06),
+    inset 0 0 0 1px rgba(0,0,0,0.05);
+
+  transform: rotate(-0.7deg);
+}
+
+#main td,
+#main th {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  background: transparent;
+}
+
+#main th {
+  text-align: left;
+  font-weight: bold;
+  background: rgba(255,255,255,0.25);
+}
+
+/* ================================
+   HEADINGS (sticky tape notes)
+   ================================ */
+
+#main h1, #main h2 {
+  position: relative;
+  display: inline-block;
+
+  padding: 10px 18px;
+  margin: 20px 0;
+
+  background: linear-gradient(#fffef7, #f6f1e6);
+
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.15),
+    0 10px 18px rgba(0,0,0,0.08);
+
+  transform: rotate(-0.4deg);
+}
+
+#main h1.tape {
+  position: relative;
+  display: inline-block;
+
+  padding: 10px 18px;
+  margin: 20px 0;
+
+  background: linear-gradient(#fffef7, #f6f1e6);
+
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.15),
+    0 10px 18px rgba(0,0,0,0.08);
+
+  transform: rotate(var(--h1-rot, -0.4deg));
+}
+
+/* shared tape base */
+#main h1.tape::before,
+#main h1.tape::after {
+  content: "";
+  position: absolute;
+
+  width: var(--tape-w, 65px);
+  height: var(--tape-h, 18px);
+
+  background: var(--tape-color, rgba(255,255,255,0.55));
+  border: 1px solid rgba(0,0,0,0.08);
+
+  box-shadow: 0 2px 3px rgba(0,0,0,0.12);
+
+  z-index: 5;
+}
+
+/* top-left tape */
+#main h1.tape::before {
+  top: var(--tape-top, -8px);
+  left: var(--tape-left, -10px);
+  transform: rotate(var(--tape-rot1, -18deg));
+}
+
+/* bottom-right tape */
+#main h1.tape::after {
+  bottom: var(--tape-bottom, -8px);
+  right: var(--tape-right, -10px);
+  transform: rotate(var(--tape-rot2, 18deg));
+}
+
+/* ================================
+   PHOTOS (taped images)
+   ================================ */
+
+#main .photo.sticky {
+  position: relative;
+  display: inline-block;
+}
+
+/* image itself */
+#main .photo.sticky img {
+  display: block;
+  max-width: 100%;
+  padding: 8px;
+  background: #fff;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.16),
+    0 18px 28px rgba(0,0,0,0.12);
+
+  transform: rotate(var(--img-rot, 0deg));
+}
+
+/* shared tape base */
+#main .photo.sticky::before,
+#main .photo.sticky::after {
+  content: "";
+  position: absolute;
+
+  width: var(--tape-w, 70px);
+  height: var(--tape-h, 18px);
+
+  background: var(--tape-color, rgba(255,255,255,0.55));
+  border: 1px solid rgba(0,0,0,0.08);
+
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+
+  z-index: 10;
+}
+
+/* positions (still deterministic, but styled via variables) */
+#main .photo.sticky::before {
+  top: var(--tape-top, -10px);
+  left: var(--tape-left, 10px);
+  transform: rotate(var(--tape-rot1, -25deg));
+}
+
+#main .photo.sticky::after {
+  top: var(--tape-top2, -10px);
+  right: var(--tape-right, 10px);
+  transform: rotate(var(--tape-rot2, 25deg));
+}
+
+
+#main .photo {
+  position: relative;
+  display: inline-block;
+  margin: 25px 0;
+	transform: rotate(var(--rot, -1deg));
+}
+
+#main .photo img {
+  display: block;
+  max-width: 100%;
+
+  padding: 8px;
+  background: #fff;
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.16),
+    0 18px 28px rgba(0,0,0,0.12);
+}
+
+code {
+	font-family:Courier;
+	background-color:#eee;
+}
+
+/* ================================
+   RIGHT MARGIN NOTES SYSTEM
+   ================================ */
+
+#notes {
+  position: absolute;
+
+  top: 60px;
+  right: 10px;
+  bottom: 60px;
+
+  width: 340px;
+
+  pointer-events: none;
+}
+
+@font-face {
+  font-family: 'chinacat_thin';
+  src: url('file:///D:/bin/fonts/TEXT/CARTOON_ARCHITECT/0_MISC/chinacat_thin.ttf')
+}
+.note {
+  position: absolute;
+
+  width: 240px;
+  min-height: 200px;
+
+  font-size: 14px;
+  line-height: 18px;
+
+  padding: 6px 8px;
+
+  /*font-family: 'chinacat_thin', sans-serif !important;*/
+  font-family: Courier;
+  color: #646464 !important;
+
+  /* PAPER VARIATION */
+  background: var(--note-bg, rgba(255, 250, 210, 0.78));
+
+  border: 1px solid rgba(0,0,0,0.08);
+
+  /* DEPTH VARIATION */
+  box-shadow: 
+    0 2px 6px rgba(0,0,0,0.10),
+    0 10px 18px rgba(0,0,0,0.06);
+
+  /* ROTATION */
+  transform: rotate(var(--rot, -1deg));
+}
+
+/* tape strip (now variable) */
+.note::before {
+  content: "";
+  position: absolute;
+
+  top: var(--tape-top, -6px);
+  left: var(--tape-left, 14px);
+
+  width: var(--tape-w, 42px);
+  height: var(--tape-h, 10px);
+
+  background: var(--tape-color, rgba(255,255,255,0.45));
+
+  border: 1px solid rgba(0,0,0,0.06);
+
+  transform: rotate(var(--tape-rot, -12deg));
+
+  box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+}
+
+/* =========================================================
+   RESPONSIVE FIXES (ADD AT BOTTOM OF CSS)
+   ========================================================= */
+
+/* -------------------------------
+   GLOBAL SAFETY (mobile overflow)
+--------------------------------- */
+@media (max-width: 900px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  img, table {
+    max-width: 100%;
+  }
+}
+
+/* -------------------------------
+   PAPER BECOMES FLUID
+--------------------------------- */
+@media (max-width: 900px) {
+  #paper {
+    width: min(1250px, 100%);
+    margin: 10px auto;
+    transform: none; /* remove tilt */
+  }
+}
+
+/* -------------------------------
+   MAIN LAYOUT BECOMES SINGLE COLUMN
+   (disables right note column behaviour)
+--------------------------------- */
+@media (max-width: 900px) {
+  #main {
+    padding-right: 20px !important;
+    padding-left: 20px;
+    padding-bottom: 60px;
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* remove ruled-line exclusion of note area */
+  #main::before {
+    right: 0 !important;
+  }
+}
+
+/* -------------------------------
+   NOTES: STACK BELOW CONTENT
+--------------------------------- */
+@media (max-width: 900px) {
+  #notes {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .note {
+    position: relative !important;
+    width: auto;
+    min-height: auto;
+    margin: 12px 0;
+
+    transform: none; /* remove chaotic rotation on mobile */
+  }
+
+  .note::before {
+    display: none; /* tape optional on mobile */
+  }
+}
+
+/* -------------------------------
+   REMOVE ROTATIONS (mobile readability)
+--------------------------------- */
+@media (max-width: 900px) {
+  #main table,
+  #main h1,
+  #main h2,
+  #main .photo.sticky img,
+  #main .photo {
+    transform: none !important;
+  }
+}
+
+/* -------------------------------
+   HEADINGS SIMPLIFICATION
+--------------------------------- */
+@media (max-width: 900px) {
+  #main h1,
+  #main h2 {
+    display: block;
+    width: 100%;
+    margin: 16px 0;
+  }
+}
+
+/* -------------------------------
+   TABLES BECOME CLEAN SCROLLABLE BLOCKS
+--------------------------------- */
+@media (max-width: 900px) {
+  #main table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* -------------------------------
+   GALLERY RESPONSIVENESS (TIGHTER)
+--------------------------------- */
+@media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 6px;
+  }
+}
+
+/* -------------------------------
+   OPTIONAL: SIMPLIFY PAPER FEEL ON SMALL SCREENS
+--------------------------------- */
+@media (max-width: 600px) {
+  body {
+    background: #e9e4d8;
+  }
+
+  #main {
+    background: #fff;
+    padding: 16px;
+  }
+}
+
+/* -------------------------------
+   PREVENT IMAGE OVERFLOW EDGE CASES
+--------------------------------- */
+@media (max-width: 900px) {
+  #main .photo img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #main .photo.sticky img {
+    max-width: 100%;
+    height: auto;
+  }
+}
