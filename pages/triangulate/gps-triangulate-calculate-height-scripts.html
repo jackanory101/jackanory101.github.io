@@ -82,9 +82,8 @@ GPS Date Stamp                  : 2026:06:05</code></pre>
 mode captures direction almost 180° opposite. As if designed for
 selfies. Landscape appears to work as intended.</p>
 <p><a href="https://opencamera.org.uk">OpenCamera</a> app however is
-solid and also captures <em>yaw pitch and roll</em> in User Comment:</p>
-<pre><code>User Comment                    : Yaw:14.072492,Pitch:-22.737116219637013,Roll:-25.72520112174726
-
+solid and also captures <em>yaw pitch and roll</em>:</p>
+<pre><code>User Comment  : Yaw:14.072492, Pitch:-22.737116219637013, Roll:-25.72520112174726
 GPS Latitude                    : 32.225938°
 GPS Altitude                    : 0 m
 GPS Latitude Ref                : South
@@ -119,15 +118,14 @@ help</strong></p>
 </iframe>
 <h3 id="example-1">Example 1</h3>
 <p>This morning on a walk with Cassie I took two photos of a cell tower
-in the distance, curious to know <em>where</em> this tower was, each
-photo taken several hundred meters apart. I hadn’t discovered
-<em>OpenCamera</em>’s ability to capture <em>pitch</em> so this example
-won’t show height calculation.</p>
+in the distance, curious to know its location,each photo taken several
+hundred meters apart. I was not yet aware of saving <em>pitch</em> and
+so this example won’t show height calculation.</p>
 <div class="g">
 <a href="img/example-1/example-1-pics-01.jpg" onclick="o(this.href);return!1"><img src="img/example-1/example-1-pics-01.jpg"></a><a href="img/example-1/example-1-pics-02.jpg" onclick="o(this.href);return!1"><img src="img/example-1/example-1-pics-02.jpg"></a>
 </div>
 <hr />
-<p>The location where I took each photo:</p>
+<p>Each photos location:</p>
 <figure>
 <img src="img/example-1/example-1-gMaps-01.jpg" width="800"
 alt="title" />
@@ -138,14 +136,13 @@ alt="title" />
 alt="title" />
 <figcaption aria-hidden="true">title</figcaption>
 </figure>
-<p>The command’s <em>stdout</em> is default,
-i.e. <code>-32.225535,115.802791</code>. Check out the nifty ASCII
-rayline graph:</p>
+<p>Default output e.g. <code>-32.225535,115.802791</code>. Check out the
+nifty ASCII rayline graph!</p>
 <iframe class="seamless-frame f2" src="iframe/gps-triangulate-pics.py-1.html" title="title">
 </iframe>
-<p>We can plug the output of the script into Google Maps via:</p>
+<p>To open result directly in Google Maps:</p>
 <pre><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -z 500 -p 1) &amp;&amp; &quot;$(cygpath -u &quot;c:\Program Files\Mozilla Firefox\firefox.exe&quot;)&quot; &quot;https://www.google.com/maps/place/$GPS&quot;</code></pre>
-<p>This opens in Maps:</p>
+<p>The result in Maps:</p>
 <figure>
 <img src="img/example-1/example-1-gMaps-03.jpg" width="800"
 alt="title" />
@@ -166,7 +163,7 @@ closer than the tower in Example 1.</p>
 </div>
 <p>Notice how the <em>top</em> of the tower is captured in the center of
 each pic. By then I’d figured out how to capture <em>pitch</em>.</p>
-<p>The position of the three photos above in Google Maps:</p>
+<p>Each photo’s position in Google Maps:</p>
 <figure>
 <img src="img/example-2/example-2-1-gMaps-03.jpg" width="800"
 alt="title" />
@@ -182,18 +179,17 @@ alt="title" />
 alt="title" />
 <figcaption aria-hidden="true">title</figcaption>
 </figure>
-<p>First, triangulate:</p>
+<p>First, let’s triangulate:</p>
 <iframe class="seamless-frame f1" src="iframe/example-2-1.html" title="title">
 </iframe>
-<p>Pipe to Google Maps:</p>
+<p>And pipe to Google Maps:</p>
 <pre><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -z 200 -p 2) &amp;&amp; &quot;$(cygpath -u &quot;c:\Program Files\Mozilla Firefox\firefox.exe&quot;)&quot; &quot;https://www.google.com/maps/place/$GPS&quot;</code></pre>
 <figure>
 <img src="img/example-2/example-2-1-gMaps-01.jpg" width="1000"
 alt="title" />
 <figcaption aria-hidden="true">title</figcaption>
 </figure>
-<p>And a closer look with script output geocoords as marker, and target
-circled:</p>
+<p>Let’s take a closer look:</p>
 <figure>
 <img src="img/example-2/example-2-1-gMaps-02.jpg" width="800"
 alt="title" />
@@ -202,18 +198,17 @@ alt="title" />
 <hr />
 <p>Now let’s <strong>calculate height:</strong></p>
 <p>Notice that each pic above centers the top of the tower in the middle
-of the photo. Of course, this doesn’t account for the difference in
-altitude between photographer position and target.</p>
-<p>However, <em>altitude</em> is captured in photo metadata and it might
-be possible, given multiple shots of the target from varying locations
-to account for differences in altitude.</p>
-<p>This <a
+of the photo. This doesn’t account for altitude difference between
+photographer and target.</p>
+<p>However, photo metadata contains altitude and with photos of target
+from a few locations we could account for altitude difference in an
+upgraded script.</p>
+<p><a
 href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py">gps-calculate-height.py</a>
-script can be called directly e.g. </p>
-<pre><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py --olat -32.24488048197978 --olon 115.81388140453734                                                </code></pre>
-<p>Or like this (note use of <code>-a</code> to switch to other
-<em>stdout</em> format):</p>
-<pre><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -a)</code></pre>
+command line:</p>
+<pre><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py --olat -32.24488048197978 --olon 115.81388140453734                                                
+
+    With `-a` switch we get a different format output.</code></pre>
 <p>.</p>
 <iframe class="seamless-frame f1" src="iframe/example-2-2.html" title="title">
 </iframe>
@@ -223,10 +218,13 @@ script can be called directly e.g. </p>
 ==========================
 Samples      : 3
 Mean height  : 15.60 m
-Median height: 16.85 m</code></pre>
+Median height: 16.85 m
+
+</code></pre>
+<p>.</p>
 <p>I have no idea how close this is to the actual height. But it seems
 reasonable.</p>
-<p>Measurement from position of each pic to target in Google Earth:</p>
+<p>Distance from each capture location to target in Google Earth:</p>
 <figure>
 <img src="img/example-2/example-2-2-gMaps-01.jpg" width="800"
 alt="pic 1" />
@@ -306,7 +304,8 @@ intersections with a mean per-photo error of ~4.5 m and a stable fused
 solution indicates the triangulation is behaving correctly and the noise
 is being averaged rather than amplified.</p>
 </blockquote>
-<h3 id="command-line-examples">Command line examples</h3>
+<section id="command-line-examples" class="footer">
+<h3>Command line examples</h3>
 <pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -d . -z 500 -p 2</code></pre>
 <pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -h|--help</code></pre>
 <pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -d -a|--args</code></pre>
@@ -316,6 +315,7 @@ is being averaged rather than amplified.</p>
 <pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -a)</code></pre>
 <pre class="shell"><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -a)
 py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $GPS</code></pre>
+</section>
 <!-- copy code button -->
 <script>addEventListener("DOMContentLoaded",()=>{document.querySelectorAll("pre").forEach(p=>{let b=document.createElement("button");b.className="copy-btn";b.innerText="";p.style.position="relative";p.appendChild(b)})});addEventListener("click",e=>{if(e.target.classList.contains("copy-btn")){let p=e.target.closest("pre"),c=p.querySelector("code");navigator.clipboard.writeText(c.innerText).then(()=>{e.target.innerText="Copied!";setTimeout(()=>e.target.innerText="",1500)}).catch(console.error)}})</script>
 <style>.copy-btn{position:absolute;top:5px;right:5px;border:0;cursor:pointer;opacity:.8}.copy-btn:hover{opacity:1}.copy-btn::after{content:"📋";font-size:14px}</style>
@@ -329,6 +329,7 @@ py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $GPS</c
   width: 100%;
   height: auto;          /* Allows it to be small by default */
   border: none; 
+  background-color: #373A2C;
   
   /* The Glow Effect */
   box-shadow: 0 0 25px 5px rgba(69, 43, 27, 0.4);
@@ -351,25 +352,44 @@ pre > code {
 }
 
 figure {
-	box-shadow: 100px 100px 102px 10px rgba(212, 128, 76, 0.23);
-	box-shadow: 100px 100px 102px 10px rgba(212, 128, 76, 0.11);
-	outline: 2px solid #1a110b;
-	outline: 2px solid #bebebe;
-	outline-offset: -2px;
+    box-shadow: 100px 100px 102px 10px rgba(212, 128, 76, 0.23);
+    box-shadow: 100px 100px 102px 10px rgba(212, 128, 76, 0.11);
+    outline: 2px solid #1a110b;
+    outline: 2px solid #bebebe;
+    outline-offset: -2px;
 }
 
 .g {
-	box-shadow: 0px 0px 1000px 10px rgba(24, 10, 1, 0.19);
+    box-shadow: 0px 0px 1000px 10px rgba(24, 10, 1, 0.19);
 }
 
+.footer {
+background-color:#888;
+}
 
+.footer.h1 {
+background-color:#a99;
+}
 
+.copy-btn {background: transparent}
+/* --- APPEND THIS OVERRIDE SECTION TO YOUR CSS --- */
 
+nav::before {
+    /* 1. Kill the old red dotted border */
+    border-bottom: none !important;
 
+    /* 2. Create the line using a thin background gradient */
+    background-image: linear-gradient(to left, rgba(40, 40, 40, 0.8), rgba(40, 40, 40, 0)) !important;
+    
+    /* 3. Give the line physical height and place it at the bottom of the element */
+    background-size: 100% 4px !important; /* 4px controls the vertical width/thickness */
+    background-repeat: no-repeat !important;
+    background-position: bottom left !important;
 
-
-
-
+    /* 4. Adjust margins/padding to make room for the wide line */
+    margin-bottom: 25px !important;
+    padding-bottom: 10px !important; /* Creates space between text and the line */
+}
 
 </style>
 </div>
