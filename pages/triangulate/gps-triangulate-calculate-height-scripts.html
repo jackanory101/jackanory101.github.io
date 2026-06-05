@@ -115,7 +115,7 @@ e.g. <code>--olat -32.225534732096165 --olon 115.80279056457381</code>.</p>
 <p><strong><a
 href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py">gps-triangulate-pics.py</a>
 help</strong></p>
-<iframe style="width:100%; height:400px;" src="iframe/gps-triangulate-pics.py-help.html" title="title">
+<iframe class="seamless-frame f1" src="iframe/gps-triangulate-pics.py-help.html" title="title">
 </iframe>
 <h3 id="example-1">Example 1</h3>
 <p>This morning on a walk with Cassie I took two photos of a cell tower
@@ -141,7 +141,7 @@ alt="title" />
 <p>The command’s <em>stdout</em> is default,
 i.e. <code>-32.225535,115.802791</code>. Check out the nifty ASCII
 rayline graph:</p>
-<iframe style="width:100%; height:400px;" src="iframe/gps-triangulate-pics.py-1.html" title="title">
+<iframe class="seamless-frame f2" src="iframe/gps-triangulate-pics.py-1.html" title="title">
 </iframe>
 <p>We can plug the output of the script into Google Maps via:</p>
 <pre><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -z 500 -p 1) &amp;&amp; &quot;$(cygpath -u &quot;c:\Program Files\Mozilla Firefox\firefox.exe&quot;)&quot; &quot;https://www.google.com/maps/place/$GPS&quot;</code></pre>
@@ -183,7 +183,7 @@ alt="title" />
 <figcaption aria-hidden="true">title</figcaption>
 </figure>
 <p>First, triangulate:</p>
-<iframe style="width:100%; height:400px;" src="iframe/example-2-1.html" title="title">
+<iframe class="seamless-frame f1" src="iframe/example-2-1.html" title="title">
 </iframe>
 <p>Pipe to Google Maps:</p>
 <pre><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -z 200 -p 2) &amp;&amp; &quot;$(cygpath -u &quot;c:\Program Files\Mozilla Firefox\firefox.exe&quot;)&quot; &quot;https://www.google.com/maps/place/$GPS&quot;</code></pre>
@@ -215,7 +215,7 @@ script can be called directly e.g. </p>
 <em>stdout</em> format):</p>
 <pre><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -a)</code></pre>
 <p>.</p>
-<iframe style="width:100%; height:400px;" src="iframe/example-2-2.html" title="title">
+<iframe class="seamless-frame f1" src="iframe/example-2-2.html" title="title">
 </iframe>
 <p>.</p>
 <pre><code>==========================
@@ -324,6 +324,54 @@ py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $GPS</c
 <style>.g{width:100%;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:0;padding:0}.g>a{aspect-ratio:1/1;overflow:hidden;display:block;width:100%;text-decoration:none}.g img{width:100%;height:100%;object-fit:cover;border-radius:8px;cursor:pointer;transition:.2s}.g img:hover{transform:scale(1.05)}</style>
 <script>let i;function o(u){i||(i=new Image,i.style.cssText="position:fixed;inset:0;margin:auto;max-width:90vw;max-height:90vh;z-index:9999;cursor:pointer",i.onclick=()=>i.style.display="none",document.body.appendChild(i));i.src=u;i.style.display="block"}</script>
 <!-- END gallery -->
+<style>
+.seamless-frame {
+  width: 100%;
+  height: auto;          /* Allows it to be small by default */
+  border: none; 
+  
+  /* The Glow Effect */
+  box-shadow: 0 0 25px 5px rgba(69, 43, 27, 0.4);
+  
+  /* Optional: Smoothly rounds the corners of the iframe and the glow */
+  border-radius: 8px; 
+}
+.seamless-frame.f1 {
+  min-height: 200px;     /* Set your absolute minimum starting height */
+}
+.seamless-frame.f2 {
+  min-height: 600px;     /* Set your absolute minimum starting height */
+}
+
+pre > code {
+    /* The Gentler Glow Effect */
+    box-shadow: 0 2px 12px 1px rgba(69, 43, 27, 0.18);
+    /* Makes the block behave nicely with the shadow */
+    display: block; 
+}
+
+figure {
+	box-shadow: 100px 100px 102px 10px rgba(212, 128, 76, 0.23);
+	box-shadow: 100px 100px 102px 10px rgba(212, 128, 76, 0.11);
+	outline: 2px solid #1a110b;
+	outline: 2px solid #bebebe;
+	outline-offset: -2px;
+}
+
+.g {
+	box-shadow: 0px 0px 1000px 10px rgba(24, 10, 1, 0.19);
+}
+
+
+
+
+
+
+
+
+
+
+</style>
 </div>
 </body>
 </html>
