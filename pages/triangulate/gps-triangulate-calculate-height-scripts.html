@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Tom Fawkes" />
+  <title>gps-triangulate-calculate-height-scripts</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* override style defined above for columns.lua */
+    div.columns { display: inherit ; gap: inherit ; }
+    /* override style defined above for numbered source code */
+    pre.numberSource { margin-left: inherit !important ; border-left: none !important ; padding-left: inherit !important ; }
+  </style>
+  <link rel="stylesheet" href="file://c:/Users/tom/Documents/bin/apps/pandoc_templates/css\baskerville-panam.css" />
+  <link rel="stylesheet" href="/styles\baskerville-panam.css" />
+  <style>
+  /* Styles added by the columns.lua pandoc filter */
+    .columns :first-child {margin-top: 0;}
+    .column-span + * {margin-top: 0;}
+  </style>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul class="incremental">
+<li><a href="#gps-triangulate-calculate-height-python-script"
+id="toc-gps-triangulate-calculate-height-python-script">gps triangulate
+calculate height python script</a>
+<ul class="incremental">
+<li><a href="#files" id="toc-files">Files</a></li>
+<li><a href="#gps-data-in-photos-captured-pixel-7-pro"
+id="toc-gps-data-in-photos-captured-pixel-7-pro">GPS data in photos
+captured Pixel 7 Pro</a></li>
+<li><a href="#example-1" id="toc-example-1">Example 1</a></li>
+<li><a href="#example-2" id="toc-example-2">Example 2</a></li>
+<li><a href="#command-line-examples"
+id="toc-command-line-examples">Command line examples</a></li>
+</ul></li>
+</ul>
+</nav>
+<div id="main">
+<h2 id="gps-triangulate-calculate-height-python-script">gps triangulate
+calculate height python script</h2>
+<h3 id="files">Files</h3>
+<blockquote>
+<p><a
+href="file://c:/cygwin64/home/tom/bin/programming/python/py313.bat">py313.bat</a><br />
+<a
+href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py">gps-triangulate-pics.py</a><br />
+<a
+href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py">gps-calculate-height.py</a><br />
+<a
+href="file://C:/cygwin64/home/tom/bin/graphics/exif-meta/gps-img-open-maps.sh">gps-img-open-maps.sh</a></p>
+</blockquote>
+<h3 id="gps-data-in-photos-captured-pixel-7-pro">GPS data in photos
+captured Pixel 7 Pro</h3>
+<p>Default camera app captures GPS coords like:</p>
+<pre><code>GPS Version ID                  : 2.2.0.0
+GPS Latitude Ref                : South
+GPS Latitude                    : 32.226572°
+GPS Longitude Ref               : East
+GPS Longitude                   : 115.803453°
+GPS Altitude Ref                : Below Sea Level
+GPS Altitude                    : 12.8 m
+GPS Time Stamp                  : 01:46:37
+GPS Img Direction Ref           : Magnetic North
+GPS Img Direction               : 140
+GPS Date Stamp                  : 2026:06:05</code></pre>
+<p>However <em>direction</em> is flakey. Brief testing shows portrait
+mode captures direction almost 180° opposite. As if designed for
+selfies. Landscape appears to work as intended.</p>
+<p><a href="https://opencamera.org.uk">OpenCamera</a> app however is
+solid and also captures <em>yaw pitch and roll</em> in User Comment:</p>
+<pre><code>User Comment                    : Yaw:14.072492,Pitch:-22.737116219637013,Roll:-25.72520112174726
+
+GPS Latitude                    : 32.225938°
+GPS Altitude                    : 0 m
+GPS Latitude Ref                : South
+GPS Altitude Ref                : Below Sea Level
+GPS Processing Method           : GPS
+GPS Longitude Ref               : East
+GPS Time Stamp                  : 01:56:51
+GPS Longitude                   : 115.806643°
+GPS Date Stamp                  : 2026:06:05
+GPS Img Direction               : 277.05
+GPS Img Direction Ref           : Magnetic North</code></pre>
+<hr />
+<p>Using data from at least two pics taken apart and directed towards
+object in distance we can triangulate and calculate approx coords of
+object, and distance to object.</p>
+<p>From brief tests it’s pretty accurate. At least, I can easily find
+object on Google Maps.</p>
+<p>Python script <a
+href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py">gps-triangulate-pics.py</a>
+prints out info incl target’s calculated distance and coords, and
+<strong><em>ascii ray graph</em></strong> to <em>stderr</em> (i.e. to
+screen) and geocoords to <em>stdout</em> (i.e. return value),
+e.g. <code>-32.225535,115.802791</code>.</p>
+<p>With <code>-a</code> flag, the script outputs format usable by next
+script <a
+href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py">gps-calculate-height.py</a>,
+e.g. <code>--olat -32.225534732096165 --olon 115.80279056457381</code>.</p>
+<p><strong><a
+href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py">gps-triangulate-pics.py</a>
+help</strong></p>
+<iframe style="width:100%; height:400px;" src="iframe/gps-triangulate-pics.py-help.html" title="title">
+</iframe>
+<h3 id="example-1">Example 1</h3>
+<p>This morning on a walk with Cassie I took two photos of a cell tower
+in the distance, curious to know <em>where</em> this tower was, each
+photo taken several hundred meters apart. I hadn’t discovered
+<em>OpenCamera</em>’s ability to capture <em>pitch</em> so this example
+won’t show height calculation.</p>
+<div class="g">
+<a href="img/example-1/example-1-pics-01.jpg" onclick="o(this.href);return!1"><img src="img/example-1/example-1-pics-01.jpg"></a><a href="img/example-1/example-1-pics-02.jpg" onclick="o(this.href);return!1"><img src="img/example-1/example-1-pics-02.jpg"></a>
+</div>
+<hr />
+<p>The location where I took each photo:</p>
+<figure>
+<img src="img/example-1/example-1-gMaps-01.jpg" width="800"
+alt="title" />
+<figcaption aria-hidden="true">title</figcaption>
+</figure>
+<figure>
+<img src="img/example-1/example-1-gMaps-02.jpg" width="800"
+alt="title" />
+<figcaption aria-hidden="true">title</figcaption>
+</figure>
+<p>The command’s <em>stdout</em> is default,
+i.e. <code>-32.225535,115.802791</code>. Check out the nifty ASCII
+rayline graph:</p>
+<iframe style="width:100%; height:400px;" src="iframe/gps-triangulate-pics.py-1.html" title="title">
+</iframe>
+<p>We can plug the output of the script into Google Maps via:</p>
+<pre><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -z 500 -p 1) &amp;&amp; &quot;$(cygpath -u &quot;c:\Program Files\Mozilla Firefox\firefox.exe&quot;)&quot; &quot;https://www.google.com/maps/place/$GPS&quot;</code></pre>
+<p>This opens in Maps:</p>
+<figure>
+<img src="img/example-1/example-1-gMaps-03.jpg" width="800"
+alt="title" />
+<figcaption aria-hidden="true">title</figcaption>
+</figure>
+<p>Closer examination:</p>
+<figure>
+<img src="img/example-1/example-1-gMaps-04.jpg" width="1000"
+alt="title" />
+<figcaption aria-hidden="true">title</figcaption>
+</figure>
+<h3 id="example-2">Example 2</h3>
+<p>Later on in the day coming back from shopping at Kwinana Hub I took
+photos of another cell tower mounted on a nearby building and much
+closer than the tower in Example 1.</p>
+<div class="g">
+<a href="img/example-2/example-2-pics-01.jpg" onclick="o(this.href);return!1"><img src="img/example-2/example-2-pics-01.jpg"></a><a href="img/example-2/example-2-pics-02.jpg" onclick="o(this.href);return!1"><img src="img/example-2/example-2-pics-02.jpg"></a><a href="img/example-2/example-2-pics-03.jpg" onclick="o(this.href);return!1"><img src="img/example-2/example-2-pics-03.jpg"></a>
+</div>
+<p>Notice how the <em>top</em> of the tower is captured in the center of
+each pic. By then I’d figured out how to capture <em>pitch</em>.</p>
+<p>The position of the three photos above in Google Maps:</p>
+<figure>
+<img src="img/example-2/example-2-1-gMaps-03.jpg" width="800"
+alt="title" />
+<figcaption aria-hidden="true">title</figcaption>
+</figure>
+<figure>
+<img src="img/example-2/example-2-1-gMaps-04.jpg" width="800"
+alt="title" />
+<figcaption aria-hidden="true">title</figcaption>
+</figure>
+<figure>
+<img src="img/example-2/example-2-1-gMaps-05.jpg" width="800"
+alt="title" />
+<figcaption aria-hidden="true">title</figcaption>
+</figure>
+<p>First, triangulate:</p>
+<iframe style="width:100%; height:400px;" src="iframe/example-2-1.html" title="title">
+</iframe>
+<p>Pipe to Google Maps:</p>
+<pre><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -z 200 -p 2) &amp;&amp; &quot;$(cygpath -u &quot;c:\Program Files\Mozilla Firefox\firefox.exe&quot;)&quot; &quot;https://www.google.com/maps/place/$GPS&quot;</code></pre>
+<figure>
+<img src="img/example-2/example-2-1-gMaps-01.jpg" width="1000"
+alt="title" />
+<figcaption aria-hidden="true">title</figcaption>
+</figure>
+<p>And a closer look with script output geocoords as marker, and target
+circled:</p>
+<figure>
+<img src="img/example-2/example-2-1-gMaps-02.jpg" width="800"
+alt="title" />
+<figcaption aria-hidden="true">title</figcaption>
+</figure>
+<hr />
+<p>Now let’s <strong>calculate height:</strong></p>
+<p>Notice that each pic above centers the top of the tower in the middle
+of the photo. Of course, this doesn’t account for the difference in
+altitude between photographer position and target.</p>
+<p>However, <em>altitude</em> is captured in photo metadata and it might
+be possible, given multiple shots of the target from varying locations
+to account for differences in altitude.</p>
+<p>This <a
+href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py">gps-calculate-height.py</a>
+script can be called directly e.g. </p>
+<pre><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py --olat -32.24488048197978 --olon 115.81388140453734                                                </code></pre>
+<p>Or like this (note use of <code>-a</code> to switch to other
+<em>stdout</em> format):</p>
+<pre><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -a)</code></pre>
+<p>.</p>
+<iframe style="width:100%; height:400px;" src="iframe/example-2-2.html" title="title">
+</iframe>
+<p>.</p>
+<pre><code>==========================
+📏 FINAL HEIGHT ESTIMATE
+==========================
+Samples      : 3
+Mean height  : 15.60 m
+Median height: 16.85 m</code></pre>
+<p>I have no idea how close this is to the actual height. But it seems
+reasonable.</p>
+<p>Measurement from position of each pic to target in Google Earth:</p>
+<figure>
+<img src="img/example-2/example-2-2-gMaps-01.jpg" width="800"
+alt="pic 1" />
+<figcaption aria-hidden="true">pic 1</figcaption>
+</figure>
+<figure>
+<img src="img/example-2/example-2-2-gMaps-02.jpg" width="800"
+alt="pic 2" />
+<figcaption aria-hidden="true">pic 2</figcaption>
+</figure>
+<figure>
+<img src="img/example-2/example-2-2-gMaps-03.jpg" width="800"
+alt="pic 3" />
+<figcaption aria-hidden="true">pic 3</figcaption>
+</figure>
+<h4 id="analysis">Analysis</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Photo</th>
+<th style="text-align: right;">Script (m)</th>
+<th style="text-align: right;">Google Earth (m)</th>
+<th style="text-align: right;">Error (m)</th>
+<th style="text-align: right;">Error (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>#1</td>
+<td style="text-align: right;">99.6</td>
+<td style="text-align: right;">92.46</td>
+<td style="text-align: right;">+7.14</td>
+<td style="text-align: right;">+7.7%</td>
+</tr>
+<tr class="even">
+<td>#2</td>
+<td style="text-align: right;">81.4</td>
+<td style="text-align: right;">79.51</td>
+<td style="text-align: right;">+1.89</td>
+<td style="text-align: right;">+2.4%</td>
+</tr>
+<tr class="odd">
+<td>#3</td>
+<td style="text-align: right;">78.1</td>
+<td style="text-align: right;">82.52</td>
+<td style="text-align: right;">-4.42</td>
+<td style="text-align: right;">-5.4%</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[ChatGPT]</p>
+<p>Across your three photos (with bearings of ~78°, 109°, and 149°), the
+script’s per-photo distance estimates ranged from about 78.1 m to 99.6 m
+compared with Google Earth’s 79.51 m to 92.52 m, producing individual
+errors between roughly 1.9 m and 7.1 m (mean absolute error ~4.5 m). The
+ASCII ray plot shows all three bearing rays intersecting cleanly near a
+common point (marked “X”), indicating strong geometric consistency and a
+stable least-squares solution. When combined, the triangulated result
+places the target at <strong>-32.244618, 115.815732</strong>, with the
+selected reference photo (#3) giving a camera-to-target distance of
+<strong>78.1 m</strong>. Overall, the final triangulated solution sits
+about <strong>4.87 m</strong> from the Google Earth-derived position,
+corresponding to roughly <strong>~5% relative error at ~80–100 m
+range</strong> and an effective angular uncertainty of about
+<strong>~3°</strong>. The results are internally consistent and indicate
+the geometry is working correctly, with remaining error dominated by GPS
+and compass noise rather than the triangulation method itself.</p>
+<p>At roughly <strong>80–100 m standoff distances</strong>, you’re only
+getting a baseline between camera positions of a few metres, and yet the
+system still converges to a target position within about <strong>~4.9 m
+of Google Earth reference</strong>. That’s a very tight outcome for
+consumer-grade inputs: phone GPS (typically ±3–5 m), magnetic compass
+heading (often ±2–5° error in real-world conditions), and single-frame
+EXIF-derived direction vectors. In that context, achieving consistent
+intersections with a mean per-photo error of ~4.5 m and a stable fused
+solution indicates the triangulation is behaving correctly and the noise
+is being averaged rather than amplified.</p>
+</blockquote>
+<h3 id="command-line-examples">Command line examples</h3>
+<pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -d . -z 500 -p 2</code></pre>
+<pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -h|--help</code></pre>
+<pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -d -a|--args</code></pre>
+<pre class="shell"><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py) &amp;&amp; &quot;$(cygpath -u &quot;c:\Program Files\Mozilla Firefox\firefox.exe&quot;)&quot; &quot;https://www.google.com/maps/place/$GPS&quot;</code></pre>
+<pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py --olat -32.22553 --olon 115.8027905</code></pre>
+<pre class="shell"><code>gps-calculate-height.py $(gps-triangulate-pics.py --args)</code></pre>
+<pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -a)</code></pre>
+<pre class="shell"><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -a)
+py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $GPS</code></pre>
+<!-- copy code button -->
+<script>addEventListener("DOMContentLoaded",()=>{document.querySelectorAll("pre").forEach(p=>{let b=document.createElement("button");b.className="copy-btn";b.innerText="";p.style.position="relative";p.appendChild(b)})});addEventListener("click",e=>{if(e.target.classList.contains("copy-btn")){let p=e.target.closest("pre"),c=p.querySelector("code");navigator.clipboard.writeText(c.innerText).then(()=>{e.target.innerText="Copied!";setTimeout(()=>e.target.innerText="",1500)}).catch(console.error)}})</script>
+<style>.copy-btn{position:absolute;top:5px;right:5px;border:0;cursor:pointer;opacity:.8}.copy-btn:hover{opacity:1}.copy-btn::after{content:"📋";font-size:14px}</style>
+<!-- END copy code button -->
+<!-- gallery -->
+<style>.g{width:100%;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:0;padding:0}.g>a{aspect-ratio:1/1;overflow:hidden;display:block;width:100%;text-decoration:none}.g img{width:100%;height:100%;object-fit:cover;border-radius:8px;cursor:pointer;transition:.2s}.g img:hover{transform:scale(1.05)}</style>
+<script>let i;function o(u){i||(i=new Image,i.style.cssText="position:fixed;inset:0;margin:auto;max-width:90vw;max-height:90vh;z-index:9999;cursor:pointer",i.onclick=()=>i.style.display="none",document.body.appendChild(i));i.src=u;i.style.display="block"}</script>
+<!-- END gallery -->
+</div>
+</body>
+</html>
