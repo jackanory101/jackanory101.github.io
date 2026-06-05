@@ -40,86 +40,69 @@ id="toc-gps-triangulate-calculate-height-python-script">gps triangulate
 calculate height python script</a>
 <ul class="incremental">
 <li><a href="#files" id="toc-files">Files</a></li>
-<li><a href="#gps-data-in-photos-captured-pixel-7-pro"
-id="toc-gps-data-in-photos-captured-pixel-7-pro">GPS data in photos
-captured Pixel 7 Pro</a></li>
+<li><a href="#gps-data-in-photos-pixel-7-pro"
+id="toc-gps-data-in-photos-pixel-7-pro">GPS data in photos Pixel 7
+Pro</a></li>
 <li><a href="#example-1" id="toc-example-1">Example 1</a></li>
 <li><a href="#example-2" id="toc-example-2">Example 2</a></li>
+<li><a href="#analysis" id="toc-analysis">Analysis</a></li>
 </ul></li>
 </ul>
 </nav>
 <div id="main">
 <h2 id="gps-triangulate-calculate-height-python-script">gps triangulate
 calculate height python script</h2>
-<p>
-This page details a custom GIS workflow using Python to triangulate
+<p>This page details a custom GIS workflow using Python to triangulate
 geographic coordinates to estimate height of distant landmarks using
-EXIF metadata extracted from smartphone photos. Passing photo
-coordinates and stable bearing data through a triangulation script
-(<code>gps-triangulate-pics.py</code>), we can map distant targets
-(buildings, cell towers, mountain tops, etc) with ~5% relative error
-margin under real-world conditions. Feeding outputs to a secondary
-script (<code>gps-calculate-height.py</code>) using camera pitch we
-calculate target height estimations.
-</p>
+EXIF metadata extracted from smartphone photos.</p>
+<p>Passing photo coordinates and stable bearing data through a
+triangulation script (<code>gps-triangulate-pics.py</code>), we can map
+distant targets (buildings, cell towers, mountain tops, etc) with ~5%
+relative error margin under real-world conditions. Feeding outputs to a
+secondary script (<code>gps-calculate-height.py</code>) using camera
+pitch we calculate target height estimations.</p>
 <h3 id="files">Files</h3>
 <blockquote>
 <p><a
-href="file://c:/cygwin64/home/tom/bin/programming/python/py313.bat">py313.bat</a><br />
+href="file://c:/cygwin64/home/tom/bin/programming/python/py313.bat">py313.bat</a>
 <a
-href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py">gps-triangulate-pics.py</a><br />
+href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py">gps-triangulate-pics.py</a>
 <a
-href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py">gps-calculate-height.py</a><br />
+href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py">gps-calculate-height.py</a>
 <a
 href="file://C:/cygwin64/home/tom/bin/graphics/exif-meta/gps-img-open-maps.sh">gps-img-open-maps.sh</a></p>
 </blockquote>
-<h3 id="gps-data-in-photos-captured-pixel-7-pro">GPS data in photos
-captured Pixel 7 Pro</h3>
-<p>Default camera app captures GPS coords like:</p>
-<pre><code>GPS Version ID                  : 2.2.0.0
-GPS Latitude Ref                : South
-GPS Latitude                    : 32.226572°
-GPS Longitude Ref               : East
-GPS Longitude                   : 115.803453°
-GPS Altitude Ref                : Below Sea Level
-GPS Altitude                    : 12.8 m
-GPS Time Stamp                  : 01:46:37
-GPS Img Direction Ref           : Magnetic North
-GPS Img Direction               : 140
-GPS Date Stamp                  : 2026:06:05</code></pre>
-<p>However <em>direction</em> is flakey. Brief testing shows portrait
-mode captures direction almost 180° opposite. As if designed for
-selfies. Landscape appears to work as intended.</p>
-<p><a href="https://opencamera.org.uk">OpenCamera</a> app however is
-solid and also captures <em>yaw pitch and roll</em>:</p>
-<pre><code>User Comment  : Yaw:14.072492, Pitch:-22.737116219637013, Roll:-25.72520112174726
-GPS Latitude                    : 32.225938°
-GPS Altitude                    : 0 m
-GPS Latitude Ref                : South
-GPS Altitude Ref                : Below Sea Level
-GPS Processing Method           : GPS
-GPS Longitude Ref               : East
-GPS Time Stamp                  : 01:56:51
-GPS Longitude                   : 115.806643°
-GPS Date Stamp                  : 2026:06:05
-GPS Img Direction               : 277.05
-GPS Img Direction Ref           : Magnetic North</code></pre>
+<h3 id="gps-data-in-photos-pixel-7-pro">GPS data in photos Pixel 7
+Pro</h3>
+<p>Typical captured data:</p>
+<pre><code>GPS Latitude : 32.226572°
+GPS Longitude : 115.803453°
+GPS Altitude : 12.8 m
+GPS Img Direction : 140</code></pre>
+<p>My Pixel phone’s default camera however fails to write direction
+correctly. <a href="https://opencamera.org.uk">OpenCamera</a> app is
+solid alternative and also captures <em>yaw pitch and roll</em>:<a
+href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a></p>
+<pre><code>User Comment : Yaw:14.072492, Pitch:-22.737116219637013, Roll:-25.72520112174726
+GPS Latitude : 32.225938°
+GPS Longitude : 115.806643°
+GPS Altitude : 0 m
+GPS Img Direction : 277.05</code></pre>
 <hr />
 <p>Using data from at least two pics taken apart and directed towards
 object in distance we can triangulate and calculate approx coords of
 object, and distance to object.</p>
 <p>From brief tests it’s pretty accurate. At least, I can easily find
 object on Google Maps.</p>
-<p>Python script <a
-href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py">gps-triangulate-pics.py</a>
-prints out info incl target’s calculated distance and coords, and
-<strong><em>ascii ray graph</em></strong> to <em>stderr</em> (i.e. to
-screen) and geocoords to <em>stdout</em> (i.e. return value),
-e.g. <code>-32.225535,115.802791</code>.</p>
-<p>With <code>-a</code> flag, the script outputs format usable by next
-script <a
-href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py">gps-calculate-height.py</a>,
-e.g. <code>--olat -32.225534732096165 --olon 115.80279056457381</code>.</p>
+<p>Python script <code>gps-triangulate-pics.py</code> outputs target
+distance, coordinates, and an ASCII ray graph - to <em>stderr</em> for
+screen display, while returning clean, pipable geocoords (e.g.,
+<code>-32.225535,115.802791</code>) directly to <em>stdout</em>.</p>
+<p>When passed the <code>-a</code> flag, the script formats its
+<em>stdout</em> as named arguments (e.g.,
+<code>--olat -32.225534732096165 --olon 115.80279056457381</code>) to be
+piped directly into <code>gps-calculate-height.py</code>.</p>
 <p><strong><a
 href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py">gps-triangulate-pics.py</a>
 help</strong></p>
@@ -206,13 +189,14 @@ alt="title" />
 <p>Each photo centers the top of the tower.</p>
 <p>Using <em>pitch</em> in photo metadata we can calculate approx height
 of target.</p>
-<p>This doesn’t account for altitude difference between photographer and
-target. Photo metadata contains altitude and using it would be possible
-in an upgraded script.</p>
+<p>Note: This calculation assumes a flat baseline and doesn’t account
+for altitude differences between the photographer and the target.
+However, because photo metadata includes altitude, integrating it into
+an upgraded version of the script is possible.</p>
 <p><a
 href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py">gps-calculate-height.py</a>
 command line:</p>
-<pre><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py --olat -32.24488048197978 --olon 115.81388140453734                                                
+<pre><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py --olat -32.24488048197978 --olon 115.81388140453734 
 
     With `-a` switch we get a different format output.</code></pre>
 <p>.</p>
@@ -220,10 +204,10 @@ command line:</p>
 </iframe>
 <p>.</p>
 <pre><code>==========================
-📏 FINAL HEIGHT ESTIMATE
+ FINAL HEIGHT ESTIMATE
 ==========================
-Samples      : 3
-Mean height  : 15.60 m
+Samples : 3
+Mean height : 15.60 m
 Median height: 16.85 m
 
 </code></pre>
@@ -252,7 +236,7 @@ alt="pic 2" />
 alt="pic 3" />
 <figcaption aria-hidden="true">pic 3</figcaption>
 </figure>
-<h4 id="analysis">Analysis</h4>
+<h3 id="analysis">Analysis</h3>
 <table>
 <thead>
 <tr class="header">
@@ -300,21 +284,112 @@ places the target at <strong>-32.244618, 115.815732</strong>, with the
 selected reference photo (#3) giving a camera-to-target distance of
 <strong>78.1 m</strong>. Overall, the final triangulated solution sits
 about <strong>4.87 m</strong> from the Google Earth-derived position,
-corresponding to roughly <strong>~5% relative error at ~80–100 m
+corresponding to roughly <strong>~5% relative error at ~80 - 100 m
 range</strong> and an effective angular uncertainty of about
 <strong>~3°</strong>. The results are internally consistent and indicate
 the geometry is working correctly, with remaining error dominated by GPS
 and compass noise rather than the triangulation method itself.</p>
-<p>At roughly <strong>80–100 m standoff distances</strong>, you’re only
-getting a baseline between camera positions of a few metres, and yet the
-system still converges to a target position within about <strong>~4.9 m
-of Google Earth reference</strong>. That’s a very tight outcome for
-consumer-grade inputs: phone GPS (typically ±3–5 m), magnetic compass
-heading (often ±2–5° error in real-world conditions), and single-frame
-EXIF-derived direction vectors. In that context, achieving consistent
-intersections with a mean per-photo error of ~4.5 m and a stable fused
-solution indicates the triangulation is behaving correctly and the noise
-is being averaged rather than amplified.</p>
+<p>At roughly <strong>80 - 100 m standoff distances</strong>, you’re
+only getting a baseline between camera positions of a few metres, and
+yet the system still converges to a target position within about
+<strong>~4.9 m of Google Earth reference</strong>. That’s a very tight
+outcome for consumer-grade inputs: phone GPS (typically ±3 - 5 m),
+magnetic compass heading (often ±2 - 5° error in real-world conditions),
+and single-frame EXIF-derived direction vectors. In that context,
+achieving consistent intersections with a mean per-photo error of ~4.5 m
+and a stable fused solution indicates the triangulation is behaving
+correctly and the noise is being averaged rather than amplified.</p>
+</blockquote>
+<p>Asked to respond to <em>ChatGPT’s</em> assessment, <em>Gemini</em>
+gave me this:</p>
+<blockquote>
+<h3 id="error-dynamics-geometric-stability">1. Error Dynamics &amp;
+Geometric Stability</h3>
+<p>The system achieves a <strong>~5% relative distance error</strong>
+and stays within <strong>~4.9 metres</strong> of the Google Earth
+control point over an 80 - 100m range. In computational geometry and
+surveying, this is an incredibly tight result for uncalibrated
+hardware.</p>
+<p>The stability of your calculation relies on three main geometric
+factors:</p>
+<ul class="incremental">
+<li><strong>The Baseline-to-Distance Ratio:</strong> In Example 2, your
+photo capture points are separated by “several hundred metres” while
+tracking a target ~90m away. This creates a wide baseline with high
+interior angles between intersecting bearing lines. Wide angles
+radically minimize the <strong>Geometric Dilution of Precision
+(GDOP)</strong>. If you had taken the photos only 5 metres apart, the
+rays would be nearly parallel, causing minor compass errors to displace
+the intersection point (the “X”) by tens of metres.</li>
+<li><strong>Least-Squares Smoothing:</strong> The ChatGPT excerpt notes
+that the system converges via a stable least-squares solution. By using
+three photos instead of the minimum two, your script successfully
+averages out random high-frequency noise (e.g., local magnetic
+interference on a single frame) rather than amplifying it.</li>
+</ul>
+<hr />
+<h3 id="the-sensor-bottleneck-stock-vs.-opencamera">2. The Sensor
+Bottleneck: Stock vs. OpenCamera</h3>
+<p>Your observation regarding the Pixel 7 Pro’s stock camera flipping
+the <code>GPSImgDirection</code> tag by 180° in portrait mode points to
+an unresolved Android coordinate mapping bug.</p>
+<p>The Android sensor framework maps hardware orientation relative to
+the device’s <strong>natural orientation</strong> (typically portrait
+for phones). When an app requests camera frames and orientation
+metadata, it must explicitly transform the coordinate space based on
+screen rotation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>θ</mi><mtext mathvariant="normal">EXIF</mtext></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>θ</mi><mtext mathvariant="normal">Sensor</mtext></msub><mo>+</mo><msub><mi>θ</mi><mtext mathvariant="normal">UI_Rotation</mtext></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mo>mod</mo><mspace width="0.222em"></mspace><mn>360</mn><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\theta_{\text{EXIF}} = (\theta_{\text{Sensor}} + \theta_{\text{UI\_Rotation}}) \pmod{360}</annotation></semantics></math></p>
+<p>If an app fails to track the active UI rotation state correctly
+during a capture event - or treats portrait mode as a baseline without
+accounting for camera sensor alignment - it writes raw or inverted
+values. OpenCamera avoids this by querying the Android
+<code>OrientationEventListener</code> directly and manually mapping the
+device’s 3D rotation matrix (Yaw, Pitch, Roll) onto the global
+magnetic/true north reference frame.</p>
+<hr />
+<h3 id="height-estimation-mechanics-math">3. Height Estimation Mechanics
+&amp; Math</h3>
+<p>Your secondary script <code>gps-calculate-height.py</code> uses basic
+right-angle trigonometry to calculate height
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math>)
+based on the triangulated horizontal distance
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>)
+and camera pitch
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><mi>D</mi><mo>⋅</mo><mo>tan</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H = D \cdot \tan(\alpha)</annotation></semantics></math></p>
+<h4 id="the-missing-variable-delta-altitude-delta-a">The Missing
+Variable: Delta Altitude
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">\Delta A</annotation></semantics></math>)</h4>
+<p>As noted in your markdown, this assumes a flat baseline
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mtext mathvariant="normal">Photographer</mtext></msub><mo>=</mo><msub><mi>H</mi><mtext mathvariant="normal">Target Base</mtext></msub></mrow><annotation encoding="application/x-tex">H_{\text{Photographer}} = H_{\text{Target Base}}</annotation></semantics></math>).
+In reality, the true height of the tower from its own base is bound by
+the terrain profile:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mtext mathvariant="normal">True</mtext></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>D</mi><mo>⋅</mo><mo>tan</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>A</mi><mtext mathvariant="normal">Photographer</mtext></msub><mo>−</mo><msub><mi>A</mi><mtext mathvariant="normal">Target Base</mtext></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">H_{\text{True}} = (D \cdot \tan(\alpha)) + (A_{\text{Photographer}} - A_{\text{Target Base}})</annotation></semantics></math></p>
+<p>Because your current script cannot calculate the terrain altitude at
+the target’s newly triangulated coordinate, your final calculation
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>15.60</mn><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> m</mtext></mrow></mrow><annotation encoding="application/x-tex">15.60\text{ m}</annotation></semantics></math>)
+measures the height of the tower <strong>relative to your eye level at
+the time of the shoot</strong>, not relative to the building’s
+foundation.</p>
+<hr />
+<h3 id="recommendations-for-script-upgrades">4. Recommendations for
+Script Upgrades</h3>
+<p>To take this workflow to an institutional grade, consider
+implementing the following code logic updates:</p>
+<ol class="incremental" type="1">
+<li><strong>Incorporate Digital Elevation Models (DEM):</strong> Instead
+of relying purely on the photo’s internal <code>GPSAltitude</code>
+(which can have vertical errors up to 3x worse than horizontal GPS
+data), you can update the script to query a free spatial elevation API
+(like Open-Elevation or USGS) using the calculated target coordinates to
+determine true
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Δ</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">\Delta A</annotation></semantics></math>.</li>
+<li><strong>Weight the Triangulation Rays:</strong> Not all photos are
+equal. Your script could weight the intersection calculations based on
+the proximity of the shot or the stability of the phone’s hardware
+compass flag at the moment of capture, favoring tighter geometric
+intersections.</li>
+</ol>
 </blockquote>
 <div class="footer">
 <pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -d . -z 500 -p 2</code></pre>
@@ -329,7 +404,7 @@ py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $GPS</c
 </div>
 <!-- copy code button -->
 <script>addEventListener("DOMContentLoaded",()=>{document.querySelectorAll("pre").forEach(p=>{let b=document.createElement("button");b.className="copy-btn";b.innerText="";p.style.position="relative";p.appendChild(b)})});addEventListener("click",e=>{if(e.target.classList.contains("copy-btn")){let p=e.target.closest("pre"),c=p.querySelector("code");navigator.clipboard.writeText(c.innerText).then(()=>{e.target.innerText="Copied!";setTimeout(()=>e.target.innerText="",1500)}).catch(console.error)}})</script>
-<style>.copy-btn{position:absolute;top:5px;right:5px;border:0;cursor:pointer;opacity:.8}.copy-btn:hover{opacity:1}.copy-btn::after{content:"📋";font-size:14px}</style>
+<style>.copy-btn{position:absolute;top:5px;right:5px;border:0;cursor:pointer;opacity:.8}.copy-btn:hover{opacity:1}.copy-btn::after{content:"";font-size:14px}</style>
 <!-- END copy code button -->
 <!-- gallery -->
 <style>.g{width:100%;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:0;padding:0}.g>a{aspect-ratio:1/1;overflow:hidden;display:block;width:100%;text-decoration:none}.g img{width:100%;height:100%;object-fit:cover;border-radius:8px;cursor:pointer;transition:.2s}.g img:hover{transform:scale(1.05)}</style>
@@ -338,6 +413,16 @@ py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $GPS</c
 <!-- prettify default CSS -->
 <style>.seamless-frame{width:100%;height:auto;border:none;background-color:#373A2C;box-shadow:0 0 25px 5px rgba(69,43,27,.4);border-radius:8px}.seamless-frame.f1{min-height:200px}.seamless-frame.f2{min-height:600px}pre>code{box-shadow:0 2px 12px 1px rgba(69,43,27,.18);display:block}figure{box-shadow:100px 100px 102px 10px rgba(212,128,76,.11);outline:2px solid #bebebe;outline-offset:-2px}.g{box-shadow:0 0 1000px 10px rgba(24,10,1,.19)}.footer{background-color:#fffcf7;padding:40px 20px;margin-top:40px;border-radius:8px;outline:1px solid #b4a58f}.footer h3{color:#6a624b;font-size:1.3rem;margin:0 0 20px 0;padding:5px 0 5px 15px;border-left:4px solid #c0b18b;background-color:transparent}.copy-btn{background:transparent}nav::before{border-bottom:none!important;background-image:linear-gradient(to left,rgba(40,40,40,.8),rgba(40,40,40,0))!important;background-size:100% 4px!important;background-repeat:no-repeat!important;background-position:bottom left!important;margin-bottom:25px!important;padding-bottom:10px!important}</style>
 <!-- END prettify default CSS -->
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a
+href="https://support.google.com/pixelphone/thread/389290976/exif-gps-data-stock-pixel-camera-app-image-direction-is-off-by-minus-90-degrees?hl=en"
+class="uri">https://support.google.com/pixelphone/thread/389290976/exif-gps-data-stock-pixel-camera-app-image-direction-is-off-by-minus-90-degrees?hl=en</a><a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 </div>
 </body>
 </html>
