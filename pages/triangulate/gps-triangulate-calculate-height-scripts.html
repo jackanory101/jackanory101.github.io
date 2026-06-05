@@ -45,8 +45,6 @@ id="toc-gps-data-in-photos-captured-pixel-7-pro">GPS data in photos
 captured Pixel 7 Pro</a></li>
 <li><a href="#example-1" id="toc-example-1">Example 1</a></li>
 <li><a href="#example-2" id="toc-example-2">Example 2</a></li>
-<li><a href="#command-line-examples"
-id="toc-command-line-examples">Command line examples</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -137,18 +135,16 @@ alt="title" />
 <figcaption aria-hidden="true">title</figcaption>
 </figure>
 <p>Default output e.g. <code>-32.225535,115.802791</code>. Check out the
-nifty ASCII rayline graph!</p>
+ASCII rayline graph.</p>
 <iframe class="seamless-frame f2" src="iframe/gps-triangulate-pics.py-1.html" title="title">
 </iframe>
 <p>To open result directly in Google Maps:</p>
 <pre><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -z 500 -p 1) &amp;&amp; &quot;$(cygpath -u &quot;c:\Program Files\Mozilla Firefox\firefox.exe&quot;)&quot; &quot;https://www.google.com/maps/place/$GPS&quot;</code></pre>
-<p>The result in Maps:</p>
 <figure>
 <img src="img/example-1/example-1-gMaps-03.jpg" width="800"
 alt="title" />
 <figcaption aria-hidden="true">title</figcaption>
 </figure>
-<p>Closer examination:</p>
 <figure>
 <img src="img/example-1/example-1-gMaps-04.jpg" width="1000"
 alt="title" />
@@ -189,20 +185,19 @@ alt="title" />
 alt="title" />
 <figcaption aria-hidden="true">title</figcaption>
 </figure>
-<p>Let’s take a closer look:</p>
 <figure>
 <img src="img/example-2/example-2-1-gMaps-02.jpg" width="800"
 alt="title" />
 <figcaption aria-hidden="true">title</figcaption>
 </figure>
 <hr />
-<p>Now let’s <strong>calculate height:</strong></p>
-<p>Notice that each pic above centers the top of the tower in the middle
-of the photo. This doesn’t account for altitude difference between
-photographer and target.</p>
-<p>However, photo metadata contains altitude and with photos of target
-from a few locations we could account for altitude difference in an
-upgraded script.</p>
+<p><strong>Calculate height:</strong></p>
+<p>Each photo centers the top of the tower.</p>
+<p>Using <em>pitch</em> in photo metadata we can calculate approx height
+of target.</p>
+<p>This doesn’t account for altitude difference between photographer and
+target. Photo metadata contains altitude and using it would be possible
+in an upgraded script.</p>
 <p><a
 href="file://c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py">gps-calculate-height.py</a>
 command line:</p>
@@ -224,6 +219,12 @@ Median height: 16.85 m
 <p>.</p>
 <p>I have no idea how close this is to the actual height. But it seems
 reasonable.</p>
+<figure>
+<img src="img/example-2/gEarth_3d.jpg" width="800"
+alt="Likely height of building &amp; tower: 9m*1.75=15.75m" />
+<figcaption aria-hidden="true">Likely height of building &amp; tower:
+9m*1.75=15.75m</figcaption>
+</figure>
 <p>Distance from each capture location to target in Google Earth:</p>
 <figure>
 <img src="img/example-2/example-2-2-gMaps-01.jpg" width="800"
@@ -304,8 +305,7 @@ intersections with a mean per-photo error of ~4.5 m and a stable fused
 solution indicates the triangulation is behaving correctly and the noise
 is being averaged rather than amplified.</p>
 </blockquote>
-<section id="command-line-examples" class="footer">
-<h3>Command line examples</h3>
+<div class="footer">
 <pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -d . -z 500 -p 2</code></pre>
 <pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -h|--help</code></pre>
 <pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -d -a|--args</code></pre>
@@ -315,7 +315,7 @@ is being averaged rather than amplified.</p>
 <pre class="shell"><code>py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -a)</code></pre>
 <pre class="shell"><code>GPS=$(py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-triangulate-pics.py -a)
 py313.bat c:/cygwin64/home/tom/bin/utilities/gis/gps-calculate-height.py $GPS</code></pre>
-</section>
+</div>
 <!-- copy code button -->
 <script>addEventListener("DOMContentLoaded",()=>{document.querySelectorAll("pre").forEach(p=>{let b=document.createElement("button");b.className="copy-btn";b.innerText="";p.style.position="relative";p.appendChild(b)})});addEventListener("click",e=>{if(e.target.classList.contains("copy-btn")){let p=e.target.closest("pre"),c=p.querySelector("code");navigator.clipboard.writeText(c.innerText).then(()=>{e.target.innerText="Copied!";setTimeout(()=>e.target.innerText="",1500)}).catch(console.error)}})</script>
 <style>.copy-btn{position:absolute;top:5px;right:5px;border:0;cursor:pointer;opacity:.8}.copy-btn:hover{opacity:1}.copy-btn::after{content:"📋";font-size:14px}</style>
@@ -364,7 +364,7 @@ figure {
 }
 
 .footer {
-    background-color: #dac6a9;
+    background-color: #fffcf7;
     padding: 40px 20px;
     margin-top: 40px;
     border-radius: 8px;
