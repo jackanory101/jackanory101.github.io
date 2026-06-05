@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Tom Fawkes" />
   <title>index</title>
   <style>
     code{white-space: pre-wrap;}
@@ -20,12 +21,13 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
-	/* override style defined above for columns.lua */
-	div.columns { display: inherit ; gap: inherit ; }
-	/* override style defined above for numbered source code */
-	pre.numberSource { margin-left: inherit !important ; border-left: none !important ; padding-left: inherit !important ; }
+    /* override style defined above for columns.lua */
+    div.columns { display: inherit ; gap: inherit ; }
+    /* override style defined above for numbered source code */
+    pre.numberSource { margin-left: inherit !important ; border-left: none !important ; padding-left: inherit !important ; }
   </style>
-  <link rel="stylesheet" href="/_styles/baskerville-panam.css" />
+  <link rel="stylesheet" href="file://c:/Users/tom/Documents/bin/apps/pandoc_templates/css\baskerville-panam.css" />
+  <link rel="stylesheet" href="/styles\baskerville-panam.css" />
   <style>
   /* Styles added by the columns.lua pandoc filter */
     .columns :first-child {margin-top: 0;}
@@ -50,9 +52,9 @@
 <li><a href="pages/misc/bob-jagger.html">bob jagger</a></li>
 <li><a href="pages/misc/tv-video.html">video tv demo</a></li>
 <li><a href="pages/misc/bibliomancy.html">bibliomancy</a></li>
-<li><a href="pages/misc/mischa.html">mischa 'sky</a></li>
+<li><a
+href="pages/triangulate/gps-triangulate-calculate-height-scripts.html">triangulate</a></li>
 <li><a href="pages/zoom/zoom.html">zoom audio</a></li>
-<li><a href="pages/pico-ai/gallery/index.html">pico ai</a></li>
 </ul>
 <!--:::{.submenu}-->
 <!--- [autotyper](pages/misc/autotyper.html)-->
@@ -116,7 +118,7 @@ body::before {
     color: white;
     width: 90%;
     max-width: 600px;
-    margin: 10% auto 0 auto;
+    margin: 15% auto 0 auto;
     text-align: center;
     font-style: italic;
     padding-bottom:100px;
@@ -133,16 +135,21 @@ body::before {
 
 /* ------------------ Footer ------------------ */
 #footer {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	color: #4b555b;
-	text-align: right;
-	padding: 15px;
-	font-size: 0.9em;
-	z-index: 2;
-	background: linear-gradient( to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0) 100% );
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: right;
+    padding: 15px;
+    font-size: 0.9em;
+    z-index: 2;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.6) 0%,
+        rgba(0,0,0,0.6) 80%,
+        rgba(0,0,0,0) 100%
+    );
 }
 
 #footer p {
@@ -172,8 +179,8 @@ body::before {
 .banner {
     display: inline-block;
     padding-left: 100%;
-    animation: scroll 620s linear infinite;
-	color: #BEA2A2;
+    animation: scroll 120s linear infinite;
+    color: #C0C0C0;
     font-size: 14px;
     animation-play-state: running;
 }
@@ -206,8 +213,7 @@ const info = [];
 
 // ------------------ Banner Update Function ------------------
 function updateBanner() {
-  document.getElementById('browser-info').textContent = info.join('    -----🤎🤎 🧡 💛 🤎 🧡 💛 🤎 🧡 💛 🤎 🧡 💛 🤎 🧡 💛🤎 🧡 💛 🤎 🧡 💛 🤎 🧡 💛 🤎 🧡 💛 🤎 🧡 💛🤎🤎 🧡 💛 🤎 🧡 💛 🤎 🧡 💛 🤎 🧡 💛 🤎 🧡 💛-----    ');
-  //document.getElementById('browser-info').textContent = info.join('    -----❤️‍🩹 🩶 💔 🤍 ❤️‍🩹 🩶 💔 🤍 ❤️‍🩹 🩶 💔 🤍 ❤️‍🩹 🩶 ❤️‍🩹 🩶 💔 🤍 ❤️‍🩹 🩶 💔 🤍 ❤️‍🩹 🩶 💔 🤍 ❤️‍🩹 🩶 💔💔❤️‍🩹 🩶 💔 🤍 ❤️‍🩹 🩶 💔 🤍 ❤️‍🩹 🩶 💔 🤍 ❤️‍🩹 🩶 💔-----    ');
+  document.getElementById('browser-info').textContent = info.join('    -----❤️-----    ');
 }
 
 // ------------------ Fetch Public IP ------------------
