@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>GPX Viewer</title>
+
+<link rel="stylesheet" href="../libs/leaflet/leaflet.css"/>
+<script src="../libs/leaflet/leaflet.js"></script>
+<script src="../libs/polylineDecorator/leaflet.polylineDecorator.min.js"></script>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+#map {
+  height: 100vh;
+  position: relative;
+  z-index: 0;
+}
+
+/* -----------------------------
+   LEAFLET CONTROL STACK FIX
+------------------------------ */
+.leaflet-control {
+  z-index: 1000 !important;
+}
+
+/* Push zoom controls down so they don't fight UI */
+.leaflet-top.leaflet-left {
+  top: 55px;
+}
+
+/* -----------------------------
+   MENU BUTTON (mobile-safe)
+------------------------------ */
+#menuBtn {
+  position:absolute;
+  top:10px;
+  left:10px;
+  z-index:2000;
+  background:white;
+  padding:8px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-family:sans-serif;
+  font-size:20px;
+  line-height:20px;
+  transition:left 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+/* -----------------------------
+   DRAWER (mobile-first)
+------------------------------ */
+#drawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background: white;
+  z-index: 3000;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  overflow-y: auto;
+  font-family: sans-serif;
+  padding: 10px;
+  box-shadow: 2px 0 20px rgba(0,0,0,0.25);
+}
+
+#drawer.open {
+  transform: translateX(0);
+}
+
+/* mobile width */
+@media (max-width: 600px) {
+  #drawer {
+    width: 85vw;
+  }
+}
+
+/* -----------------------------
+   DRAWER SECTIONS
+------------------------------ */
+.section {
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.section h3 {
+  margin: 0;
+  padding: 8px;
+  background: #f0f0f0;
+  cursor: pointer;
+  font-size: 14px;
+  user-select: none;
+}
+
+.section-content {
+  display: none;
+  padding: 8px;
+}
+
+.section.open .section-content {
+  display: block;
+}
+
+/* -----------------------------
+   INFO PANEL
+------------------------------ */
+.info {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2000;
+  background: white;
+  padding: 10px;
+  font-family: sans-serif;
+  font-size: 13px;
+  border-radius: 6px;
+  width: 260px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* -----------------------------
+   BUTTONS
+------------------------------ */
+button {
+  margin: 3px;
+  font-size: 12px;
+}
+
+/* -----------------------------
+   RESTORE YOUR TILE ICON
+------------------------------ */
+.leaflet-control-layers-toggle {
+  width: 30px !important;
+  height: 36px !important;
+  background-image: url("../img/map.png") !important;
+  background-size: 30px 36px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+</style>
+</head>
+
+<body>
+
+<div id="menuBtn">☰</div>
+
+<div id="drawer">
+
+  <div class="section" id="trackSec">
+    <h3>Tracks</h3>
+    <div class="section-content">
+      <button id="all">Select All</button>
+      <button id="none">Select None</button>
+      <div id="trackList"></div>
+    </div>
+  </div>
+
+  <div class="section" id="waySec">
+    <h3>Waypoints</h3>
+    <div class="section-content">
+      <button id="wAll">Select All</button>
+      <button id="wNone">Select None</button>
+      <div id="waypointList"></div>
+    </div>
+  </div>
+
+</div>
+
+<div id="map"></div>
+
+<div class="info" id="info">
+<b>Info</b><br>
+Click item
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+const map = L.map('map').setView([-32.236621325, 115.81048539], 13);
+
+/* BASE LAYERS (UNCHANGED) */
+const baseLayers = {
+
+  "OSM": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' }),
+
+  "OpenTopoMap": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenTopoMap' }),
+
+  "Esri Satellite": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'),
+
+  "Esri Streets": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png'),
+
+  "Carto Light": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'),
+
+  "Carto Dark": L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'),
+
+  "Thunderforest": L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=7edc5f269c144e27967e8523e072f40e')
+
+};
+
+baseLayers["OSM"].addTo(map);
+L.control.layers(baseLayers, null, { position: "topleft" }).addTo(map);
+
+const myIcon = L.icon({
+    iconUrl: "../img/marker.png",
+    iconSize: [22, 32],
+    iconAnchor: [11, 32],
+    popupAnchor: [0, -32]
+});
+
+let stats = {};
+let trackLayers = {};
+let trackCB = {};
+let waypointLayers = {};
+let waypointCB = {};
+
+function toggleSection(id) {
+  document.getElementById(id).classList.toggle("open");
+}
+
+document.getElementById("menuBtn").onclick = () => {
+
+    const drawer = document.getElementById("drawer");
+    const btn = document.getElementById("menuBtn");
+
+    drawer.classList.toggle("open");
+
+    if (drawer.classList.contains("open")) {
+
+        btn.innerHTML = "&times;";      // ×
+        btn.style.left = "310px";
+
+    } else {
+
+        btn.innerHTML = "☰";
+        btn.style.left = "10px";
+
+    }
+};
+
+
+document.querySelectorAll(".section h3").forEach(h => {
+  h.onclick = () => h.parentElement.classList.toggle("open");
+});
+
+function renderStats(name) {
+    const s = stats[name] || {};
+
+    document.getElementById("info").innerHTML =
+        "<b>" + name + "</b><br><br>" +
+        "Start: " + (s.start_time || "N/A") + "<br>" +
+        "End: " + (s.end_time || "N/A") + "<br>" +
+        "Duration: " + (s.duration || "N/A") + "<br><br>" +
+        "Distance: " + ((s.distance_m/1000) || 0).toFixed(2) + " km<br><br>" +
+        "Min: " + (s.min_alt ?? "N/A") + "<br>" +
+        "Max: " + (s.max_alt ?? "N/A") + "<br><br>" +
+        "Avg: " + (s.avg_speed_kmh ?? "N/A") + " km/h<br>" +
+        "Max: " + (s.max_speed_kmh ?? "N/A") + " km/h";
+}
+
+fetch("stats.json").then(r => r.json()).then(s => stats = s);
+
+fetch("tracks.geojson").then(r => r.json()).then(data => {
+
+    const trackList = document.getElementById("trackList");
+    const waypointList = document.getElementById("waypointList");
+
+    let bounds = L.latLngBounds([]);
+
+    data.features.forEach(f => {
+
+        if (f.geometry.type === "LineString") {
+
+            const name = f.properties.name;
+            const coords = f.geometry.coordinates.map(c => [c[1], c[0]]);
+
+            const poly = L.polyline(coords, {
+                color: f.properties.color,
+                weight: 4
+            }).addTo(map);
+
+            trackLayers[name] = poly;
+
+            bounds.extend(poly.getBounds());
+
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.checked = true;
+
+            trackCB[name] = cb;
+
+            cb.onchange = () => {
+                cb.checked ? poly.addTo(map) : map.removeLayer(poly);
+            };
+
+            const row = document.createElement("div");
+
+            const label = document.createElement("span");
+            label.innerText = " " + name;
+            label.style.cursor = "pointer";
+
+            label.onclick = () => {
+                map.fitBounds(poly.getBounds());
+                renderStats(name);
+            };
+
+            row.appendChild(cb);
+            row.appendChild(label);
+            trackList.appendChild(row);
+        }
+
+        else if (f.geometry.type === "Point") {
+
+            const [lon, lat] = f.geometry.coordinates;
+
+            const marker = L.marker([lat, lon], {
+                icon: myIcon
+            }).addTo(map);
+
+            waypointLayers[f.properties.name] = marker;
+
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.checked = true;
+
+            waypointCB[f.properties.name] = cb;
+
+            cb.onchange = () => {
+                cb.checked ? marker.addTo(map) : map.removeLayer(marker);
+            };
+
+            const row = document.createElement("div");
+
+            const label = document.createElement("span");
+            label.innerText = " " + f.properties.name;
+            label.style.cursor = "pointer";
+
+            label.onclick = () => {
+                map.setView([lat, lon], 16);
+                document.getElementById("info").innerHTML =
+                    "<b>" + f.properties.name + "</b><br>" +
+                    "Lat: " + lat.toFixed(6) + "<br>" +
+                    "Lon: " + lon.toFixed(6) + "<br>" +
+                    "Ele: " + (f.properties.ele ?? "N/A");
+            };
+
+            row.appendChild(cb);
+            row.appendChild(label);
+            waypointList.appendChild(row);
+        }
+    });
+
+    if (bounds.isValid()) map.fitBounds(bounds);
+
+});
+
+/* TRACK BUTTONS */
+document.getElementById("all").onclick = () => {
+    Object.keys(trackLayers).forEach(k => {
+        trackLayers[k].addTo(map);
+        if (trackCB[k]) trackCB[k].checked = true;
+    });
+};
+
+document.getElementById("none").onclick = () => {
+    Object.keys(trackLayers).forEach(k => {
+        map.removeLayer(trackLayers[k]);
+        if (trackCB[k]) trackCB[k].checked = false;
+    });
+};
+
+/* WAYPOINT BUTTONS */
+document.getElementById("wAll").onclick = () => {
+    Object.keys(waypointLayers).forEach(k => {
+        waypointLayers[k].addTo(map);
+        if (waypointCB[k]) waypointCB[k].checked = true;
+    });
+};
+
+document.getElementById("wNone").onclick = () => {
+    Object.keys(waypointLayers).forEach(k => {
+        map.removeLayer(waypointLayers[k]);
+        if (waypointCB[k]) waypointCB[k].checked = false;
+    });
+};
+
+});
+</script>
+
+</body>
+</html>

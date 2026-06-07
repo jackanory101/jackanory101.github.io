@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.0" creator="GPSBabel - https://www.gpsbabel.org" xmlns="http://www.topografix.com/GPX/1/0">
+  <time>2026-06-07T06:46:49.244Z</time>
+  <bounds minlat="-32.245724970" minlon="115.802914455" maxlat="-32.233280770" maxlon="115.814849080"/>
+  <wpt lat="-32.245724970" lon="115.814354428">
+    <ele>0.000</ele>
+    <name>Kwinana Hub</name>
+    <cmt>Kwinana Hub</cmt>
+    <desc>Kwinana Hub</desc>
+  </wpt>
+  <wpt lat="-32.233282578" lon="115.802914455">
+    <ele>0.000</ele>
+    <name>Home</name>
+    <cmt>Home</cmt>
+    <desc>Home</desc>
+  </wpt>
+  <trk>
+    <name>Route to Hub</name>
+    <trkseg>
+      <trkpt lat="-32.233280770" lon="115.802948153">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.233292554" lon="115.803156676">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.233956507" lon="115.803156708">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.233980146" lon="115.805338762">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.235282314" lon="115.805442930">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.235800518" lon="115.805557349">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.235829236" lon="115.806659271">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.235828530" lon="115.807499817">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.236189377" lon="115.808782720">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.236621325" lon="115.810485390">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.236723145" lon="115.812490604">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.236721631" lon="115.812877188">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.238976864" lon="115.812911843">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.240049070" lon="115.812764636">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.241850644" lon="115.812325953">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.244161458" lon="115.812267303">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.244125735" lon="115.814412423">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.244501985" lon="115.814434179">
+        <ele>0.000</ele>
+      </trkpt>
+      <trkpt lat="-32.244509755" lon="115.814849080">
+        <ele>0.000</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
