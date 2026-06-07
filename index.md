@@ -65,6 +65,7 @@ body {
     background-attachment: fixed;
     position: relative;
     max-width: 100%;
+	display: grid;
 }
 
 /* Dark overlay */
@@ -87,10 +88,13 @@ body::before {
     color: white;
     width: 90%;
     max-width: 600px;
-    margin: 15% auto 0 auto;
     text-align: center;
     font-style: italic;
-	padding-bottom:100px;
+    margin: auto; /* Handles centering inside Grid of body */
+    /* Dynamic Padding: Scaled to use 10% of the screen height, 
+       but it will never drop below 20px or grow past 100px */
+    padding-top: clamp(20px, 10vh, 100px);
+    padding-bottom: clamp(20px, 10vh, 100px);
 }
 
 /* Lists and submenu */
