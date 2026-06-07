@@ -158,7 +158,7 @@ button {
      MENU BUTTON
   ------------------------- */
   #menuBtn {
-    font-size: 23px;
+    font-size: 12px;
     padding: 14px 16px;
   }
 
@@ -357,20 +357,56 @@ document.querySelectorAll(".section h3").forEach(h => {
   h.onclick = () => h.parentElement.classList.toggle("open");
 });
 
+
 function renderStats(name) {
     const s = stats[name] || {};
 
+    function fmtTime(t) {
+        if (!t) return "N/A";
+
+        const d = new Date(t);
+        const pad = n => String(n).padStart(2, "0");
+
+        let h = d.getHours();
+        const m = pad(d.getMinutes());
+        const ampm = h >= 12 ? "pm" : "am";
+
+        h = h % 12;
+        if (h === 0) h = 12;
+
+        return (
+            pad(d.getDate()) + "/" +
+            pad(d.getMonth() + 1) + "/" +
+            String(d.getFullYear()).slice(-2) + " " +
+            h + ":" + m + ampm
+        );
+    }
+
+    function fmtDuration(sec) {
+        if (!sec && sec !== 0) return "N/A";
+
+        const h = Math.floor(sec / 3600);
+        const m = Math.floor((sec % 3600) / 60);
+
+        return h + "h " + m + "m";
+    }
+
+    const dist = s.distance_m ? (s.distance_m / 1000).toFixed(2) : "N/A";
+    const avg = s.avg_speed_kmh != null ? Math.round(s.avg_speed_kmh) : "N/A";
+    const max = s.max_speed_kmh != null ? Math.round(s.max_speed_kmh) : "N/A";
+
     document.getElementById("info").innerHTML =
-        "<b>" + name + "</b><br><br>" +
-        "Start: " + (s.start_time || "N/A") + "<br>" +
-        "End: " + (s.end_time || "N/A") + "<br>" +
-        "Duration: " + (s.duration || "N/A") + "<br><br>" +
-        "Distance: " + ((s.distance_m/1000) || 0).toFixed(2) + " km<br><br>" +
+        "<b>" + name + "</b><br>" +
+        "Start: " + fmtTime(s.start_time) + "<br>" +
+        "End: " + fmtTime(s.end_time) + "<br>" +
+        "Duration: " + fmtDuration(s.duration) + "<br>" +
+        "Distance: " + dist + " km<br>" +
         "Min: " + (s.min_alt ?? "N/A") + "<br>" +
-        "Max: " + (s.max_alt ?? "N/A") + "<br><br>" +
-        "Avg: " + (s.avg_speed_kmh ?? "N/A") + " km/h<br>" +
-        "Max: " + (s.max_speed_kmh ?? "N/A") + " km/h";
+        "Max: " + (s.max_alt ?? "N/A") + "<br>" +
+        "Avg: " + avg + " km/h<br>" +
+        "Max: " + max + " km/h";
 }
+
 
 fetch("stats.json").then(r => r.json()).then(s => stats = s);
 
