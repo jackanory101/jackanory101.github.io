@@ -146,6 +146,125 @@ button {
   background-repeat: no-repeat !important;
   background-position: center !important;
 }
+
+/* =========================================================
+   MOBILE RESPONSIVE OVERRIDES
+   (desktop stays unchanged)
+========================================================= */
+
+@media (max-width: 600px) {
+
+  /* -----------------------------
+     MAP CONTROLS SPACING
+  ------------------------------ */
+
+  .leaflet-top.leaflet-left {
+    top: 70px; /* keep zoom away from menu button */
+  }
+
+  .leaflet-control {
+    z-index: 1000 !important;
+  }
+
+  /* Make zoom buttons bigger */
+  .leaflet-control-zoom a {
+    width: 44px !important;
+    height: 44px !important;
+    line-height: 44px !important;
+    font-size: 22px !important;
+  }
+
+  /* Layer toggle button (your map.png icon) */
+  .leaflet-control-layers-toggle {
+    width: 44px !important;
+    height: 44px !important;
+    background-size: 44px 44px !important;
+  }
+
+  /* -----------------------------
+     MENU BUTTON (hamburger)
+  ------------------------------ */
+
+  #menuBtn {
+    padding: 14px 16px;
+    font-size: 32px;
+    line-height: 32px;
+    border-radius: 10px;
+
+    /* ensure it's finger-sized */
+    min-width: 52px;
+    min-height: 52px;
+  }
+
+  /* -----------------------------
+     DRAWER TEXT + TOUCH TARGETS
+  ------------------------------ */
+
+  #drawer {
+    width: 90vw; /* slightly more usable on phone */
+    padding: 14px;
+  }
+
+  .section h3 {
+    font-size: 18px;
+    padding: 12px;
+  }
+
+  .section-content {
+    font-size: 16px;
+  }
+
+  /* Each row (checkbox + label) */
+  #trackList div,
+  #waypointList div {
+    font-size: 16px;
+    padding: 8px 0;
+  }
+
+  /* Bigger checkboxes for fingers */
+  input[type="checkbox"] {
+    transform: scale(1.6);
+    margin-right: 10px;
+    transform-origin: left center;
+  }
+
+  /* Buttons: Select All / None */
+  button {
+    font-size: 15px;
+    padding: 10px 12px;
+    min-height: 44px;
+    border-radius: 6px;
+  }
+
+  /* -----------------------------
+     INFO PANEL (mobile bottom sheet feel)
+  ------------------------------ */
+
+  .info {
+    top: auto;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+
+    width: auto;
+
+    font-size: 15px;
+    padding: 12px;
+
+    max-height: 30vh;
+    overflow-y: auto;
+  }
+
+  /* -----------------------------
+     IMPROVE TOUCH SCROLLING
+  ------------------------------ */
+
+  #drawer {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
 </style>
 </head>
 
@@ -185,7 +304,7 @@ Click item
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-const map = L.map('map').setView([-32.236621325, 115.81048539], 13);
+const map = L.map('map').setView([-32.232889, 115.795852], 13);
 
 /* BASE LAYERS (UNCHANGED) */
 const baseLayers = {
