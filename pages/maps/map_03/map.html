@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <title>GPX Viewer</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../libs/leaflet/leaflet.css"/>
 <script src="../libs/leaflet/leaflet.js"></script>
 <script src="../libs/polylineDecorator/leaflet.polylineDecorator.min.js"></script>
@@ -44,7 +44,7 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  z-index: 2000;
+  z-index: 3000;
   background: white;
   padding: 8px 10px;
   border-radius: 6px;
@@ -158,7 +158,7 @@ button {
      MENU BUTTON
   ------------------------- */
   #menuBtn {
-    font-size: 34px;
+    font-size: 26px;
     padding: 14px 16px;
   }
 
@@ -166,11 +166,11 @@ button {
      INFO PANEL (FULL WIDTH FEEL)
   ------------------------- */
   .info {
-    font-size: 20px;
+    font-size: 12px;
     line-height: 1.6;
-    width: 92vw;
-    right: 4vw;
-    top: 80px;
+    width: 37vw;
+    right: 2vw;
+    top: 7px;
     padding: 16px;
   }
 
@@ -178,7 +178,7 @@ button {
      DRAWER TEXT SCALE
   ------------------------- */
   #drawer {
-    font-size: 20px;
+    font-size: 12px;
     line-height: 1.6;
     padding: 16px;
   }
@@ -197,7 +197,7 @@ button {
      BUTTONS (TOUCH TARGETS)
   ------------------------- */
   button {
-    font-size: 18px;
+    font-size: 14px;
     padding: 12px 14px;
     margin: 8px 6px;
     border-radius: 10px;
@@ -215,7 +215,7 @@ button {
   #trackList div,
   #waypointList div {
     margin: 14px 0;
-    line-height: 1.8;
+    /*line-height: 1.8;*/
   }
 
   /* -------------------------
