@@ -1,0 +1,589 @@
+<?xml version="1.0" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="ExifTool-JSON-to-GPX">
+	<wpt lat="-32.2288666666667" lon="115.807538888889">
+		<ele>-14.58</ele>
+		<time>2026-06-03T08:37:51Z</time>
+		<name>Ghost Fungus</name>
+		<desc>strongly bioluminescent
+Poisoning hazard</desc>
+		<extensions>
+			<filename>PXL_20260603_003751438.jpg</filename>
+			<heading>13</heading>
+		</extensions>
+		<link href="img/PXL_20260603_003751438.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2326569444444" lon="115.798053888889">
+		<ele>0</ele>
+		<time>2026-06-07T08:36:29Z</time>
+		<name>IMG_20260607_083629.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>IMG_20260607_083629.jpg</filename>
+			<heading>241.12</heading>
+		</extensions>
+		<link href="img/IMG_20260607_083629.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2329638888889" lon="115.797433333333">
+		<ele>-24.57</ele>
+		<time>2026-05-27T09:16:34Z</time>
+		<name>PXL_20260527_011634196.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260527_011634196.jpg</filename>
+			<heading>13</heading>
+		</extensions>
+		<link href="img/PXL_20260527_011634196.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2336833333333" lon="115.801497222222">
+		<ele>-20.89</ele>
+		<time>2026-06-01T08:50:55Z</time>
+		<name>Derbal St</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260601_005055092.jpg</filename>
+			<heading>320</heading>
+		</extensions>
+		<link href="img/PXL_20260601_005055092.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2326638888889" lon="115.799116666667">
+		<ele>-22.6</ele>
+		<time>2026-06-01T08:55:29Z</time>
+		<name>Thomas oval</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260601_005529196.jpg</filename>
+			<heading>279</heading>
+		</extensions>
+		<link href="img/PXL_20260601_005529196.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2286666666667" lon="115.800605555556">
+		<ele>-13.5</ele>
+		<time>2026-06-01T09:16:59Z</time>
+		<name>Cassie on the kwinana loop</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260601_011659125.jpg</filename>
+			<heading>60</heading>
+		</extensions>
+		<link href="img/PXL_20260601_011659125.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2292083333333" lon="115.805802777778">
+		<ele>-12.19</ele>
+		<time>2026-06-01T09:43:53Z</time>
+		<name>pair of pink and grey galahs</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260601_014353520.jpg</filename>
+			<heading>110</heading>
+		</extensions>
+		<link href="img/PXL_20260601_014353520.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2290277777778" lon="115.797819444444">
+		<ele>3.05</ele>
+		<time>2026-06-03T08:10:17Z</time>
+		<name>PXL_20260603_001017295.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260603_001017295.jpg</filename>
+			<heading>105</heading>
+		</extensions>
+		<link href="img/PXL_20260603_001017295.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2309638888889" lon="115.795875">
+		<ele>-19.41</ele>
+		<time>2026-06-05T09:21:45Z</time>
+		<name>PXL_20260605_012145219.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260605_012145219.jpg</filename>
+			<heading>347</heading>
+		</extensions>
+		<link href="img/PXL_20260605_012145219.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2282055555556" lon="115.799747222222">
+		<ele>-10.53</ele>
+		<time>2026-06-05T09:37:27Z</time>
+		<name>PXL_20260605_013727960.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260605_013727960.jpg</filename>
+			<heading>133</heading>
+		</extensions>
+		<link href="img/PXL_20260605_013727960.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2265666666667" lon="115.803452777778">
+		<ele>-12.8</ele>
+		<time>2026-06-05T09:46:42Z</time>
+		<name>PXL_20260605_014642155.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260605_014642155.jpg</filename>
+			<heading>237</heading>
+		</extensions>
+		<link href="img/PXL_20260605_014642155.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2263361111111" lon="115.804636111111">
+		<ele>-6.5</ele>
+		<time>2026-06-05T09:52:23Z</time>
+		<name>PXL_20260605_015223960.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260605_015223960.jpg</filename>
+			<heading>22</heading>
+		</extensions>
+		<link href="img/PXL_20260605_015223960.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2254777777778" lon="115.808005555556">
+		<ele>-7.84</ele>
+		<time>2026-06-05T09:59:38Z</time>
+		<name>PXL_20260605_015938875.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260605_015938875.jpg</filename>
+			<heading>317</heading>
+		</extensions>
+		<link href="img/PXL_20260605_015938875.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2255444444444" lon="115.809333333333">
+		<ele>-5.88</ele>
+		<time>2026-06-05T10:04:19Z</time>
+		<name>PXL_20260605_020419745.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260605_020419745.jpg</filename>
+			<heading>64</heading>
+		</extensions>
+		<link href="img/PXL_20260605_020419745.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2330527777778" lon="115.795655555556">
+		<ele>-26.04</ele>
+		<time>2026-06-06T08:56:16Z</time>
+		<name>PXL_20260606_005616644.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260606_005616644.jpg</filename>
+			<heading>150</heading>
+		</extensions>
+		<link href="img/PXL_20260606_005616644.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2312694444444" lon="115.795494444444">
+		<ele>-24.2</ele>
+		<time>2026-06-07T08:44:20Z</time>
+		<name>PXL_20260607_004420202.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260607_004420202.jpg</filename>
+			<heading>237</heading>
+		</extensions>
+		<link href="img/PXL_20260607_004420202.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2304527777778" lon="115.796477777778">
+		<ele>-1.21</ele>
+		<time>2026-06-07T08:49:32Z</time>
+		<name>Australian shelduck (Tadorna tadornoides),</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260607_004932068.jpg</filename>
+			<heading>37</heading>
+		</extensions>
+		<link href="img/PXL_20260607_004932068.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2304527777778" lon="115.796477777778">
+		<ele>-1.21</ele>
+		<time>2026-06-07T08:49:32Z</time>
+		<name>Australian shelduck (Tadorna tadornoides),</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260607_004932068e.jpg</filename>
+			<heading>37</heading>
+		</extensions>
+		<link href="img/PXL_20260607_004932068e.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2334583333333" lon="115.801111111111">
+		<ele>-21.39</ele>
+		<time>2026-06-08T09:17:26Z</time>
+		<name>PXL_20260608_011726724.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_011726724.jpg</filename>
+			<heading>123</heading>
+		</extensions>
+		<link href="img/PXL_20260608_011726724.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2332138888889" lon="115.800722222222">
+		<ele>-21.39</ele>
+		<time>2026-06-08T09:18:18Z</time>
+		<name>White gum</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_011818019.jpg</filename>
+			<heading>62</heading>
+		</extensions>
+		<link href="img/PXL_20260608_011818019.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2329472222222" lon="115.800230555556">
+		<ele>-21.39</ele>
+		<time>2026-06-08T09:20:02Z</time>
+		<name>Medina BMX track</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_012002185.jpg</filename>
+			<heading>90</heading>
+		</extensions>
+		<link href="img/PXL_20260608_012002185.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2330972222222" lon="115.796269444444">
+		<ele>-24.39</ele>
+		<time>2026-06-08T09:28:27Z</time>
+		<name>PXL_20260608_012827136.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_012827136.jpg</filename>
+			<heading>188</heading>
+		</extensions>
+		<link href="img/PXL_20260608_012827136.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2327" lon="115.793644444444">
+		<ele>-30.07</ele>
+		<time>2026-06-08T09:34:55Z</time>
+		<name>PXL_20260608_013455567.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_013455567.jpg</filename>
+			<heading>350</heading>
+		</extensions>
+		<link href="img/PXL_20260608_013455567.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2325" lon="115.79305">
+		<ele>-20.54</ele>
+		<time>2026-06-08T09:36:40Z</time>
+		<name>bunbury to dampier gas pipeline</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_013640140.jpg</filename>
+			<heading>95</heading>
+		</extensions>
+		<link href="img/PXL_20260608_013640140.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2318305555556" lon="115.793511111111">
+		<ele>-25.09</ele>
+		<time>2026-06-08T09:37:56Z</time>
+		<name>a banksia flower</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_013756473.jpg</filename>
+			<heading>123</heading>
+		</extensions>
+		<link href="img/PXL_20260608_013756473.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2287416666667" lon="115.796275">
+		<ele>0.79</ele>
+		<time>2026-06-08T09:47:52Z</time>
+		<name>PXL_20260608_014752937.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_014752937.jpg</filename>
+			<heading>347</heading>
+		</extensions>
+		<link href="img/PXL_20260608_014752937.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2281138888889" lon="115.798966666667">
+		<ele>-16.07</ele>
+		<time>2026-06-08T09:51:59Z</time>
+		<name>PXL_20260608_015159808.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_015159808.jpg</filename>
+			<heading>301</heading>
+		</extensions>
+		<link href="img/PXL_20260608_015159808.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2280111111111" lon="115.800769444444">
+		<ele>-11.5</ele>
+		<time>2026-06-08T09:54:15Z</time>
+		<name>PXL_20260608_015415561.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_015415561.jpg</filename>
+			<heading>263</heading>
+		</extensions>
+		<link href="img/PXL_20260608_015415561.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2274472222222" lon="115.802930555556">
+		<ele>-12.8</ele>
+		<time>2026-06-08T09:57:56Z</time>
+		<name>PXL_20260608_015756325.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_015756325.jpg</filename>
+			<heading>157</heading>
+		</extensions>
+		<link href="img/PXL_20260608_015756325.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2270472222222" lon="115.8037">
+		<ele>-14.12</ele>
+		<time>2026-06-08T09:59:43Z</time>
+		<name>Cassie</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_015943874.jpg</filename>
+			<heading>77</heading>
+		</extensions>
+		<link href="img/PXL_20260608_015943874.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2270944444444" lon="115.807872222222">
+		<ele>-15</ele>
+		<time>2026-06-08T10:06:12Z</time>
+		<name>PXL_20260608_020612170.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_020612170.jpg</filename>
+			<heading>255</heading>
+		</extensions>
+		<link href="img/PXL_20260608_020612170.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2270888888889" lon="115.809636111111">
+		<ele>-10.69</ele>
+		<time>2026-06-08T10:10:41Z</time>
+		<name>PXL_20260608_021041896.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_021041896.jpg</filename>
+			<heading>280</heading>
+		</extensions>
+		<link href="img/PXL_20260608_021041896.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2270916666667" lon="115.810183333333">
+		<ele>-14.7</ele>
+		<time>2026-06-08T10:11:54Z</time>
+		<name>fungus</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_021154630.PORTRAIT.jpg</filename>
+			<heading>0</heading>
+		</extensions>
+		<link href="img/PXL_20260608_021154630.PORTRAIT.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2274027777778" lon="115.811447222222">
+		<ele>-14.3</ele>
+		<time>2026-06-08T10:14:25Z</time>
+		<name>PXL_20260608_021425586.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_021425586.jpg</filename>
+			<heading>114</heading>
+		</extensions>
+		<link href="img/PXL_20260608_021425586.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2303555555556" lon="115.813444444444">
+		<ele>-11</ele>
+		<time>2026-06-08T10:23:24Z</time>
+		<name>PXL_20260608_022324305.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_022324305.jpg</filename>
+			<heading>259</heading>
+		</extensions>
+		<link href="img/PXL_20260608_022324305.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.23145" lon="115.814522222222">
+		<ele>-9.19</ele>
+		<time>2026-06-08T10:26:37Z</time>
+		<name>loquat and fig</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_022637347.jpg</filename>
+			<heading>86</heading>
+		</extensions>
+		<link href="img/PXL_20260608_022637347.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2338138888889" lon="115.816744444444">
+		<ele>-11.69</ele>
+		<time>2026-06-08T10:34:32Z</time>
+		<name>PXL_20260608_023432498.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_023432498.jpg</filename>
+			<heading>336</heading>
+		</extensions>
+		<link href="img/PXL_20260608_023432498.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.235175" lon="115.815322222222">
+		<ele>-9.09</ele>
+		<time>2026-06-08T10:40:15Z</time>
+		<name>PXL_20260608_024015179.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_024015179.jpg</filename>
+			<heading>118</heading>
+		</extensions>
+		<link href="img/PXL_20260608_024015179.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2346694444444" lon="115.81335">
+		<ele>-13</ele>
+		<time>2026-06-08T10:44:08Z</time>
+		<name>PXL_20260608_024408034.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_024408034.jpg</filename>
+			<heading>104</heading>
+		</extensions>
+		<link href="img/PXL_20260608_024408034.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.233225" lon="115.811355555556">
+		<ele>-10.84</ele>
+		<time>2026-06-08T10:50:59Z</time>
+		<name>kwinana knights football ground</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_025059253.jpg</filename>
+			<heading>105</heading>
+		</extensions>
+		<link href="img/PXL_20260608_025059253.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2331305555556" lon="115.809436111111">
+		<ele>-13.59</ele>
+		<time>2026-06-08T10:55:13Z</time>
+		<name>kwinana knights football ground</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_025513384.jpg</filename>
+			<heading>330</heading>
+		</extensions>
+		<link href="img/PXL_20260608_025513384.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2333416666667" lon="115.807444444444">
+		<ele>-2.2</ele>
+		<time>2026-06-08T10:59:05Z</time>
+		<name>PXL_20260608_025905404.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_025905404.jpg</filename>
+			<heading>330</heading>
+		</extensions>
+		<link href="img/PXL_20260608_025905404.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2333416666667" lon="115.807444444444">
+		<ele>-2.2</ele>
+		<time>2026-06-08T10:59:10Z</time>
+		<name>PXL_20260608_025910160.jpg</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_025910160.jpg</filename>
+			<heading>177</heading>
+		</extensions>
+		<link href="img/PXL_20260608_025910160.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2333472222222" lon="115.806802777778">
+		<ele>1.2</ele>
+		<time>2026-06-08T11:00:15Z</time>
+		<name>Harry mcguigan park</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_030015470.jpg</filename>
+			<heading>205</heading>
+		</extensions>
+		<link href="img/PXL_20260608_030015470.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2337555555556" lon="115.805588888889">
+		<ele>-8.45</ele>
+		<time>2026-06-08T11:04:17Z</time>
+		<name>Medina avenue</name>
+		<desc>hills weeping figs</desc>
+		<extensions>
+			<filename>PXL_20260608_030417315.jpg</filename>
+			<heading>250</heading>
+		</extensions>
+		<link href="img/PXL_20260608_030417315.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+</gpx>

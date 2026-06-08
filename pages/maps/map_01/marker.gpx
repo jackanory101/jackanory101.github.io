@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="bash-gpx-script">
+  <wpt lat="-32.22964191127181" lon=" 115.80493966980364">
+    <ele>0</ele>
+    <time>2026-06-08T08:36:09Z</time>
+    <name>Hewison Reserve</name>
+    <desc>Nesting site for lorikeets and cockatoos</desc>
+  </wpt>
+</gpx>

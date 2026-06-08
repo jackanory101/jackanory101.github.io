@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="bash-gpx-script">
+  <wpt lat="-32.2346112" lon="115.8176705">
+    <ele>0</ele>
+    <time>2026-06-08T08:30:00Z</time>
+    <name>Orelia Oval</name>
+    <desc>Hockey club grounds</desc>
+    <extensions>
+      <heading>110</heading>
+    </extensions>
+  </wpt>
+</gpx>
