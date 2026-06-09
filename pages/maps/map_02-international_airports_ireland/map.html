@@ -61,7 +61,8 @@ const baseLayers = {
   "Carto Dark": L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png')
 };
 
-baseLayers["OSM"].addTo(map);
+//baseLayers["OSM"].addTo(map);
+baseLayers["Esri Satellite"].addTo(map);
 L.control.layers(baseLayers, null, { position: "topleft" }).addTo(map);
 
 const defaultIcon = L.icon({
