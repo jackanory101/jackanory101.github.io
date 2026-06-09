@@ -145,7 +145,55 @@ body {
 .info .desc {
 	font-style: italic;
 }
+.info {
+  overflow: hidden; /* important */
+}
 
+/* header bar */
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.info-title {
+	color: #484861;
+	font-size: 26px;
+}
+
+
+/* body content */
+.info-body {
+  padding: 10px;
+  font-size: 13px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* collapsed state = only header visible */
+.info.collapsed .info-body {
+  display: none;
+}
+
+/* icon animation */
+.info-icon {
+  transition: transform 0.2s ease;
+}
+
+/* 👉 closed */
+.info.collapsed .info-icon {
+  transform: rotate(0deg);
+}
+
+/* 👇 open */
+.info:not(.collapsed) .info-icon {
+  transform: rotate(90deg);
+}
 button {
   margin: 3px;
   font-size: 12px;
