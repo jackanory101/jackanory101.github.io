@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="bash-gpx-script">
+  <wpt lat="51.8488668491668" lon=" -8.490142002542559">
+    <ele>154</ele>
+    <time>2026-06-09T12:30:50Z</time>
+    <name>Cork</name>
+    <desc>Co Cork</desc>
+    <link href="img/cork.jpg">
+      <type>image/jpeg</type>
+    </link>
+  </wpt>
+</gpx>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="bash-gpx-script">
+  <wpt lat="53.28143763014291" lon=" -9.060249839827911">
+    <ele>8</ele>
+    <time>2026-06-09T12:24:29Z</time>
+    <name>Galway City</name>
+    <desc>Co Galway</desc>
+    <link href="img/galway.jpg">
+      <type>image/jpeg</type>
+    </link>
+  </wpt>
+</gpx>

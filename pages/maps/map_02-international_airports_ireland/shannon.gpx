@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="bash-gpx-script">
+  <wpt lat="52.69074038050296" lon=" -8.917552046614826">
+    <ele>2</ele>
+    <time>2026-06-09T12:26:36Z</time>
+    <name>Shannon</name>
+    <desc>Co Clare</desc>
+    <link href="img/shannon.jpg">
+      <type>image/jpeg</type>
+    </link>
+  </wpt>
+</gpx>

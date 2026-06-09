@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>GPX Viewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../libs/leaflet/leaflet.css"/>
+<link rel="stylesheet" href="../libs/css/style.css"/>
+<script src="../libs/leaflet/leaflet.js"></script>
+<script src="../libs/polylineDecorator/leaflet.polylineDecorator.min.js"></script>
+</head>
+
+<body>
+<div id="map-lightbox" class="custom-lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="Waypoint View" onclick="event.stopPropagation()">
+</div>
+<div id="menuBtn">☰</div>
+
+<div id="drawer">
+
+  <div class="section" id="trackSec">
+    <h3>Tracks</h3>
+    <div class="section-content">
+      <button id="all">Select All</button>
+      <button id="none">Select None</button>
+      <div id="trackList"></div>
+    </div>
+  </div>
+
+  <div class="section" id="waySec">
+    <h3>Waypoints</h3>
+    <div class="section-content">
+      <button id="wAll">Select All</button>
+      <button id="wNone">Select None</button>
+      <div id="waypointList"></div>
+    </div>
+  </div>
+
+</div>
+
+<div id="map"></div>
+
+<div class="info" id="info">
+<b>Info</b><br>
+Select a track or waypoint layer to view metrics.
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+const map = L.map('map').setView([53.41135, -8.01509], 13);
+
+/* BASE LAYERS */
+const baseLayers = {
+  "OSM": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' }),
+  "OpenTopoMap": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenTopoMap' }),
+  "Esri Satellite": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'),
+  "Esri Streets": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png'),
+  "Carto Light": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'),
+  "Carto Dark": L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png')
+};
+
+baseLayers["OSM"].addTo(map);
+L.control.layers(baseLayers, null, { position: "topleft" }).addTo(map);
+
+const defaultIcon = L.icon({
+    iconUrl: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23d35400' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/></svg>",
+    iconSize: [50, 64],       
+    iconAnchor: [25, 64],       
+    popupAnchor: [0, -64]      
+});
+
+let stats = {};
+let trackLayers = {};
+let arrowLayers = {}; 
+let trackColors = {};
+let trackCB = {};
+let waypointLayers = {};
+let waypointCB = {};
+
+let animId = null;
+let currentAnimTrack = null;
+let animOffset = 0;
+
+document.getElementById("menuBtn").onclick = () => {
+    const drawer = document.getElementById("drawer");
+    const btn = document.getElementById("menuBtn");
+    drawer.classList.toggle("open");
+    if (drawer.classList.contains("open")) {
+        btn.innerHTML = "&times;";
+        btn.style.left = "310px";
+        btn.style.width = "auto";
+    } else {
+        btn.innerHTML = "☰";
+        btn.style.left = "10px";
+        btn.style.width = "50px";
+    }
+};
+
+document.querySelectorAll(".section h3").forEach(h => {
+  h.onclick = () => h.parentElement.classList.toggle("open");
+});
+
+function startTrackAnimation(name) {
+    if (animId) cancelAnimationFrame(animId);
+    currentAnimTrack = name;
+    animOffset = 0;
+
+    function frame() {
+        if (currentAnimTrack !== name) return;
+        const decorator = arrowLayers[name];
+        const color = trackColors[name];
+
+        if (decorator && map.hasLayer(decorator)) {
+            animOffset = (animOffset + 1) % 120;
+            decorator.setPatterns([
+                {
+                    offset: animOffset + 'px', 
+                    repeat: '120px', 
+                    symbol: L.Symbol.arrowHead({
+                        pixelSize: 10,
+                        polygon: false,
+                        pathOptions: { stroke: true, color: color, weight: 2, opacity: 0.85 }
+                    })
+                }
+            ]);
+        }
+        animId = requestAnimationFrame(frame);
+    }
+    animId = requestAnimationFrame(frame);
+}
+
+function handleTrackSelection(name) {
+    renderStats(name);
+    startTrackAnimation(name);
+}
+
+/* LOCAL TIME FORMATTER FOR SYSTEM INFO PANELS */
+function formatWaypointTime(isoString) {
+    if (!isoString) return "N/A";
+    try {
+        const d = new Date(isoString);
+        if (isNaN(d.getTime())) return "N/A";
+        
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        
+        let hours = d.getHours();
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'pm' : 'am';
+        
+        hours = hours % 12;
+        hours = hours ? hours : 12; // Converts '0' hours down to '12'
+        
+        return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ampm;
+    } catch(e) {
+        return "N/A";
+    }
+}
+
+/* UI SPECIFIC DATA OVERLAY PANEL RENDERER */
+function renderWaypointInfo(props, lat, lon) {
+    // Top headline now uses the GPX filename including extension
+    const topHeadline = props.filename ? props.filename : "Unknown File";
+    const nameText = props.name ? props.name : "Unnamed Waypoint";
+    const timeFormatted = formatWaypointTime(props.time);
+    const elevationText = props.ele != null ? props.ele.toFixed(1) + "m" : "N/A";
+    const headingText = props.heading != null ? props.heading + "°" : "N/A";
+
+	let htmlContent = "<span class='name'>" + nameText + "</span><br>" ; 
+	if (props.desc) {
+		htmlContent += "<span class='desc'>" + props.desc + "</span><br>";
+	} 
+	//else {
+		//htmlContent += "<i>No description available</i>";
+	//}
+
+htmlContent += "<br><table style='border-collapse: collapse;'>";
+
+
+htmlContent +=
+    "<tr><td><b>Time</b></td><td>" + timeFormatted + "</td></tr>" +
+    "<tr><td><b>Lat</b></td><td>" + lat.toFixed(6) + "</td></tr>" +
+    "<tr><td><b>Lon</b></td><td>" + lon.toFixed(6) + "</td></tr>" +
+    "<tr><td><b>Ele</b></td><td>" + elevationText + "</td></tr>" +
+    "<tr><td><b>Dir</b></td><td>" + headingText + "</td></tr>" +
+    "<tr><td><b>File</b></td><td><b>" + topHeadline + "</b></td></tr>";
+
+htmlContent += "</table>";
+
+	//htmlContent += "Time: " + timeFormatted + "<br>" +
+		//"Lat: " + lat.toFixed(6) + "<br>" +
+		//"Lon: " + lon.toFixed(6) + "<br>" +
+		//"Ele: " + elevationText + "<br>" +
+		//"Heading: " + headingText + "<br><br>" +
+		//"File: <b>" + topHeadline + "</b><br>";
+
+
+    document.getElementById("info").innerHTML = htmlContent;
+}
+
+function renderStats(name) {
+    const s = stats[name] || {};
+    function fmtTime(t) {
+        if (!t) return "N/A";
+        const d = new Date(t);
+        const pad = n => String(n).padStart(2, "0");
+        let h = d.getHours();
+        const m = pad(d.getMinutes());
+        const ampm = h >= 12 ? "pm" : "am";
+        h = h % 12;
+        if (h === 0) h = 12;
+        return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + String(d.getFullYear()).slice(-2) + " " + h + ":" + m + ampm;
+    }
+    function fmtDuration(sec) {
+        if (!sec && sec !== 0) return "N/A";
+        const h = Math.floor(sec / 3600);
+        const m = Math.floor((sec % 3600) / 60);
+        return h + "h " + m + "m";
+    }
+    const dist = s.distance_m ? (s.distance_m / 1000).toFixed(2) : "N/A";
+    const avg = s.avg_speed_kmh != null ? Math.round(s.avg_speed_kmh) : "N/A";
+    const max = s.max_speed_kmh != null ? Math.round(s.max_speed_kmh) : "N/A";
+
+    document.getElementById("info").innerHTML =
+        "<b>" + name + "</b><br>" +
+        "Start: " + fmtTime(s.start_time) + "<br>" +
+        "End: " + fmtTime(s.end_time) + "<br>" +
+        "Duration: " + fmtDuration(s.duration) + "<br>" +
+        "Distance: " + dist + " km<br>" +
+        "Min Alt: " + (s.min_alt ?? "N/A") + "m<br>" +
+        "Max Alt: " + (s.max_alt ?? "N/A") + "m<br>" +
+        "Avg: " + avg + " km/h<br>" +
+        "Max: " + max + " km/h";
+}
+
+window.openLightbox = function(imgSrc) {
+    const lightbox = document.getElementById('map-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = imgSrc;
+    lightbox.classList.add('active');
+}
+
+window.closeLightbox = function() {
+    document.getElementById('map-lightbox').classList.remove('active');
+}
+
+fetch("stats.json").then(r => r.json()).then(s => stats = s);
+
+fetch("tracks.geojson").then(r => r.json()).then(data => {
+    const trackList = document.getElementById("trackList");
+    const waypointList = document.getElementById("waypointList");
+    let bounds = L.latLngBounds([]);
+
+    data.features.forEach(f => {
+        if (f.geometry.type === "LineString") {
+            const name = f.properties.name;
+            const coords = f.geometry.coordinates.map(c => [c[1], c[0]]);
+            trackColors[name] = f.properties.color;
+
+            const poly = L.polyline(coords, { color: f.properties.color, weight: 4 }).addTo(map);
+
+            const decorator = L.polylineDecorator(poly, {
+                patterns: [
+                    {
+                        offset: '50px', repeat: '120px', 
+                        symbol: L.Symbol.arrowHead({
+                            pixelSize: 10, polygon: false,
+                            pathOptions: { stroke: true, color: f.properties.color, weight: 2, opacity: 0.7 }
+                        })
+                    }
+                ]
+            }).addTo(map);
+
+            trackLayers[name] = poly;
+            arrowLayers[name] = decorator;
+            bounds.extend(poly.getBounds());
+
+            poly.on('click', (e) => {
+                L.DomEvent.stopPropagation(e);
+                handleTrackSelection(name);
+            });
+
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.checked = true;
+            trackCB[name] = cb;
+
+            cb.onchange = () => {
+                if (cb.checked) {
+                    poly.addTo(map);
+                    decorator.addTo(map);
+                } else {
+                    map.removeLayer(poly);
+                    map.removeLayer(decorator);
+                    if (currentAnimTrack === name) {
+                        if (animId) cancelAnimationFrame(animId);
+                        currentAnimTrack = null;
+                    }
+                }
+            };
+
+            const row = document.createElement("div");
+            const label = document.createElement("span");
+            label.innerText = " " + name;
+            label.style.cursor = "pointer";
+
+            label.onclick = () => {
+                map.fitBounds(poly.getBounds());
+                handleTrackSelection(name);
+            };
+
+            row.appendChild(cb);
+            row.appendChild(label);
+            trackList.appendChild(row);
+        }
+
+        else if (f.geometry.type === "Point") {
+            const [lon, lat] = f.geometry.coordinates;
+            const wId = f.properties.id; // Unique string tracking key assignment
+            let finalIcon = defaultIcon;
+
+            if (f.properties.image) {
+                finalIcon = L.divIcon({
+                    html: "<div class='thumb-pin' style='background-image: url(\"" + f.properties.image + "\");'></div>",
+                    className: "", 
+                    iconSize: [46, 46],
+                    iconAnchor: [23, 52]
+                });
+            }
+
+            const marker = L.marker([lat, lon], { icon: finalIcon }).addTo(map);
+            bounds.extend([lat, lon]);
+
+            marker.on('click', (e) => {
+                L.DomEvent.stopPropagation(e);
+                if (f.properties.image) {
+                    openLightbox(f.properties.image);
+                }
+                renderWaypointInfo(f.properties, lat, lon);
+            });
+
+            waypointLayers[wId] = marker;
+
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.checked = true;
+            waypointCB[wId] = cb;
+
+            cb.onchange = () => {
+                cb.checked ? marker.addTo(map) : map.removeLayer(marker);
+            };
+
+            const row = document.createElement("div");
+            const label = document.createElement("span");
+            label.innerText = " " + f.properties.name;
+            label.style.cursor = "pointer";
+
+            label.onclick = () => {
+                map.setView([lat, lon], 16);
+                renderWaypointInfo(f.properties, lat, lon);
+            };
+
+            row.appendChild(cb);
+            row.appendChild(label);
+            waypointList.appendChild(row);
+        }
+    });
+
+    if (bounds.isValid()) map.fitBounds(bounds);
+});
+
+/* GLOBAL CONTROLS TETHER */
+document.getElementById("all").onclick = () => {
+    Object.keys(trackLayers).forEach(k => {
+        trackLayers[k].addTo(map);
+        if (arrowLayers[k]) arrowLayers[k].addTo(map);
+        if (trackCB[k]) trackCB[k].checked = true;
+    });
+};
+
+document.getElementById("none").onclick = () => {
+    if (animId) cancelAnimationFrame(animId);
+    currentAnimTrack = null;
+    Object.keys(trackLayers).forEach(k => {
+        map.removeLayer(trackLayers[k]);
+        if (arrowLayers[k]) map.removeLayer(arrowLayers[k]);
+        if (trackCB[k]) trackCB[k].checked = false;
+    });
+};
+
+document.getElementById("wAll").onclick = () => {
+    Object.keys(waypointLayers).forEach(k => {
+        waypointLayers[k].addTo(map);
+        if (waypointCB[k]) waypointCB[k].checked = true;
+    });
+};
+
+document.getElementById("wNone").onclick = () => {
+    Object.keys(waypointLayers).forEach(k => {
+        map.removeLayer(waypointLayers[k]);
+        if (waypointCB[k]) waypointCB[k].checked = false;
+    });
+};
+
+});
+</script>
+</body>
+</html>

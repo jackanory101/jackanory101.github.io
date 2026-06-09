@@ -1,0 +1,279 @@
+/* ==========================================================
+   Jackanory101 Maps Index
+   ========================================================== */
+
+:root {
+	--glass-bg: rgba(20, 28, 38, 0.55);
+	--glass-border: rgba(255, 255, 255, 0.15);
+
+	--text-main: #f4f7fa;
+	--text-soft: #b8c2cc;
+
+	--accent: #8fd3ff;
+	--accent-hover: #d4f0ff;
+
+	--shadow:
+		0 8px 32px rgba(0,0,0,0.35);
+
+	--radius: 24px;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	min-height: 100%;
+	font-family: "Inter", sans-serif;
+	color: var(--text-main);
+}
+
+body {
+	background-image:
+		linear-gradient(
+			rgba(10,15,20,0.45),
+			rgba(10,15,20,0.65)
+		),
+		url("img/background_map.jpg");
+
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 4rem 1rem;
+
+	overflow-x: hidden;
+	position: relative;
+}
+
+/* ----------------------------------------------------------
+   Subtle animated glow
+   ---------------------------------------------------------- */
+
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+
+	background:
+		radial-gradient(
+			circle at 20% 20%,
+			rgba(143,211,255,0.15),
+			transparent 40%
+		),
+		radial-gradient(
+			circle at 80% 70%,
+			rgba(255,255,255,0.08),
+			transparent 35%
+		);
+
+	animation: drift 18s ease-in-out infinite alternate;
+	pointer-events: none;
+}
+
+@keyframes drift {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(1.08);
+	}
+}
+
+/* ----------------------------------------------------------
+   Main panel
+   ---------------------------------------------------------- */
+
+.panel {
+	width: min(600px, 95vw);
+	max-width: 1100px;
+
+	margin: auto;
+
+	background: var(--glass-bg);
+
+	backdrop-filter: blur(18px);
+	-webkit-backdrop-filter: blur(18px);
+
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius);
+
+	padding: 3rem;
+
+	box-shadow: var(--shadow);
+
+	position: relative;
+	z-index: 1;
+}
+
+/* subtle glass reflection */
+
+.panel::after {
+	content: "";
+
+	position: absolute;
+	inset: 0;
+
+	border-radius: inherit;
+
+	background:
+		linear-gradient(
+			135deg,
+			rgba(255,255,255,0.10),
+			rgba(255,255,255,0.00) 40%
+		);
+
+	pointer-events: none;
+}
+
+.title {
+	font-family: "Cormorant Garamond", serif;
+	font-size: clamp(2.8rem, 5vw, 4.5rem);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-align: center;
+	margin-bottom: 0.3rem;
+}
+
+.subtitle {
+	text-align: center;
+	color: var(--text-soft);
+	font-size: 1rem;
+	margin-bottom: 2rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+/* ----------------------------------------------------------
+   Map list
+   ---------------------------------------------------------- */
+
+.map-list {
+	list-style: none;
+
+	display: grid;
+	grid-template-columns: 1fr;
+
+	gap: 1rem;
+}
+
+/* Enable manually when desired:
+   <ul class="map-list two-column">
+*/
+
+.map-list.two-column {
+	grid-template-columns: 1fr 1fr;
+}
+
+/*And apply this*/
+/*.panel {*/
+	/*width: min(1100px, 95vw);*/
+/*}*/
+
+
+
+
+
+
+.map-list a {
+	display: block;
+	height: 100%;
+
+	padding: 1rem 1.2rem;
+
+	text-decoration: none;
+	color: var(--text-main);
+
+	border: 1px solid rgba(255,255,255,0.08);
+	border-radius: 14px;
+
+	background: rgba(255,255,255,0.03);
+
+	transition:
+		transform 0.2s ease,
+		background 0.2s ease,
+		border-color 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.map-list a:hover {
+	transform: translateY(-2px);
+
+	background: rgba(255,255,255,0.08);
+
+	border-color: rgba(143,211,255,0.45);
+
+	box-shadow:
+		0 0 20px rgba(143,211,255,0.15);
+}
+
+.map-title {
+	font-size: 1.05rem;
+	font-weight: 600;
+}
+
+.map-desc {
+	margin-top: 0.3rem;
+	font-size: 0.92rem;
+	color: var(--text-soft);
+}
+
+/* ----------------------------------------------------------
+   Footer
+   ---------------------------------------------------------- */
+
+.footer-links {
+	margin-top: 2rem;
+	padding-top: 1.5rem;
+
+	border-top: 1px solid rgba(255,255,255,0.08);
+
+	display: flex;
+	justify-content: center;
+}
+
+.footer-links a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 500;
+
+	transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+	color: var(--accent-hover);
+}
+
+/* ----------------------------------------------------------
+   Mobile
+   ---------------------------------------------------------- */
+
+@media (max-width: 640px) {
+
+	body {
+		padding: 2rem 0.75rem;
+	}
+
+	.panel {
+		padding: 2rem;
+	}
+
+	.title {
+		font-size: 2.5rem;
+	}
+
+	/* Always one column on mobile */
+
+	.map-list,
+	.map-list.two-column {
+		grid-template-columns: 1fr;
+	}
+}
