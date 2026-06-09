@@ -48,7 +48,8 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-const map = L.map('map').setView([53.41135, -8.01509], 13);
+//const map = L.map('map').setView([53.497090562328324, -9.79906947169947], 13);
+const map = L.map('map').setView([53.497090562328324, -9.79906947169947], 11);
 
 /* BASE LAYERS */
 const baseLayers = {
@@ -368,7 +369,12 @@ fetch("tracks.geojson").then(r => r.json()).then(data => {
         }
     });
 
-    if (bounds.isValid()) map.fitBounds(bounds);
+    //if (bounds.isValid()) map.fitBounds(bounds);
+	const FIT_TO_DATA = false;
+
+	if (FIT_TO_DATA && bounds.isValid()) {
+		map.fitBounds(bounds);
+	}
 });
 
 /* GLOBAL CONTROLS TETHER */
