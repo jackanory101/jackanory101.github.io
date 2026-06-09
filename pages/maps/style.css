@@ -37,7 +37,7 @@ body {
 			rgba(10,15,20,0.45),
 			rgba(10,15,20,0.65)
 		),
-		url("img/background_map.jpg");
+		url("bg.jpg");
 
 	background-size: cover;
 	background-position: center center;

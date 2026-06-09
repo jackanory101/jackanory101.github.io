@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="bash-gpx-script">
+  <wpt lat="53.42725713620833" lon=" -6.2437324250138255">
+    <ele>70</ele>
+    <time>2026-06-09T12:29:01Z</time>
+    <name>Dublin</name>
+    <desc>Description</desc>
+	<link href="img/dublin.jpg">
+      <type>image/jpeg</type>
+    </link>
+  </wpt>
+</gpx>

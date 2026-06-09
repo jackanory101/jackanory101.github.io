@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="bash-gpx-script">
+  <wpt lat="53.58845417650083" lon=" -9.963203309232524">
+    <ele>53</ele>
+    <time>2026-06-09T12:14:58Z</time>
+    <name>Tullycross</name>
+    <desc>Renvyle</desc>
+    <link href="img/tullymountain.jpg">
+      <type>image/jpeg</type>
+    </link>
+  </wpt>
+</gpx>
