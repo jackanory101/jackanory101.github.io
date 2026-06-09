@@ -15,7 +15,7 @@
 - [bibliomancy](pages/misc/bibliomancy.html)
 - [triangulate](pages/triangulate/gps-triangulate-calculate-height-scripts.html)
 - [leaflets](pages/maps/)
-- [zoom audio](pages/zoom/zoom.html)
+<!--- [zoom audio](pages/zoom/zoom.html)-->
 
 
 
