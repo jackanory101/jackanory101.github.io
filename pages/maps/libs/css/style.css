@@ -1,405 +1,422 @@
-/* =========================================================
-   BASE LAYOUT
-========================================================= */
+/* ==========================================================================
+   1. BASE LAYOUT & GLOBAL STYLES
+   ========================================================================== */
+
+/* Core application window overrides */
 body {
-	margin: 0;
-	overflow: hidden;
-	font-family: sans-serif;
+    margin: 0;
+    overflow: hidden;
+    font-family: sans-serif;
 }
 
+/* Map canvas container */
 #map {
-	height: 100vh;
-	position: relative;
-	z-index: 0;
+    height: 100vh;
+    position: relative;
+    z-index: 0;
 }
 
-.leaflet-control {
-	z-index: 1000 !important;
-}
-
-.leaflet-top.leaflet-left {
-	top: 55px;
-}
-
-/* Button that opens and closes track and marker list */
-#menuBtn {
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	width: 50px;
-	z-index: 3000;
-	background: white;
-	padding: 8px 10px;
-	border-radius: 6px;
-	cursor: pointer;
-	font-family: sans-serif;
-	font-size: 20px;
-	line-height: 20px;
-	box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-	transition: left 0.25s ease;
-}
-
-/* Track and marker list */
-	#drawer {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 280px;
-		height: 100%;
-		background: white;
-		z-index: 3000;
-		transform: translateX(-100%);
-		transition: transform 0.25s ease;
-		overflow-y: auto;
-		padding: 10px;
-		box-shadow: 2px 0 20px rgba(0,0,0,0.25);
-		font-size:12px;
-	}
-
-	#drawer.open {
-		transform: translateX(0);
-	}
-
-	.section {
-		margin-bottom: 12px;
-		border: 1px solid #ddd;
-		border-radius: 6px;
-	}
-
-	/* 1. Prepare the H3 header to hold an aligned arrow icon */
-	.section h3 {
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		justify-content: space-between; /* Pushes the title left and the arrow right */
-		user-select: none;
-		margin: 0;
-		padding: 10px;
-	}
-
-	/* 2. Create the disclosure arrow using a pseudo-element */
-	.section h3::after {
-		content: '';
-		display: inline-block;
-		width: 0;
-		height: 0;
-		
-		/* Draws a crisp, downward-pointing triangle using CSS borders */
-		border-left: 6px solid transparent;
-		border-right: 6px solid transparent;
-		border-top: 7px solid #666666; /* Match your preferred UI text color */
-		
-		/* Smooth transition for the rotation animation */
-		transition: transform 0.2s ease, border-top-color 0.2s ease;
-		margin-left: 10px;
-	}
-
-	/* 3. Change arrow color on hover to signal interactivity */
-	.section h3:hover::after {
-		border-top-color: #d35400; /* Subtle accent shift (matches your marker orange) */
-	}
-
-	/* 4. Flip the arrow upside down when the parent section is OPEN */
-	.section.open h3::after {
-		transform: rotate(-180deg);
-	}
-
-	/* 5. Optional: Smooth out the content visibility transition */
-	.section .section-content {
-		display: none;
-		padding: 10px;
-	}
-
-	.section.open .section-content {
-		display: block;
-	}
-
-/* =========================================================
-	 INFO PANEL
-========================================================= */
-	.info {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		z-index: 2000;
-		background: white;
-		/*padding: 10px;*/
-		font-size: 13px;
-		border-radius: 6px;
-		width: 260px;
-		box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-		max-height: 85vh;
-		overflow-y: auto;
-	}
-
-	.info-img {
-		width: 100%;
-		height: auto;
-		margin-top: 8px;
-		border-radius: 4px;
-		border: 1px solid #ddd;
-		display: block;
-	}
-
-	.info .name {
-		font-weight: bold;
-	}
-
-	.info .desc {
-		font-style: italic;
-	}
-	.info {
-		overflow: hidden; /* important */
-	}
-
-	/* header bar */
-	.info-header {
-		/*display: flex;*/
-		/*justify-content: space-between;*/
-		/*align-items: center;*/
-		/*[>padding: 6px 10px;<]*/
-		/*padding-left:10px;*/
-		/*font-weight: bold;*/
-		/*letter-spacing: 1px;*/
-		text-align: center;
-		padding-right: 20px;
-		cursor: pointer;
-		user-select: none;
-	}
-	.info.collapsed .info-header {
-		/*height: 10px;*/
-		padding-left:10px;
-	}
-
-	.info-title {
-		/*color: #fff;*/
-		font-weight: bold;
-		font-size: 20px;
-	}
-
-	.info.collapsed .info-title {
-		/*color: #fff;*/
-	}
-	.info:not(.collapsed) .info-title {
-		/*color: #000;*/
-	}
-
-
-	/* body content */
-	.info-body {
-		padding: 10px;
-		font-size: 13px;
-		max-height: 70vh;
-		overflow-y: auto;
-	}
-
-	.info.collapsed {
-		width: 139px;
-		background-color: #ffffff6b !important;
-	}
-
-	/* collapsed state = only header visible */
-	.info.collapsed .info-body {
-		display: none;
-	}
-
-	/* icon animation */
-	.info-icon {
-		display: inline-block;
-		font-size: 20px;
-		margin-right: 20px;
-		transform: translateY(-1px) rotate(0deg);
-		transition: transform 0.2s ease;
-	}
-
-	/* 👉 closed */
-	.info.collapsed .info-icon {
-		transform: rotate(0deg);
-		transform: translateY(-1px) rotate(0deg);
-	}
-
-	/* 👇 open */
-	.info:not(.collapsed) .info-icon {
-		transform: translateY(0px) rotate(90deg);
-	}
-
-
-
-
+/* Global button element defaults */
 button {
-	margin: 3px;
-	font-size: 12px;
+    margin: 3px;
+    font-size: 12px;
 }
 
+
+/* ==========================================================================
+   2. LEAFLET INTERFACE CUSTOMIZATION
+   ========================================================================== */
+
+/* Force UI elements above map vectors */
+.leaflet-control {
+    z-index: 1000 !important;
+}
+
+/* Reposition top-left controls to clear header space */
+.leaflet-top.leaflet-left {
+    top: 55px;
+}
+
+/* Custom icon mapping for Leaflet layers switcher */
 .leaflet-control-layers-toggle {
-	width: 30px !important;
-	height: 36px !important;
-	background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z'/><path d='M15 5.764v15'/><path d='M9 3.236v15'/></svg>") !important;
-	background-size: 30px 36px !important;
-	background-repeat: no-repeat !important;
-	background-position: center !important;
+    width: 30px !important;
+    height: 36px !important;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z'/><path d='M15 5.764v15'/><path d='M9 3.236v15'/></svg>") !important;
+    background-size: 30px 36px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
 }
 
+/* Map text typography */
+.leaflet-container {
+    font-family: sans-serif;
+}
+
+/* Context popup/tooltip sizing */
+.leaflet-control,
+.leaflet-popup {
+    font-size: 14px;
+}
+
+
+/* ==========================================================================
+   3. SIDEBAR NAVIGATION DRAWER
+   ========================================================================== */
+
+/* Floating trigger button for the drawer menu */
+#menuBtn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    z-index: 3000;
+    background: white;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 20px;
+    line-height: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: left 0.25s ease;
+}
+
+/* Off-canvas panel container (Tracks & Markers list) */
+#drawer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: white;
+    z-index: 3000;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    overflow-y: auto;
+    padding: 10px;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.25);
+    font-size: 12px;
+}
+
+/* Revealed state via JS trigger class */
+#drawer.open {
+    transform: translateX(0);
+}
+
+
+/* ==========================================================================
+   4. ACCORDION SECTIONS (INSIDE DRAWER)
+   ========================================================================== */
+
+/* Individual structural card wrapper */
+.section {
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+/* Header trigger for accordion content toggle */
+.section h3 {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    margin: 0;
+    padding: 10px;
+}
+
+/* Triangle indicator element */
+.section h3::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 7px solid #666666;
+    transition: transform 0.2s ease, border-top-color 0.2s ease;
+    margin-left: 10px;
+}
+
+/* Accent shift indicating clickability */
+.section h3:hover::after {
+    border-top-color: #d35400;
+}
+
+/* Invert triangle when section is active/uncollapsed */
+.section.open h3::after {
+    transform: rotate(-180deg);
+}
+
+/* Internal body content panel */
+.section .section-content {
+    display: none;
+    padding: 10px;
+}
+
+.section.open .section-content {
+    display: block;
+}
+
+
+/* ==========================================================================
+   5. MAP DATA INFO PANEL
+   ========================================================================== */
+
+/* Primary information card base viewport configuration */
+.info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2000;
+    background: white;
+    font-size: 13px;
+    border-radius: 6px;
+    width: 260px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow: hidden;
+}
+
+/* Dynamic media items inside information readout */
+.info-img {
+    width: 100%;
+    height: auto;
+    margin-top: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    display: block;
+}
+
+/* Metadata text treatments */
+.info .name {
+    font-weight: bold;
+}
+
+.info .desc {
+    font-style: italic;
+}
+
+/* Information panel title strip */
+.info-header {
+    text-align: center;
+    padding-right: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.info.collapsed .info-header {
+    padding-left: 10px;
+}
+
+.info-title {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Body content layout */
+.info-body {
+    padding: 10px;
+    font-size: 13px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Minimized dashboard overlay state */
+.info.collapsed {
+    width: 139px;
+    background-color: rgba(255, 255, 255, 0.42) !important;
+}
+
+.info.collapsed .info-body {
+    display: none;
+}
+
+/* Mini state collapse/expand icon indicator */
+.info-icon {
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 20px;
+    transform: translateY(-1px) rotate(0deg);
+    transition: transform 0.2s ease;
+}
+
+.info.collapsed .info-icon {
+    transform: translateY(-1px) rotate(0deg);
+}
+
+.info:not(.collapsed) .info-icon {
+    transform: translateY(0px) rotate(90deg);
+}
+
+
 /* =========================================================
-	 THUMBNAIL PIN STYLING
-========================================================= */
-	.thumb-pin {
-		width: 46px;
-		height: 46px;
-		border-radius: 6px;
-		border: 2px solid white;
-		box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-		position: relative;
-	}
+   6. CUSTOM THUMBNAIL MAP PIN GRAPHICS
+   ========================================================= */
 
-	.thumb-pin::after {
-		content: '';
-		position: absolute;
-		bottom: -6px;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 0;
-		height: 0;
-		border-left: 6px solid transparent;
-		border-right: 6px solid transparent;
-		border-top: 6px solid white;
-	}
+/* Main pin container styled to feature cover imagery */
+.thumb-pin {
+    width: 46px;
+    height: 46px;
+    border-radius: 6px;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Downward anchor pointing directly at map geocoordinates */
+.thumb-pin::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid white;
+}
+
 
 /* =========================================================
-	 MOBILE OVERRIDES
-========================================================= */
-	@media (max-width: 600px) {
-		body {
-		font-size: 20px;
-		line-height: 1.6;
-		}
+   7. MODAL LIGHTBOX IMAGE OVERLAY
+   ========================================================= */
 
-		#menuBtn {
-		font-size: 26px;
-		padding: 14px 16px;
-		}
+/* Fullscreen modal viewport backdrop mask */
+.custom-lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
-		.info {
-		font-size: 12px;
-		line-height: 1.6;
-		width: 37vw;
-		right: 2vw;
-		top: 7px;
-		/*padding: 16px;*/
-		}
+/* Visibility toggled on by application script */
+.custom-lightbox.active {
+    display: flex;
+    opacity: 1;
+}
 
-		#drawer {
-		font-size: 12px;
-		line-height: 1.6;
-		padding: 16px;
-		}
+/* Blown-up graphic framing viewport bounds */
+.custom-lightbox img {
+    max-width: 90%;
+    max-height: 85%;
+    border: 3px solid #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
 
-		.section h3 {
-		font-size: 21px;
-		padding: 16px;
-		}
+.custom-lightbox.active img {
+    transform: scale(1);
+}
 
-		.section-content {
-		padding: 14px;
-		}
+/* Top corner exit control button */
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s ease;
+}
 
-		button {
-		font-size: 14px;
-		padding: 12px 14px;
-		margin: 8px 6px;
-		border-radius: 10px;
-		}
-
-		input[type="checkbox"] {
-		transform: scale(1.7);
-		margin-right: 12px;
-		}
-
-		#trackList div,
-		#waypointList div {
-		margin: 14px 0;
-		}
-
-		.leaflet-control-zoom a {
-		width: 52px !important;
-		height: 52px !important;
-		line-height: 52px !important;
-		font-size: 26px !important;
-		}
-
-		.leaflet-top.leaflet-left {
-		top: 60px;
-		}
-
-		.leaflet-control-layers-toggle {
-		width: 52px !important;
-		height: 52px !important;
-		}
-	}
-
-	.leaflet-container {
-		font-family: sans-serif;
-	}
-
-	.leaflet-control,
-	.leaflet-popup {
-		font-size: 14px;
-	}
-
-/* --- LIGHTBOX OVERLAY --- */
-	.custom-lightbox {
-		display: none;
-		position: fixed;
-		z-index: 9999; /* Ensure it stays completely above the Leaflet map */
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		background-color: rgba(0, 0, 0, 0.85);
-		justify-content: center;
-		align-items: center;
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
-
-	.custom-lightbox.active {
-		display: flex;
-		opacity: 1;
-	}
-
-	.custom-lightbox img {
-		max-width: 90%;
-		max-height: 85%;
-		border: 3px solid #ffffff;
-		border-radius: 4px;
-		box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-		transform: scale(0.95);
-		transition: transform 0.3s ease;
-	}
-
-	.custom-lightbox.active img {
-		transform: scale(1);
-	}
-
-	/* Close Button Layout */
-	.lightbox-close {
-		position: absolute;
-		top: 20px;
-		right: 30px;
-		color: #ffffff;
-		font-size: 40px;
-		font-weight: bold;
-		cursor: pointer;
-		user-select: none;
-		transition: color 0.2s ease;
-	}
-
-	.lightbox-close:hover {
-		color: #d35400; /* Matches your burnt-orange map markers */
-	}
+.lightbox-close:hover {
+    color: #d35400;
+}
 
 
-" vim: set ai tw=0 foldmethod=indent:
+/* =========================================================
+   8. MOBILE RESPONSIVE ADAPTATIONS
+   ========================================================= */
+
+@media (max-width: 600px) {
+    /* Up scaled core typography for smaller screen footprints */
+    body {
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    /* Target enlargement for touch interface accessibility */
+    #menuBtn {
+        font-size: 26px;
+        padding: 14px 16px;
+    }
+
+    /* Scaling panel size dynamically relative to narrower viewports */
+    .info {
+        font-size: 12px;
+        line-height: 1.6;
+        width: 37vw;
+        right: 2vw;
+        top: 7px;
+    }
+
+    #drawer {
+        font-size: 12px;
+        line-height: 1.6;
+        padding: 16px;
+    }
+
+    .section h3 {
+        font-size: 21px;
+        padding: 16px;
+    }
+
+    .section-content {
+        padding: 14px;
+    }
+
+    /* Expanded button surfaces for thumb navigation */
+    button {
+        font-size: 14px;
+        padding: 12px 14px;
+        margin: 8px 6px;
+        border-radius: 10px;
+    }
+
+    /* Massive target checkbox sizes for touch displays */
+    input[type="checkbox"] {
+        transform: scale(1.7);
+        margin-right: 12px;
+    }
+
+    #trackList div,
+    #waypointList div {
+        margin: 14px 0;
+    }
+
+    /* Zoom utilities expanded to match leaflet layout standards */
+    .leaflet-control-zoom a {
+        width: 52px !important;
+        height: 52px !important;
+        line-height: 52px !important;
+        font-size: 26px !important;
+    }
+
+    .leaflet-top.leaflet-left {
+        top: 60px;
+    }
+
+    .leaflet-control-layers-toggle {
+        width: 52px !important;
+        height: 52px !important;
+    }
+}
