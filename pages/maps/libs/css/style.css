@@ -178,10 +178,10 @@ body {
 	}
 
 	.info.collapsed .info-title {
-		color: #fff;
+		/*color: #fff;*/
 	}
 	.info:not(.collapsed) .info-title {
-		color: #000;
+		/*color: #000;*/
 	}
 
 
