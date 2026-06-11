@@ -58,27 +58,61 @@ button {
     font-size: 14px;
 }
 
-
 /* ==========================================================================
-   3. SIDEBAR NAVIGATION DRAWER
+   3. SIDEBAR NAVIGATION DRAWER & ACCORDIONS
    ========================================================================== */
 
+:root {
+    --nav-bg: rgba(255, 255, 255, 0.85);
+    --nav-border: rgba(0, 0, 0, 0.08);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --primary-accent: #2563eb;
+    --primary-accent-hover: #1d4ed8;
+    --bg-hover: rgba(0, 0, 0, 0.04);
+    --btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --drawer-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+    --nav-radius: 12px;
+    --elem-radius: 8px;
+    --glass-blur: blur(12px);
+}
+
 /* Floating trigger button for the drawer menu */
+/* Note that jscript in html template resizes this button, so must conform to the settings here */
+/*   Search for this: 
+        btn.style.width = "32px"; */
 #menuBtn {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 50px;
+    top: 9px;
+    left: 11px;
+    width: 32px;
+    height: 46px;
     z-index: 3000;
-    background: white;
-    padding: 8px 10px;
-    border-radius: 6px;
+    background: var(--nav-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--nav-border);
+    border-radius: var(--nav-radius);
     cursor: pointer;
-    font-family: sans-serif;
-    font-size: 20px;
-    line-height: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    transition: left 0.25s ease;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--btn-shadow);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    color: var(--text-main);
+}
+
+#menuBtn:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* If your JS shifts the menu button when the drawer opens, this keeps it fluid */
+#menuBtn.drawer-open {
+    left: 316px; /* 300px drawer width + 16px padding */
+	width: 50px;
 }
 
 /* Off-canvas panel container (Tracks & Markers list) */
@@ -86,16 +120,21 @@ button {
     position: absolute;
     top: 0;
     left: 0;
-    width: 280px;
+    width: 300px; /* Matched to the info panel width */
     height: 100%;
-    background: white;
+    background: var(--nav-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-right: 1px solid var(--nav-border);
     z-index: 3000;
     transform: translateX(-100%);
-    transition: transform 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow-y: auto;
-    padding: 10px;
-    box-shadow: 2px 0 20px rgba(0,0,0,0.25);
-    font-size: 12px;
+    padding: 20px 16px;
+    box-shadow: var(--drawer-shadow);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text-main);
+    box-sizing: border-box;
 }
 
 /* Revealed state via JS trigger class */
@@ -111,8 +150,20 @@ button {
 /* Individual structural card wrapper */
 .section {
     margin-bottom: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--nav-border);
+    border-radius: var(--nav-radius);
+    overflow: hidden; /* Keeps background hovers within rounded corners */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.section:hover {
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+.section.open {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(37, 99, 235, 0.2); /* Subtle accent glow color when open */
 }
 
 /* Header trigger for accordion content toggle */
@@ -123,134 +174,267 @@ button {
     justify-content: space-between;
     user-select: none;
     margin: 0;
-    padding: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--text-main);
+    transition: background-color 0.2s ease;
 }
 
-/* Triangle indicator element */
+.section h3:hover {
+    background-color: var(--bg-hover);
+}
+
+/* Modern Minimalist Arrow Indicator (Goodbye clunky CSS borders) */
 .section h3::after {
-    content: '';
+    content: '➤';
     display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 7px solid #666666;
-    transition: transform 0.2s ease, border-top-color 0.2s ease;
-    margin-left: 10px;
+    font-family: system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-muted);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.2s ease;
 }
 
-/* Accent shift indicating clickability */
 .section h3:hover::after {
-    border-top-color: #d35400;
+    color: var(--primary-accent);
 }
 
-/* Invert triangle when section is active/uncollapsed */
+/* Smoothly rotate modern arrow down when open */
 .section.open h3::after {
-    transform: rotate(-180deg);
+    transform: rotate(90deg);
+    color: var(--primary-accent);
 }
 
 /* Internal body content panel */
 .section .section-content {
     display: none;
-    padding: 10px;
+    padding: 16px;
+    border-top: 1px solid var(--nav-border);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .section.open .section-content {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Premium styling for Select All / Select None Action Buttons */
+.section-content button {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: var(--elem-radius);
+    border: 1px solid var(--nav-border);
+    background: #ffffff;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.section-content button:hover {
+    background: var(--primary-accent);
+    color: #ffffff;
+    border-color: var(--primary-accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.section-content button:active {
+    transform: translateY(0);
+}
+
+/* Layout container for custom lists inside sections */
+#trackList, #waypointList {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Custom Scrollbar for the Drawer */
+#drawer::-webkit-scrollbar {
+    width: 6px;
+}
+#drawer::-webkit-scrollbar-track {
+    background: transparent;
+}
+#drawer::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+#drawer::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
 }
 
 
+
 /* ==========================================================================
-   5. MAP DATA INFO PANEL
+   5. MODERN MAP DATA INFO PANEL
    ========================================================================== */
+
+:root {
+    --panel-bg: rgba(255, 255, 255, 0.85);
+    --panel-bg-collapsed: rgba(255, 255, 255, 0.7);
+    --panel-border: rgba(0, 0, 0, 0.08);
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --accent-color: #2563eb;
+    --radius: 12px;
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.12), 0 2px 8px -1px rgba(0, 0, 0, 0.08);
+    --blur: blur(12px);
+}
 
 /* Primary information card base viewport configuration */
 .info {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 16px;
+    right: 16px;
     z-index: 2000;
-    background: white;
-    font-size: 13px;
-    border-radius: 6px;
-    width: 260px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    background: var(--panel-bg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    width: 300px; /* Slightly wider for better text readability */
+    box-shadow: var(--shadow);
+    border: 1px solid var(--panel-border);
     max-height: 85vh;
-    overflow-y: auto;
     overflow: hidden;
-}
-
-/* Dynamic media items inside information readout */
-.info-img {
-    width: 100%;
-    height: auto;
-    margin-top: 8px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    display: block;
-}
-
-/* Metadata text treatments */
-.info .name {
-    font-weight: bold;
-}
-
-.info .desc {
-    font-style: italic;
-}
-
-/* Information panel title strip */
-.info-header {
-    text-align: center;
-    padding-right: 20px;
-    cursor: pointer;
-    user-select: none;
-}
-
-.info.collapsed .info-header {
-    padding-left: 10px;
-}
-
-.info-title {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-/* Body content layout */
-.info-body {
-    padding: 10px;
-    font-size: 13px;
-    max-height: 70vh;
-    overflow-y: auto;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* Minimized dashboard overlay state */
 .info.collapsed {
-    width: 139px;
-    background-color: rgba(255, 255, 255, 0.42) !important;
+    width: 110px;
+    background: var(--panel-bg-collapsed) !important;
+}
+
+/* Information panel title strip */
+.info-header {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid var(--panel-border);
+    transition: background-color 0.2s ease;
+}
+
+.info-header:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.info.collapsed .info-header {
+    border-bottom-color: transparent;
+    padding: 12px 14px;
+}
+
+.info-title {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    gap: 8px;
+}
+
+/* Mini state collapse/expand icon indicator */
+.info-icon {
+    display: inline-block;
+    font-size: 12px; /* Made smaller and cleaner */
+    color: var(--accent-color);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.info.collapsed .info-icon {
+    transform: rotate(0deg);
+}
+
+.info:not(.collapsed) .info-icon {
+    transform: rotate(90deg);
+}
+
+/* Body content layout */
+.info-body {
+    padding: 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Adds clean spacing between paragraphs automatically */
 }
 
 .info.collapsed .info-body {
     display: none;
 }
 
-/* Mini state collapse/expand icon indicator */
-.info-icon {
-    display: inline-block;
-    font-size: 20px;
-    margin-right: 20px;
-    transform: translateY(-1px) rotate(0deg);
-    transition: transform 0.2s ease;
+/* Typography & Content Elements inside body */
+.info-description {
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
 }
 
-.info.collapsed .info-icon {
-    transform: translateY(-1px) rotate(0deg);
+.info-instructions {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.info:not(.collapsed) .info-icon {
-    transform: translateY(0px) rotate(90deg);
+/* Inline SVG mapping icons alignment */
+.info-instructions img {
+    vertical-align: middle;
+    margin: 0 2px;
+    opacity: 0.8;
 }
 
+/* Dynamic media items inside information readout (for your future JS injections) */
+.info-img {
+    width: 100%;
+    height: auto;
+    margin-top: 4px;
+    border-radius: 6px;
+    border: 1px solid var(--panel-border);
+    display: block;
+}
+
+.info .name {
+    font-weight: 600;
+}
+
+.info .desc {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Smooth scrollbar for the info body */
+.info-body::-webkit-scrollbar {
+    width: 6px;
+}
+.info-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.info-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+.info-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
 
 /* =========================================================
    6. CUSTOM THUMBNAIL MAP PIN GRAPHICS
