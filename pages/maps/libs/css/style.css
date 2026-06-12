@@ -541,14 +541,14 @@ button {
     /* Target enlargement for touch interface accessibility */
     #menuBtn {
         font-size: 26px;
-        padding: 14px 16px;
+        /*padding: 14px 16px;*/
     }
 
     /* Scaling panel size dynamically relative to narrower viewports */
     .info {
         font-size: 12px;
         line-height: 1.6;
-        width: 37vw;
+        width: 44vw;
         right: 2vw;
         top: 7px;
     }
@@ -571,8 +571,9 @@ button {
     /* Expanded button surfaces for thumb navigation */
     button {
         font-size: 14px;
-        padding: 12px 14px;
-        margin: 8px 6px;
+		padding: 12px 14px;
+        /*margin: 8px 6px;*/
+		margin:0;
         border-radius: 10px;
     }
 
