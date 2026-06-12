@@ -13,30 +13,30 @@
 
 <body>
 <div id="map-lightbox" class="custom-lightbox" onclick="closeLightbox()">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <img id="lightbox-img" src="" alt="Waypoint View" onclick="event.stopPropagation()">
+	<span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+	<img id="lightbox-img" src="" alt="Waypoint View" onclick="event.stopPropagation()">
 </div>
 <div id="menuBtn">☰</div>
 
 <div id="drawer">
 
-  <div class="section" id="trackSec">
-    <h3>Tracks</h3>
-    <div class="section-content">
-      <button id="all">Select All</button>
-      <button id="none">Select None</button>
-      <div id="trackList"></div>
-    </div>
-  </div>
+	<div class="section" id="trackSec">
+	<h3>Tracks</h3>
+	<div class="section-content">
+		<button id="all">Select All</button>
+		<button id="none">Select None</button>
+		<div id="trackList"></div>
+	</div>
+	</div>
 
-  <div class="section" id="waySec">
-    <h3>Waypoints</h3>
-    <div class="section-content">
-      <button id="wAll">Select All</button>
-      <button id="wNone">Select None</button>
-      <div id="waypointList"></div>
-    </div>
-  </div>
+	<div class="section" id="waySec">
+	<h3>Waypoints</h3>
+	<div class="section-content">
+		<button id="wAll">Select All</button>
+		<button id="wNone">Select None</button>
+		<div id="waypointList"></div>
+	</div>
+	</div>
 
 </div>
 
@@ -44,18 +44,18 @@
 
 <div class="info collapsed" id="info">
 
-  <div class="info-header" id="infoToggle">
-	  <!--<div class="info-title">INFO <div class="info-icon">➤</div></div>-->
-	  <div class="info-title"><div class="info-icon">➤</div>INFO</div>
-  </div>
+	<div class="info-header" id="infoToggle">
+		<!--<div class="info-title">INFO <div class="info-icon">➤</div></div>-->
+		<div class="info-title"><div class="info-icon">➤</div>INFO</div>
+	</div>
 
-  <div class="info-body" id="infoBody">
+	<div class="info-body" id="infoBody">
 	<p class="info-description" id="infoDescription">Loading description...</p>
 	<p class="info-instructions">Open the ☰ menu to select routes and markers. Click on routes and markers to open info about them in this panel.</p>
 	<p class="info-instructions">Click on routes and markers on the map also shows info in this panel.</p>
 	<p class="info-instructions">Click on the <img style="display:inline;" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z'/><path d='M15 5.764v15'/><path d='M9 3.236v15'/></svg>"> icon to select map style.</p>
-    <!-- your JS will still inject into this -->
-  </div>
+	<!-- your JS will still inject into this -->
+	</div>
 
 </div>
 
@@ -67,12 +67,12 @@ const map = L.map('map').setView([34.99824, 135.78311], 13);
 
 /* BASE LAYERS */
 const baseLayers = {
-  "OSM": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' }),
-  "OpenTopoMap": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenTopoMap' }),
-  "Esri Satellite": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'),
-  "Esri Streets": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png'),
-  "Carto Light": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'),
-  "Carto Dark": L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png')
+	"OSM": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' }),
+	"OpenTopoMap": L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenTopoMap' }),
+	"Esri Satellite": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'),
+	"Esri Streets": L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png'),
+	"Carto Light": L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'),
+	"Carto Dark": L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png')
 };
 
 baseLayers["Esri Satellite"].addTo(map);
@@ -80,10 +80,10 @@ baseLayers["Esri Satellite"].addTo(map);
 L.control.layers(baseLayers, null, { position: "topleft" }).addTo(map);
 
 const defaultIcon = L.icon({
-    iconUrl: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23d35400' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/></svg>",
-    iconSize: [50, 64],       
-    iconAnchor: [25, 64],       
-    popupAnchor: [0, -64]      
+	iconUrl: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23d35400' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z'/></svg>",
+	iconSize: [50, 64],			
+	iconAnchor: [25, 64],		
+	popupAnchor: [0, -64]		 
 });
 
 let stats = {};
@@ -102,94 +102,94 @@ const infoPanel = document.getElementById("info");
 const infoToggle = document.getElementById("infoToggle");
 
 infoToggle.onclick = () => {
-    infoPanel.classList.toggle("collapsed");
+	infoPanel.classList.toggle("collapsed");
 };
 
 document.getElementById("menuBtn").onclick = () => {
-    const drawer = document.getElementById("drawer");
-    const btn = document.getElementById("menuBtn");
-    drawer.classList.toggle("open");
-    if (drawer.classList.contains("open")) {
-        btn.innerHTML = "&times;";
-        btn.style.left = "305px";
-        btn.style.width = "50px";
-    } else {
-        btn.innerHTML = "☰";
-        btn.style.left = "11px";
-        btn.style.width = "32px";
-    }
+	const drawer = document.getElementById("drawer");
+	const btn = document.getElementById("menuBtn");
+	drawer.classList.toggle("open");
+	if (drawer.classList.contains("open")) {
+		btn.innerHTML = "&times;";
+		btn.style.left = "305px";
+		btn.style.width = "50px";
+	} else {
+		btn.innerHTML = "☰";
+		btn.style.left = "11px";
+		btn.style.width = "32px";
+	}
 };
 
 document.querySelectorAll(".section h3").forEach(h => {
-  h.onclick = () => h.parentElement.classList.toggle("open");
+	h.onclick = () => h.parentElement.classList.toggle("open");
 });
 
 function startTrackAnimation(name) {
-    if (animId) cancelAnimationFrame(animId);
-    currentAnimTrack = name;
-    animOffset = 0;
+	if (animId) cancelAnimationFrame(animId);
+	currentAnimTrack = name;
+	animOffset = 0;
 
-    function frame() {
-        if (currentAnimTrack !== name) return;
-        const decorator = arrowLayers[name];
-        const color = trackColors[name];
+	function frame() {
+		if (currentAnimTrack !== name) return;
+		const decorator = arrowLayers[name];
+		const color = trackColors[name];
 
-        if (decorator && map.hasLayer(decorator)) {
-            animOffset = (animOffset + 1) % 120;
-            decorator.setPatterns([
-                {
-                    offset: animOffset + 'px', 
-                    repeat: '120px', 
-                    symbol: L.Symbol.arrowHead({
-                        pixelSize: 10,
-                        polygon: false,
-                        pathOptions: { stroke: true, color: color, weight: 2, opacity: 0.85 }
-                    })
-                }
-            ]);
-        }
-        animId = requestAnimationFrame(frame);
-    }
-    animId = requestAnimationFrame(frame);
+		if (decorator && map.hasLayer(decorator)) {
+			animOffset = (animOffset + 1) % 120;
+			decorator.setPatterns([
+				{
+					offset: animOffset + 'px', 
+					repeat: '120px', 
+					symbol: L.Symbol.arrowHead({
+						pixelSize: 10,
+						polygon: false,
+						pathOptions: { stroke: true, color: color, weight: 2, opacity: 0.85 }
+					})
+				}
+			]);
+		}
+		animId = requestAnimationFrame(frame);
+	}
+	animId = requestAnimationFrame(frame);
 }
 
 function handleTrackSelection(name) {
-    renderStats(name);
-    startTrackAnimation(name);
+	renderStats(name);
+	startTrackAnimation(name);
 }
 
 /* LOCAL TIME FORMATTER FOR SYSTEM INFO PANELS */
 function formatWaypointTime(isoString) {
-    if (!isoString) return "N/A";
-    try {
-        const d = new Date(isoString);
-        if (isNaN(d.getTime())) return "N/A";
-        
-        const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, '0');
-        const day = String(d.getDate()).padStart(2, '0');
-        
-        let hours = d.getHours();
-        const minutes = String(d.getMinutes()).padStart(2, '0');
-        const ampm = hours >= 12 ? 'pm' : 'am';
-        
-        hours = hours % 12;
-        hours = hours ? hours : 12; // Converts '0' hours down to '12'
-        
-        return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ampm;
-    } catch(e) {
-        return "N/A";
-    }
+	if (!isoString) return "N/A";
+	try {
+		const d = new Date(isoString);
+		if (isNaN(d.getTime())) return "N/A";
+		
+		const year = d.getFullYear();
+		const month = String(d.getMonth() + 1).padStart(2, '0');
+		const day = String(d.getDate()).padStart(2, '0');
+		
+		let hours = d.getHours();
+		const minutes = String(d.getMinutes()).padStart(2, '0');
+		const ampm = hours >= 12 ? 'pm' : 'am';
+		
+		hours = hours % 12;
+		hours = hours ? hours : 12; // Converts '0' hours down to '12'
+		
+		return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ampm;
+	} catch(e) {
+		return "N/A";
+	}
 }
 
 /* UI SPECIFIC DATA OVERLAY PANEL RENDERER */
 function renderWaypointInfo(props, lat, lon) {
-    // Top headline now uses the GPX filename including extension
-    const topHeadline = props.filename ? props.filename : "Unknown File";
-    const nameText = props.name ? props.name : "Unnamed Waypoint";
-    const timeFormatted = formatWaypointTime(props.time);
-    const elevationText = props.ele != null ? props.ele.toFixed(1) + "m" : "N/A";
-    const headingText = props.heading != null ? props.heading + "°" : "N/A";
+	// Top headline now uses the GPX filename including extension
+	const topHeadline = props.filename ? props.filename : "Unknown File";
+	const nameText = props.name ? props.name : "Unnamed Waypoint";
+	const timeFormatted = formatWaypointTime(props.time);
+	const elevationText = props.ele != null ? props.ele.toFixed(1) + "m" : "N/A";
+	const headingText = props.heading != null ? props.heading + "°" : "N/A";
 
 	let htmlContent = "<span class='name'>" + nameText + "</span><br>" ; 
 	if (props.desc) {
@@ -203,12 +203,12 @@ htmlContent += "<br><table style='border-collapse: collapse;'>";
 
 
 htmlContent +=
-    "<tr><td><b>Time</b></td><td>" + timeFormatted + "</td></tr>" +
-    "<tr><td><b>Lat</b></td><td>" + lat.toFixed(6) + "</td></tr>" +
-    "<tr><td><b>Lon</b></td><td>" + lon.toFixed(6) + "</td></tr>" +
-    "<tr><td><b>Ele</b></td><td>" + elevationText + "</td></tr>" +
-    "<tr><td><b>Dir</b></td><td>" + headingText + "</td></tr>" +
-    "<tr><td><b>File</b></td><td><b>" + topHeadline + "</b></td></tr>";
+	"<tr><td><b>Time</b></td><td>" + timeFormatted + "</td></tr>" +
+	"<tr><td><b>Lat</b></td><td>" + lat.toFixed(6) + "</td></tr>" +
+	"<tr><td><b>Lon</b></td><td>" + lon.toFixed(6) + "</td></tr>" +
+	"<tr><td><b>Ele</b></td><td>" + elevationText + "</td></tr>" +
+	"<tr><td><b>Dir</b></td><td>" + headingText + "</td></tr>" +
+	"<tr><td><b>File</b></td><td><b>" + topHeadline + "</b></td></tr>";
 
 htmlContent += "</table>";
 
@@ -220,179 +220,179 @@ htmlContent += "</table>";
 		//"File: <b>" + topHeadline + "</b><br>";
 
 
-    //document.getElementById("info").innerHTML = htmlContent;
+	//document.getElementById("info").innerHTML = htmlContent;
 	document.getElementById("infoBody").innerHTML = htmlContent;
 }
 
 function renderStats(name) {
-    const s = stats[name] || {};
-    function fmtTime(t) {
-        if (!t) return "N/A";
-        const d = new Date(t);
-        const pad = n => String(n).padStart(2, "0");
-        let h = d.getHours();
-        const m = pad(d.getMinutes());
-        const ampm = h >= 12 ? "pm" : "am";
-        h = h % 12;
-        if (h === 0) h = 12;
-        return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + String(d.getFullYear()).slice(-2) + " " + h + ":" + m + ampm;
-    }
-    function fmtDuration(sec) {
-        if (!sec && sec !== 0) return "N/A";
-        const h = Math.floor(sec / 3600);
-        const m = Math.floor((sec % 3600) / 60);
-        return h + "h " + m + "m";
-    }
-    const dist = s.distance_m ? (s.distance_m / 1000).toFixed(2) : "N/A";
-    const avg = s.avg_speed_kmh != null ? Math.round(s.avg_speed_kmh) : "N/A";
-    const max = s.max_speed_kmh != null ? Math.round(s.max_speed_kmh) : "N/A";
+	const s = stats[name] || {};
+	function fmtTime(t) {
+		if (!t) return "N/A";
+		const d = new Date(t);
+		const pad = n => String(n).padStart(2, "0");
+		let h = d.getHours();
+		const m = pad(d.getMinutes());
+		const ampm = h >= 12 ? "pm" : "am";
+		h = h % 12;
+		if (h === 0) h = 12;
+		return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + String(d.getFullYear()).slice(-2) + " " + h + ":" + m + ampm;
+	}
+	function fmtDuration(sec) {
+		if (!sec && sec !== 0) return "N/A";
+		const h = Math.floor(sec / 3600);
+		const m = Math.floor((sec % 3600) / 60);
+		return h + "h " + m + "m";
+	}
+	const dist = s.distance_m ? (s.distance_m / 1000).toFixed(2) : "N/A";
+	const avg = s.avg_speed_kmh != null ? Math.round(s.avg_speed_kmh) : "N/A";
+	const max = s.max_speed_kmh != null ? Math.round(s.max_speed_kmh) : "N/A";
 
-    document.getElementById("infoBody").innerHTML =
-        "<b>" + name + "</b><br>" +
-        "Start: " + fmtTime(s.start_time) + "<br>" +
-        "End: " + fmtTime(s.end_time) + "<br>" +
-        "Duration: " + fmtDuration(s.duration) + "<br>" +
-        "Distance: " + dist + " km<br>" +
-        "Min Alt: " + (s.min_alt ?? "N/A") + "m<br>" +
-        "Max Alt: " + (s.max_alt ?? "N/A") + "m<br>" +
-        "Avg: " + avg + " km/h<br>" +
-        "Max: " + max + " km/h";
+	document.getElementById("infoBody").innerHTML =
+		"<b>" + name + "</b><br>" +
+		"Start: " + fmtTime(s.start_time) + "<br>" +
+		"End: " + fmtTime(s.end_time) + "<br>" +
+		"Duration: " + fmtDuration(s.duration) + "<br>" +
+		"Distance: " + dist + " km<br>" +
+		"Min Alt: " + (s.min_alt ?? "N/A") + "m<br>" +
+		"Max Alt: " + (s.max_alt ?? "N/A") + "m<br>" +
+		"Avg: " + avg + " km/h<br>" +
+		"Max: " + max + " km/h";
 }
 
 window.openLightbox = function(imgSrc) {
-    const lightbox = document.getElementById('map-lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = imgSrc;
-    lightbox.classList.add('active');
+	const lightbox = document.getElementById('map-lightbox');
+	const lightboxImg = document.getElementById('lightbox-img');
+	lightboxImg.src = imgSrc;
+	lightbox.classList.add('active');
 }
 
 window.closeLightbox = function() {
-    document.getElementById('map-lightbox').classList.remove('active');
+	document.getElementById('map-lightbox').classList.remove('active');
 }
 
 fetch("stats.json").then(r => r.json()).then(s => stats = s);
 
 fetch("tracks.geojson").then(r => r.json()).then(data => {
-    const trackList = document.getElementById("trackList");
-    const waypointList = document.getElementById("waypointList");
-    let bounds = L.latLngBounds([]);
+	const trackList = document.getElementById("trackList");
+	const waypointList = document.getElementById("waypointList");
+	let bounds = L.latLngBounds([]);
 
-    data.features.forEach(f => {
-        if (f.geometry.type === "LineString") {
-            const name = f.properties.name;
-            const coords = f.geometry.coordinates.map(c => [c[1], c[0]]);
-            trackColors[name] = f.properties.color;
+	data.features.forEach(f => {
+		if (f.geometry.type === "LineString") {
+			const name = f.properties.name;
+			const coords = f.geometry.coordinates.map(c => [c[1], c[0]]);
+			trackColors[name] = f.properties.color;
 
-            const poly = L.polyline(coords, { color: f.properties.color, weight: 4 }).addTo(map);
+			const poly = L.polyline(coords, { color: f.properties.color, weight: 4 }).addTo(map);
 
-            const decorator = L.polylineDecorator(poly, {
-                patterns: [
-                    {
-                        offset: '50px', repeat: '120px', 
-                        symbol: L.Symbol.arrowHead({
-                            pixelSize: 10, polygon: false,
-                            pathOptions: { stroke: true, color: f.properties.color, weight: 2, opacity: 0.7 }
-                        })
-                    }
-                ]
-            }).addTo(map);
+			const decorator = L.polylineDecorator(poly, {
+				patterns: [
+					{
+						offset: '50px', repeat: '120px', 
+						symbol: L.Symbol.arrowHead({
+							pixelSize: 10, polygon: false,
+							pathOptions: { stroke: true, color: f.properties.color, weight: 2, opacity: 0.7 }
+						})
+					}
+				]
+			}).addTo(map);
 
-            trackLayers[name] = poly;
-            arrowLayers[name] = decorator;
-            bounds.extend(poly.getBounds());
+			trackLayers[name] = poly;
+			arrowLayers[name] = decorator;
+			bounds.extend(poly.getBounds());
 
-            poly.on('click', (e) => {
-                L.DomEvent.stopPropagation(e);
-                handleTrackSelection(name);
-            });
+			poly.on('click', (e) => {
+				L.DomEvent.stopPropagation(e);
+				handleTrackSelection(name);
+			});
 
-            const cb = document.createElement("input");
-            cb.type = "checkbox";
-            cb.checked = true;
-            trackCB[name] = cb;
+			const cb = document.createElement("input");
+			cb.type = "checkbox";
+			cb.checked = true;
+			trackCB[name] = cb;
 
-            cb.onchange = () => {
-                if (cb.checked) {
-                    poly.addTo(map);
-                    decorator.addTo(map);
-                } else {
-                    map.removeLayer(poly);
-                    map.removeLayer(decorator);
-                    if (currentAnimTrack === name) {
-                        if (animId) cancelAnimationFrame(animId);
-                        currentAnimTrack = null;
-                    }
-                }
-            };
+			cb.onchange = () => {
+				if (cb.checked) {
+					poly.addTo(map);
+					decorator.addTo(map);
+				} else {
+					map.removeLayer(poly);
+					map.removeLayer(decorator);
+					if (currentAnimTrack === name) {
+						if (animId) cancelAnimationFrame(animId);
+						currentAnimTrack = null;
+					}
+				}
+			};
 
-            const row = document.createElement("div");
-            const label = document.createElement("span");
-            label.innerText = " " + name;
-            label.style.cursor = "pointer";
+			const row = document.createElement("div");
+			const label = document.createElement("span");
+			label.innerText = " " + name;
+			label.style.cursor = "pointer";
 
-            label.onclick = () => {
-                map.fitBounds(poly.getBounds());
-                handleTrackSelection(name);
-            };
+			label.onclick = () => {
+				map.fitBounds(poly.getBounds());
+				handleTrackSelection(name);
+			};
 
-            row.appendChild(cb);
-            row.appendChild(label);
-            trackList.appendChild(row);
-        }
+			row.appendChild(cb);
+			row.appendChild(label);
+			trackList.appendChild(row);
+		}
 
-        else if (f.geometry.type === "Point") {
-            const [lon, lat] = f.geometry.coordinates;
-            const wId = f.properties.id; // Unique string tracking key assignment
-            let finalIcon = defaultIcon;
+		else if (f.geometry.type === "Point") {
+			const [lon, lat] = f.geometry.coordinates;
+			const wId = f.properties.id; // Unique string tracking key assignment
+			let finalIcon = defaultIcon;
 
-            if (f.properties.image) {
-                finalIcon = L.divIcon({
-                    html: "<div class='thumb-pin' style='background-image: url(\"" + f.properties.image + "\");'></div>",
-                    className: "", 
-                    iconSize: [46, 46],
-                    iconAnchor: [23, 52]
-                });
-            }
+			if (f.properties.image) {
+				finalIcon = L.divIcon({
+					html: "<div class='thumb-pin' style='background-image: url(\"" + f.properties.image + "\");'></div>",
+					className: "", 
+					iconSize: [46, 46],
+					iconAnchor: [23, 52]
+				});
+			}
 
-            const marker = L.marker([lat, lon], { icon: finalIcon }).addTo(map);
-            bounds.extend([lat, lon]);
+			const marker = L.marker([lat, lon], { icon: finalIcon }).addTo(map);
+			bounds.extend([lat, lon]);
 
-            marker.on('click', (e) => {
-                L.DomEvent.stopPropagation(e);
-                if (f.properties.image) {
-                    openLightbox(f.properties.image);
-                }
-                renderWaypointInfo(f.properties, lat, lon);
-            });
+			marker.on('click', (e) => {
+				L.DomEvent.stopPropagation(e);
+				if (f.properties.image) {
+					openLightbox(f.properties.image);
+				}
+				renderWaypointInfo(f.properties, lat, lon);
+			});
 
-            waypointLayers[wId] = marker;
+			waypointLayers[wId] = marker;
 
-            const cb = document.createElement("input");
-            cb.type = "checkbox";
-            cb.checked = true;
-            waypointCB[wId] = cb;
+			const cb = document.createElement("input");
+			cb.type = "checkbox";
+			cb.checked = true;
+			waypointCB[wId] = cb;
 
-            cb.onchange = () => {
-                cb.checked ? marker.addTo(map) : map.removeLayer(marker);
-            };
+			cb.onchange = () => {
+				cb.checked ? marker.addTo(map) : map.removeLayer(marker);
+			};
 
-            const row = document.createElement("div");
-            const label = document.createElement("span");
-            label.innerText = " " + f.properties.name;
-            label.style.cursor = "pointer";
+			const row = document.createElement("div");
+			const label = document.createElement("span");
+			label.innerText = " " + f.properties.name;
+			label.style.cursor = "pointer";
 
-            label.onclick = () => {
-                map.setView([lat, lon], 16);
-                renderWaypointInfo(f.properties, lat, lon);
-            };
+			label.onclick = () => {
+				map.setView([lat, lon], 16);
+				renderWaypointInfo(f.properties, lat, lon);
+			};
 
-            row.appendChild(cb);
-            row.appendChild(label);
-            waypointList.appendChild(row);
-        }
-    });
+			row.appendChild(cb);
+			row.appendChild(label);
+			waypointList.appendChild(row);
+		}
+	});
 
-    //if (bounds.isValid()) map.fitBounds(bounds);
+	//if (bounds.isValid()) map.fitBounds(bounds);
 	const FIT_TO_DATA = true;
 
 	if (FIT_TO_DATA && bounds.isValid()) {
@@ -402,71 +402,71 @@ fetch("tracks.geojson").then(r => r.json()).then(data => {
 
 /* GLOBAL CONTROLS TETHER */
 document.getElementById("all").onclick = () => {
-    Object.keys(trackLayers).forEach(k => {
-        trackLayers[k].addTo(map);
-        if (arrowLayers[k]) arrowLayers[k].addTo(map);
-        if (trackCB[k]) trackCB[k].checked = true;
-    });
+	Object.keys(trackLayers).forEach(k => {
+		trackLayers[k].addTo(map);
+		if (arrowLayers[k]) arrowLayers[k].addTo(map);
+		if (trackCB[k]) trackCB[k].checked = true;
+	});
 };
 
 document.getElementById("none").onclick = () => {
-    if (animId) cancelAnimationFrame(animId);
-    currentAnimTrack = null;
-    Object.keys(trackLayers).forEach(k => {
-        map.removeLayer(trackLayers[k]);
-        if (arrowLayers[k]) map.removeLayer(arrowLayers[k]);
-        if (trackCB[k]) trackCB[k].checked = false;
-    });
+	if (animId) cancelAnimationFrame(animId);
+	currentAnimTrack = null;
+	Object.keys(trackLayers).forEach(k => {
+		map.removeLayer(trackLayers[k]);
+		if (arrowLayers[k]) map.removeLayer(arrowLayers[k]);
+		if (trackCB[k]) trackCB[k].checked = false;
+	});
 };
 
 document.getElementById("wAll").onclick = () => {
-    Object.keys(waypointLayers).forEach(k => {
-        waypointLayers[k].addTo(map);
-        if (waypointCB[k]) waypointCB[k].checked = true;
-    });
+	Object.keys(waypointLayers).forEach(k => {
+		waypointLayers[k].addTo(map);
+		if (waypointCB[k]) waypointCB[k].checked = true;
+	});
 };
 
 document.getElementById("wNone").onclick = () => {
-    Object.keys(waypointLayers).forEach(k => {
-        map.removeLayer(waypointLayers[k]);
-        if (waypointCB[k]) waypointCB[k].checked = false;
-    });
+	Object.keys(waypointLayers).forEach(k => {
+		map.removeLayer(waypointLayers[k]);
+		if (waypointCB[k]) waypointCB[k].checked = false;
+	});
 };
 
 });
 
 /*==================================
- *    INFO DESCRIPTION
- *    Adds contents of info-description.html to default value of info box
+ *		INFO DESCRIPTION
+ *		Adds contents of info-description.html to default value of info box
  *==================================*/
 document.addEventListener("DOMContentLoaded", function() {
-    const descElement = document.getElementById('infoDescription');
-    
-    // Attempt to fetch the adjacent layout snippet
-    fetch('info-description.html')
-        .then(response => {
-            if (!response.ok) {
-                // If file is missing (404) or server errors out, throw error to trigger .catch()
-                throw new Error('Description file not found');
-            }
-            return response.text();
-        })
-        .then(htmlContent => {
-            // Check if the file is completely empty whitespace
-            if (htmlContent.strip && htmlContent.strip() === "" || htmlContent.trim() === "") {
-                descElement.remove();
-            } else {
-                // Inject the content including any formatting tags present inside the file
-                descElement.innerHTML = htmlContent;
-            }
-        })
-        .catch(error => {
-            // Gracefully remove the <p> section entirely if file doesn't exist
-            if (descElement) {
-                descElement.remove();
-            }
-            console.log("Notice: info-description.html was not loaded or does not exist.");
-        });
+	const descElement = document.getElementById('infoDescription');
+	
+	// Attempt to fetch the adjacent layout snippet
+	fetch('info-description.html')
+		.then(response => {
+			if (!response.ok) {
+				// If file is missing (404) or server errors out, throw error to trigger .catch()
+				throw new Error('Description file not found');
+			}
+			return response.text();
+		})
+		.then(htmlContent => {
+			// Check if the file is completely empty whitespace
+			if (htmlContent.strip && htmlContent.strip() === "" || htmlContent.trim() === "") {
+				descElement.remove();
+			} else {
+				// Inject the content including any formatting tags present inside the file
+				descElement.innerHTML = htmlContent;
+			}
+		})
+		.catch(error => {
+			// Gracefully remove the <p> section entirely if file doesn't exist
+			if (descElement) {
+				descElement.remove();
+			}
+			console.log("Notice: info-description.html was not loaded or does not exist.");
+		});
 });
 
 
@@ -477,3 +477,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
+
+
+<!-- vim: set ai tw=0 foldmethod=indent: -->

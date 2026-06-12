@@ -4,24 +4,23 @@
 
 /* Core application window overrides */
 body {
-    margin: 0;
-    overflow: hidden;
-    font-family: sans-serif;
+	margin: 0;
+	overflow: hidden;
+	font-family: sans-serif;
 }
 
 /* Map canvas container */
 #map {
-    height: 100vh;
-    position: relative;
-    z-index: 0;
+	height: 100vh;
+	position: relative;
+	z-index: 0;
 }
 
 /* Global button element defaults */
 button {
-    margin: 3px;
-    font-size: 12px;
+	margin: 3px;
+	font-size: 12px;
 }
-
 
 /* ==========================================================================
    2. LEAFLET INTERFACE CUSTOMIZATION
@@ -29,33 +28,33 @@ button {
 
 /* Force UI elements above map vectors */
 .leaflet-control {
-    z-index: 1000 !important;
+	z-index: 1000 !important;
 }
 
 /* Reposition top-left controls to clear header space */
 .leaflet-top.leaflet-left {
-    top: 55px;
+	top: 55px;
 }
 
 /* Custom icon mapping for Leaflet layers switcher */
 .leaflet-control-layers-toggle {
-    width: 30px !important;
-    height: 36px !important;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z'/><path d='M15 5.764v15'/><path d='M9 3.236v15'/></svg>") !important;
-    background-size: 30px 36px !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
+	width: 30px !important;
+	height: 36px !important;
+	background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z'/><path d='M15 5.764v15'/><path d='M9 3.236v15'/></svg>") !important;
+	background-size: 30px 36px !important;
+	background-repeat: no-repeat !important;
+	background-position: center !important;
 }
 
 /* Map text typography */
 .leaflet-container {
-    font-family: sans-serif;
+	font-family: sans-serif;
 }
 
 /* Context popup/tooltip sizing */
 .leaflet-control,
 .leaflet-popup {
-    font-size: 14px;
+	font-size: 14px;
 }
 
 /* ==========================================================================
@@ -63,85 +62,84 @@ button {
    ========================================================================== */
 
 :root {
-    --nav-bg: rgba(255, 255, 255, 0.85);
-    --nav-border: rgba(0, 0, 0, 0.08);
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --primary-accent: #2563eb;
-    --primary-accent-hover: #1d4ed8;
-    --bg-hover: rgba(0, 0, 0, 0.04);
-    --btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --drawer-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
-    --nav-radius: 12px;
-    --elem-radius: 8px;
-    --glass-blur: blur(12px);
+	--nav-bg: rgba(255, 255, 255, 0.85);
+	--nav-border: rgba(0, 0, 0, 0.08);
+	--text-main: #1e293b;
+	--text-muted: #64748b;
+	--primary-accent: #2563eb;
+	--primary-accent-hover: #1d4ed8;
+	--bg-hover: rgba(0, 0, 0, 0.04);
+	--btn-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--drawer-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+	--nav-radius: 12px;
+	--elem-radius: 8px;
+	--glass-blur: blur(12px);
 }
 
 /* Floating trigger button for the drawer menu */
 /* Note that jscript in html template resizes this button, so must conform to the settings here */
-/*   Search for this: 
-        btn.style.width = "32px"; */
+/*	 Search for this: 
+		btn.style.width = "32px"; */
 #menuBtn {
-    position: absolute;
-    top: 9px;
-    left: 11px;
-    width: 32px;
-    height: 46px;
-    z-index: 3000;
-    background: var(--nav-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--nav-border);
-    border-radius: var(--nav-radius);
-    cursor: pointer;
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--btn-shadow);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    color: var(--text-main);
+	position: absolute;
+	top: 9px;
+	left: 11px;
+	width: 32px;
+	height: 46px;
+	z-index: 3000;
+	background: var(--nav-bg);
+	backdrop-filter: var(--glass-blur);
+	-webkit-backdrop-filter: var(--glass-blur);
+	border: 1px solid var(--nav-border);
+	border-radius: var(--nav-radius);
+	cursor: pointer;
+	font-size: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: var(--btn-shadow);
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	color: var(--text-main);
 }
 
 #menuBtn:hover {
-    background: #ffffff;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+	background: #ffffff;
+	transform: translateY(-1px);
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 /* If your JS shifts the menu button when the drawer opens, this keeps it fluid */
 #menuBtn.drawer-open {
-    left: 316px; /* 300px drawer width + 16px padding */
+	left: 316px; /* 300px drawer width + 16px padding */
 	width: 50px;
 }
 
 /* Off-canvas panel container (Tracks & Markers list) */
 #drawer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 300px; /* Matched to the info panel width */
-    height: 100%;
-    background: var(--nav-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border-right: 1px solid var(--nav-border);
-    z-index: 3000;
-    transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    overflow-y: auto;
-    padding: 20px 16px;
-    box-shadow: var(--drawer-shadow);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: var(--text-main);
-    box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 300px; /* Matched to the info panel width */
+	height: 100%;
+	background: var(--nav-bg);
+	backdrop-filter: var(--glass-blur);
+	-webkit-backdrop-filter: var(--glass-blur);
+	border-right: 1px solid var(--nav-border);
+	z-index: 3000;
+	transform: translateX(-100%);
+	transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	overflow-y: auto;
+	padding: 20px 16px;
+	box-shadow: var(--drawer-shadow);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	color: var(--text-main);
+	box-sizing: border-box;
 }
 
 /* Revealed state via JS trigger class */
 #drawer.open {
-    transform: translateX(0);
+	transform: translateX(0);
 }
-
 
 /* ==========================================================================
    4. ACCORDION SECTIONS (INSIDE DRAWER)
@@ -149,291 +147,289 @@ button {
 
 /* Individual structural card wrapper */
 .section {
-    margin-bottom: 12px;
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid var(--nav-border);
-    border-radius: var(--nav-radius);
-    overflow: hidden; /* Keeps background hovers within rounded corners */
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+	margin-bottom: 12px;
+	background: rgba(255, 255, 255, 0.4);
+	border: 1px solid var(--nav-border);
+	border-radius: var(--nav-radius);
+	overflow: hidden; /* Keeps background hovers within rounded corners */
+	transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .section:hover {
-    border-color: rgba(0, 0, 0, 0.15);
+	border-color: rgba(0, 0, 0, 0.15);
 }
 
 .section.open {
-    background: rgba(255, 255, 255, 0.6);
-    border-color: rgba(37, 99, 235, 0.2); /* Subtle accent glow color when open */
+	background: rgba(255, 255, 255, 0.6);
+	border-color: rgba(37, 99, 235, 0.2); /* Subtle accent glow color when open */
 }
 
 /* Header trigger for accordion content toggle */
 .section h3 {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    user-select: none;
-    margin: 0;
-    padding: 14px 16px;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    color: var(--text-main);
-    transition: background-color 0.2s ease;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	user-select: none;
+	margin: 0;
+	padding: 14px 16px;
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+	color: var(--text-main);
+	transition: background-color 0.2s ease;
 }
 
 .section h3:hover {
-    background-color: var(--bg-hover);
+	background-color: var(--bg-hover);
 }
 
 /* Modern Minimalist Arrow Indicator (Goodbye clunky CSS borders) */
 .section h3::after {
-    content: '➤';
-    display: inline-block;
-    font-family: system-ui, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--text-muted);
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.2s ease;
+	content: '➤';
+	display: inline-block;
+	font-family: system-ui, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: var(--text-muted);
+	transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.2s ease;
 }
 
 .section h3:hover::after {
-    color: var(--primary-accent);
+	color: var(--primary-accent);
 }
 
 /* Smoothly rotate modern arrow down when open */
 .section.open h3::after {
-    transform: rotate(90deg);
-    color: var(--primary-accent);
+	transform: rotate(90deg);
+	color: var(--primary-accent);
 }
 
 /* Internal body content panel */
 .section .section-content {
-    display: none;
-    padding: 16px;
-    border-top: 1px solid var(--nav-border);
-    background: rgba(255, 255, 255, 0.3);
+	display: none;
+	padding: 16px;
+	border-top: 1px solid var(--nav-border);
+	background: rgba(255, 255, 255, 0.3);
 }
 
 .section.open .section-content {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
 /* Premium styling for Select All / Select None Action Buttons */
 .section-content button {
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 8px 12px;
-    border-radius: var(--elem-radius);
-    border: 1px solid var(--nav-border);
-    background: #ffffff;
-    color: var(--text-main);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 8px 12px;
+	border-radius: var(--elem-radius);
+	border: 1px solid var(--nav-border);
+	background: #ffffff;
+	color: var(--text-main);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .section-content button:hover {
-    background: var(--primary-accent);
-    color: #ffffff;
-    border-color: var(--primary-accent);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+	background: var(--primary-accent);
+	color: #ffffff;
+	border-color: var(--primary-accent);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
 }
 
 .section-content button:active {
-    transform: translateY(0);
+	transform: translateY(0);
 }
 
 /* Layout container for custom lists inside sections */
 #trackList, #waypointList {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-top: 4px;
+	font-size: 13px;
+	color: var(--text-muted);
+	margin-top: 4px;
 }
 
 /* Custom Scrollbar for the Drawer */
 #drawer::-webkit-scrollbar {
-    width: 6px;
+	width: 6px;
 }
 #drawer::-webkit-scrollbar-track {
-    background: transparent;
+	background: transparent;
 }
 #drawer::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
 }
 #drawer::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.2);
+	background: rgba(0, 0, 0, 0.2);
 }
-
-
 
 /* ==========================================================================
    5. MODERN MAP DATA INFO PANEL
    ========================================================================== */
 
 :root {
-    --panel-bg: rgba(255, 255, 255, 0.85);
-    --panel-bg-collapsed: rgba(255, 255, 255, 0.7);
-    --panel-border: rgba(0, 0, 0, 0.08);
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --accent-color: #2563eb;
-    --radius: 12px;
-    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.12), 0 2px 8px -1px rgba(0, 0, 0, 0.08);
-    --blur: blur(12px);
+	--panel-bg: rgba(255, 255, 255, 0.85);
+	--panel-bg-collapsed: rgba(255, 255, 255, 0.7);
+	--panel-border: rgba(0, 0, 0, 0.08);
+	--text-primary: #1e293b;
+	--text-secondary: #64748b;
+	--accent-color: #2563eb;
+	--radius: 12px;
+	--shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.12), 0 2px 8px -1px rgba(0, 0, 0, 0.08);
+	--blur: blur(12px);
 }
 
 /* Primary information card base viewport configuration */
 .info {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 2000;
-    background: var(--panel-bg);
-    backdrop-filter: var(--blur);
-    -webkit-backdrop-filter: var(--blur);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: var(--text-primary);
-    border-radius: var(--radius);
-    width: 300px; /* Slightly wider for better text readability */
-    box-shadow: var(--shadow);
-    border: 1px solid var(--panel-border);
-    max-height: 85vh;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	z-index: 2000;
+	background: var(--panel-bg);
+	backdrop-filter: var(--blur);
+	-webkit-backdrop-filter: var(--blur);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	color: var(--text-primary);
+	border-radius: var(--radius);
+	width: 300px; /* Slightly wider for better text readability */
+	box-shadow: var(--shadow);
+	border: 1px solid var(--panel-border);
+	max-height: 85vh;
+	overflow: hidden;
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* Minimized dashboard overlay state */
 .info.collapsed {
-    width: 110px;
-    background: var(--panel-bg-collapsed) !important;
+	width: 110px;
+	background: var(--panel-bg-collapsed) !important;
 }
 
 /* Information panel title strip */
 .info-header {
-    display: flex;
-    align-items: center;
-    padding: 14px 16px;
-    cursor: pointer;
-    user-select: none;
-    border-bottom: 1px solid var(--panel-border);
-    transition: background-color 0.2s ease;
+	display: flex;
+	align-items: center;
+	padding: 14px 16px;
+	cursor: pointer;
+	user-select: none;
+	border-bottom: 1px solid var(--panel-border);
+	transition: background-color 0.2s ease;
 }
 
 .info-header:hover {
-    background-color: rgba(0, 0, 0, 0.02);
+	background-color: rgba(0, 0, 0, 0.02);
 }
 
 .info.collapsed .info-header {
-    border-bottom-color: transparent;
-    padding: 12px 14px;
+	border-bottom-color: transparent;
+	padding: 12px 14px;
 }
 
 .info-title {
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: var(--text-primary);
-    gap: 8px;
+	display: flex;
+	align-items: center;
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	color: var(--text-primary);
+	gap: 8px;
 }
 
 /* Mini state collapse/expand icon indicator */
 .info-icon {
-    display: inline-block;
-    font-size: 12px; /* Made smaller and cleaner */
-    color: var(--accent-color);
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	display: inline-block;
+	font-size: 12px; /* Made smaller and cleaner */
+	color: var(--accent-color);
+	transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .info.collapsed .info-icon {
-    transform: rotate(0deg);
+	transform: rotate(0deg);
 }
 
 .info:not(.collapsed) .info-icon {
-    transform: rotate(90deg);
+	transform: rotate(90deg);
 }
 
 /* Body content layout */
 .info-body {
-    padding: 16px;
-    max-height: 70vh;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px; /* Adds clean spacing between paragraphs automatically */
+	padding: 16px;
+	max-height: 70vh;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 12px; /* Adds clean spacing between paragraphs automatically */
 }
 
 .info.collapsed .info-body {
-    display: none;
+	display: none;
 }
 
 /* Typography & Content Elements inside body */
 .info-description {
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 500;
-    color: var(--text-primary);
-    margin: 0;
+	font-size: 14px;
+	line-height: 1.5;
+	font-weight: 500;
+	color: var(--text-primary);
+	margin: 0;
 }
 
 .info-instructions {
-    font-size: 12.5px;
-    line-height: 1.5;
-    color: var(--text-secondary);
-    margin: 0;
-    background: rgba(0, 0, 0, 0.02);
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.04);
+	font-size: 12.5px;
+	line-height: 1.5;
+	color: var(--text-secondary);
+	margin: 0;
+	background: rgba(0, 0, 0, 0.02);
+	padding: 10px;
+	border-radius: 8px;
+	border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 /* Inline SVG mapping icons alignment */
 .info-instructions img {
-    vertical-align: middle;
-    margin: 0 2px;
-    opacity: 0.8;
+	vertical-align: middle;
+	margin: 0 2px;
+	opacity: 0.8;
 }
 
 /* Dynamic media items inside information readout (for your future JS injections) */
 .info-img {
-    width: 100%;
-    height: auto;
-    margin-top: 4px;
-    border-radius: 6px;
-    border: 1px solid var(--panel-border);
-    display: block;
+	width: 100%;
+	height: auto;
+	margin-top: 4px;
+	border-radius: 6px;
+	border: 1px solid var(--panel-border);
+	display: block;
 }
 
 .info .name {
-    font-weight: 600;
+	font-weight: 600;
 }
 
 .info .desc {
-    color: var(--text-secondary);
-    font-style: italic;
+	color: var(--text-secondary);
+	font-style: italic;
 }
 
 /* Smooth scrollbar for the info body */
 .info-body::-webkit-scrollbar {
-    width: 6px;
+	width: 6px;
 }
 .info-body::-webkit-scrollbar-track {
-    background: transparent;
+	background: transparent;
 }
 .info-body::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
 }
 .info-body::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.25);
+	background: rgba(0, 0, 0, 0.25);
 }
 
 /* =========================================================
@@ -442,29 +438,29 @@ button {
 
 /* Main pin container styled to feature cover imagery */
 .thumb-pin {
-    width: 46px;
-    height: 46px;
-    border-radius: 6px;
-    border: 2px solid white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
+	width: 46px;
+	height: 46px;
+	border-radius: 6px;
+	border: 2px solid white;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
 }
 
 /* Downward anchor pointing directly at map geocoordinates */
 .thumb-pin::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid white;
+	content: '';
+	position: absolute;
+	bottom: -6px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid white;
 }
 
 
@@ -474,134 +470,136 @@ button {
 
 /* Fullscreen modal viewport backdrop mask */
 .custom-lightbox {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.85);
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+	display: none;
+	position: fixed;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.85);
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.3s ease;
 }
 
 /* Visibility toggled on by application script */
 .custom-lightbox.active {
-    display: flex;
-    opacity: 1;
+	display: flex;
+	opacity: 1;
 }
 
 /* Blown-up graphic framing viewport bounds */
 .custom-lightbox img {
-    max-width: 90%;
-    max-height: 85%;
-    border: 3px solid #ffffff;
-    border-radius: 4px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
+	max-width: 90%;
+	max-height: 85%;
+	border: 3px solid #ffffff;
+	border-radius: 4px;
+	box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+	transform: scale(0.95);
+	transition: transform 0.3s ease;
 }
 
 .custom-lightbox.active img {
-    transform: scale(1);
+	transform: scale(1);
 }
 
 /* Top corner exit control button */
 .lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: #ffffff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    user-select: none;
-    transition: color 0.2s ease;
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	color: #ffffff;
+	font-size: 40px;
+	font-weight: bold;
+	cursor: pointer;
+	user-select: none;
+	transition: color 0.2s ease;
 }
 
 .lightbox-close:hover {
-    color: #d35400;
+	color: #d35400;
 }
-
 
 /* =========================================================
    8. MOBILE RESPONSIVE ADAPTATIONS
    ========================================================= */
 
 @media (max-width: 600px) {
-    /* Up scaled core typography for smaller screen footprints */
-    body {
-        font-size: 20px;
-        line-height: 1.6;
-    }
+	/* Up scaled core typography for smaller screen footprints */
+	body {
+		font-size: 20px;
+		line-height: 1.6;
+	}
 
-    /* Target enlargement for touch interface accessibility */
-    #menuBtn {
-        font-size: 26px;
-        /*padding: 14px 16px;*/
-    }
+	/* Target enlargement for touch interface accessibility */
+	#menuBtn {
+		font-size: 26px;
+		/*padding: 14px 16px;*/
+	}
 
-    /* Scaling panel size dynamically relative to narrower viewports */
-    .info {
-        font-size: 12px;
-        line-height: 1.6;
-        width: 44vw;
-        right: 2vw;
-        top: 7px;
-    }
+	/* Scaling panel size dynamically relative to narrower viewports */
+	.info {
+		font-size: 12px;
+		line-height: 1.6;
+		width: 44vw;
+		right: 2vw;
+		top: 7px;
+	}
 
-    #drawer {
-        font-size: 12px;
-        line-height: 1.6;
-        padding: 16px;
-    }
+	#drawer {
+		font-size: 12px;
+		line-height: 1.6;
+		padding: 16px;
+	}
 
-    .section h3 {
-        font-size: 21px;
-        padding: 16px;
-    }
+	.section h3 {
+		font-size: 21px;
+		padding: 16px;
+	}
 
-    .section-content {
-        padding: 14px;
-    }
+	.section-content {
+		padding: 14px;
+	}
 
-    /* Expanded button surfaces for thumb navigation */
-    button {
-        font-size: 14px;
+	/* Expanded button surfaces for thumb navigation */
+	button {
+		font-size: 14px;
 		padding: 12px 14px;
-        /*margin: 8px 6px;*/
+		/*margin: 8px 6px;*/
 		margin:0;
-        border-radius: 10px;
-    }
+		border-radius: 10px;
+	}
 
-    /* Massive target checkbox sizes for touch displays */
-    input[type="checkbox"] {
-        transform: scale(1.7);
-        margin-right: 12px;
-    }
+	/* Massive target checkbox sizes for touch displays */
+	input[type="checkbox"] {
+		transform: scale(1.7);
+		margin-right: 12px;
+	}
 
-    #trackList div,
-    #waypointList div {
-        margin: 14px 0;
-    }
+	#trackList div,
+	#waypointList div {
+		margin: 14px 0;
+	}
 
-    /* Zoom utilities expanded to match leaflet layout standards */
-    .leaflet-control-zoom a {
-        width: 52px !important;
-        height: 52px !important;
-        line-height: 52px !important;
-        font-size: 26px !important;
-    }
+	/* Zoom utilities expanded to match leaflet layout standards */
+	.leaflet-control-zoom a {
+		width: 52px !important;
+		height: 52px !important;
+		line-height: 52px !important;
+		font-size: 26px !important;
+	}
 
-    .leaflet-top.leaflet-left {
-        top: 60px;
-    }
+	.leaflet-top.leaflet-left {
+		top: 60px;
+	}
 
-    .leaflet-control-layers-toggle {
-        width: 52px !important;
-        height: 52px !important;
-    }
+	.leaflet-control-layers-toggle {
+		width: 52px !important;
+		height: 52px !important;
+	}
 }
+
+
+/*vim: set ai tw=0 foldmethod=indent:*/
