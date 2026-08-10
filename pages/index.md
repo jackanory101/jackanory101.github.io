@@ -4,18 +4,8 @@
 :::
 
 :::{#content}
-- [qr codes](qr-codes.html)
-- [ai images](pages/ai-images/index.html)
-- [townacarra](pages/townacarra/index.html)
-- [ouroboros](pages/ouroboros/index.html)
-- [pano cassie](pages/pano-cassie/)
-- [autotyper](pages/misc/autotyper.html)
-- [bob jagger](pages/misc/bob-jagger.html)
-- [video tv demo](pages/misc/tv-video.html)
-- [bibliomancy](pages/misc/bibliomancy.html)
-- [triangulate](pages/triangulate/gps-triangulate-calculate-height-scripts.html)
-- [leaflets](pages/maps/)
-- [... other links](pages/index.html)
+- [HOME](/index.html)
+- [Yasen & Pete](/pages/yasen/)
 <!--- [zoom audio](pages/zoom/zoom.html)-->
 
 
@@ -266,5 +256,6 @@ if (navigator.plugins && navigator.plugins.length > 0) {
 info.push(...browserInfo);
 updateBanner();
 </script>
+
 
 

@@ -1,46 +1,66 @@
-:::{.banner-container}
-:::{.banner #browser-info}
-:::
-:::
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* override style defined above for columns.lua */
+    div.columns { display: inherit ; gap: inherit ; }
+    /* override style defined above for numbered source code */
+    pre.numberSource { margin-left: inherit !important ; border-left: none !important ; padding-left: inherit !important ; }
+  </style>
+  <link rel="stylesheet" href="/_styles/baskerville-panam.css" />
+  <style>
+  /* Styles added by the columns.lua pandoc filter */
+    .columns :first-child {margin-top: 0;}
+    .column-span + * {margin-top: 0;}
+  </style>
+  <link rel="icon" type="image/png" href="/favicon.svg">
+</head>
+<body>
+<div id="main">
+<div class="banner-container">
+<div id="browser-info" class="banner">
 
-:::{#content}
-- [qr codes](qr-codes.html)
-- [ai images](pages/ai-images/index.html)
-- [townacarra](pages/townacarra/index.html)
-- [ouroboros](pages/ouroboros/index.html)
-- [pano cassie](pages/pano-cassie/)
-- [autotyper](pages/misc/autotyper.html)
-- [bob jagger](pages/misc/bob-jagger.html)
-- [video tv demo](pages/misc/tv-video.html)
-- [bibliomancy](pages/misc/bibliomancy.html)
-- [triangulate](pages/triangulate/gps-triangulate-calculate-height-scripts.html)
-- [leaflets](pages/maps/)
-- [... other links](pages/index.html)
-<!--- [zoom audio](pages/zoom/zoom.html)-->
-
-
-
-
-
-
+</div>
+</div>
+<div id="content">
+<ul class="incremental">
+<li><a href="/index.html">HOME</a></li>
+<li><a href="/pages/yasen/">Yasen &amp; Pete</a>
+<!--- [zoom audio](pages/zoom/zoom.html)--></li>
+</ul>
 <!--:::{.submenu}-->
 <!--- [autotyper](pages/misc/autotyper.html)-->
 <!--- [git guide](pages/misc/git-github-how-to-guide-02.html)-->
 <!--- [bob jagger](pages/misc/bob-jagger.html)-->
 <!--:::-->
-
-:::
-
-:::{#footer}
-
-&copy; 2025 JACKANORY101 | Last updated: <span id="last-updated"></span>
-
-:::
-
-<div class="banner-container" id="banner-container">
-  <div class="banner" id="browser-info"></div>
 </div>
+<div id="footer">
+<p>© 2025 JACKANORY101 | Last updated: <span
+id="last-updated"></span></p>
+</div>
+<div id="banner-container" class="banner-container">
+<div id="browser-info" class="banner">
 
+</div>
+</div>
 <style>
 /* ------------------ Font ------------------ */
 @font-face {
@@ -66,7 +86,7 @@ body {
     background-attachment: fixed;
     position: relative;
     max-width: 100%;
-	display: grid;
+    display: grid;
 }
 
 /* Dark overlay */
@@ -168,15 +188,12 @@ body::before {
     100% { transform: translateX(-100%); }
 }
 </style>
-
-
 <script>
   // Get the last modified date of the current document
   const lastModified = new Date(document.lastModified);
   document.getElementById('last-updated').textContent =
     lastModified.toLocaleDateString();
 </script>
-
 <script>
 const banner = document.getElementById('browser-info');
 const container = document.getElementById('banner-container');
@@ -266,5 +283,6 @@ if (navigator.plugins && navigator.plugins.length > 0) {
 info.push(...browserInfo);
 updateBanner();
 </script>
-
-
+</div>
+</body>
+</html>
