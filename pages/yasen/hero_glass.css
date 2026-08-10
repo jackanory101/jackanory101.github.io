@@ -1,0 +1,257 @@
+/* =========================
+   UNIVERSAL GLASS + HERO THEME
+   (NO STRUCTURE ASSUMPTIONS)
+   ========================= */
+
+:root {
+    --bg: #0b0f17;
+
+    --glass: rgba(255, 255, 255, 0.06);
+    --glass-strong: rgba(255, 255, 255, 0.10);
+    --border: rgba(255, 255, 255, 0.12);
+
+    --text: rgba(255, 255, 255, 0.88);
+    --muted: rgba(255, 255, 255, 0.65);
+    --accent: #7aa2ff;
+
+    --code-bg: rgba(0, 0, 0, 0.35);
+
+    --hero-image: url("gpw-200702-49-NASA-ISS007-E-10807-space-sunset-20030721-Pacific-Ocean-medium.jpg");
+}
+
+/* =========================
+   GLOBAL PAGE BACKDROP
+   ========================= */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.65;
+    background: var(--bg);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* HERO IMAGE LAYER */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background-image: var(--hero-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    transform: scale(1.05);
+    filter: brightness(0.7) contrast(1.1) saturate(1.1);
+
+    z-index: -2;
+}
+
+/* DARK + GLASS OVERLAY */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08), transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05), transparent 45%),
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.80));
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    z-index: -1;
+}
+
+/* =========================
+   UNIVERSAL CONTENT LAYOUT
+   (THIS IS THE KEY FIX)
+   ========================= */
+
+/*
+We apply the "glass card" to ANY likely content container,
+not just #main.
+*/
+main,
+article,
+section,
+div,
+body > *:not(style):not(script):not(link):not(meta) {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* Prevent EVERYTHING becoming a card accidentally */
+header,
+footer {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* =========================
+   TYPOGRAPHY (GLOBAL SAFE)
+   ========================= */
+
+h1, h2, h3, h4 {
+    color: var(--text);
+    font-weight: 600;
+    margin-top: 1.8rem;
+}
+
+h1 {
+    font-size: 2.6rem;
+}
+
+h2 {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3rem;
+}
+
+p {
+    color: var(--text);
+}
+
+/* =========================
+   LINKS
+   ========================= */
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   CODE
+   ========================= */
+
+pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.95em;
+}
+
+p code {
+    background: rgba(255,255,255,0.08);
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+}
+
+/* =========================
+   BLOCKQUOTES
+   ========================= */
+
+blockquote {
+    margin: 1.5rem 0;
+    padding: 1rem 1.2rem;
+
+    border-left: 3px solid var(--accent);
+    background: var(--glass-strong);
+    border-radius: 10px;
+
+    color: var(--muted);
+}
+
+/* =========================
+   LISTS
+   ========================= */
+
+ul, ol {
+    padding-left: 1.5rem;
+}
+
+/* =========================
+   TABLES
+   ========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+
+    background: var(--glass);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background: rgba(255,255,255,0.05);
+}
+
+/* =========================
+   DETAILS / SUMMARY
+   ========================= */
+
+details {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* =========================
+   SCROLLBAR (OPTIONAL)
+   ========================= */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+/* =========================
+   GLOBAL FEEL
+   ========================= */
+
+* {
+    transition: all 0.15s ease;
+}
