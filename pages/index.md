@@ -5,7 +5,7 @@
 
 :::{#content}
 - [HOME](/index.html)
-- [Yasen & Pete](/pages/yasen/)
+<!--- [Yasen & Pete](/pages/yasen/)-->
 <!--- [zoom audio](pages/zoom/zoom.html)-->
 
 
