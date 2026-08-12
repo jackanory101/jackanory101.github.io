@@ -1,6 +1,6 @@
 /* =========================
    UNIVERSAL GLASS + HERO THEME
-   (NO STRUCTURE ASSUMPTIONS)
+   (MOBILE-FRIENDLY REVISED)
    ========================= */
 
 :root {
@@ -36,6 +36,11 @@ body {
     background: var(--bg);
     overflow-x: hidden;
     position: relative;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 /* HERO IMAGE LAYER */
@@ -74,21 +79,17 @@ body::after {
 
 /* =========================
    UNIVERSAL CONTENT LAYOUT
-   (THIS IS THE KEY FIX)
    ========================= */
 
-/*
-We apply the "glass card" to ANY likely content container,
-not just #main.
-*/
 main,
 article,
 section,
 div,
 body > *:not(style):not(script):not(link):not(meta) {
     max-width: 900px;
-    margin: 3rem auto;
-    padding: 2rem;
+    width: 92%;
+    margin: 2rem auto;
+    padding: 1.5rem;
 
     background: var(--glass);
     border: 1px solid var(--border);
@@ -98,6 +99,22 @@ body > *:not(style):not(script):not(link):not(meta) {
     -webkit-backdrop-filter: blur(14px);
 
     box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* Prevent accidental nested card blowouts on inner sections */
+main section,
+article section,
+section section {
+    max-width: 100%;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 /* Prevent EVERYTHING becoming a card accidentally */
@@ -111,6 +128,24 @@ footer {
 }
 
 /* =========================
+   RESPONSIVE MEDIA ELEMENTS
+   ========================= */
+
+audio,
+video,
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+video.inline {
+    width: 100% !important;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* =========================
    TYPOGRAPHY (GLOBAL SAFE)
    ========================= */
 
@@ -121,7 +156,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 2.6rem;
+    font-size: 2.2rem;
 }
 
 h2 {
@@ -140,6 +175,7 @@ p {
 a {
     color: var(--accent);
     text-decoration: none;
+    word-break: break-word;
 }
 
 a:hover {
@@ -167,6 +203,7 @@ p code {
     background: rgba(255,255,255,0.08);
     padding: 0.2em 0.4em;
     border-radius: 6px;
+    word-break: break-all;
 }
 
 /* =========================
@@ -236,7 +273,8 @@ summary {
    ========================= */
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -254,4 +292,25 @@ summary {
 
 * {
     transition: all 0.15s ease;
+}
+
+/* =========================
+   MOBILE MEDIA QUERY
+   ========================= */
+
+@media (max-width: 600px) {
+    main,
+    article,
+    section,
+    div,
+    body > *:not(style):not(script):not(link):not(meta) {
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
 }
