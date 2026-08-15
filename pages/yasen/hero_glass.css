@@ -298,3 +298,76 @@ summary {
         font-size: 2rem;
     }
 }
+
+/* =========================
+   MEDIA CARD & DOWNLOAD FIX
+   ========================= */
+
+/* Prevent nested cards inside your media wrappers */
+.media-card,
+.media-card section,
+.media-card div.download-container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+	margin: 0.5rem 0 1.5rem 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+
+/* Make the media card itself act as the structured container */
+.media-card {
+    background: var(--glass) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 18px !important;
+	padding: 1.5rem !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+	margin: 2rem auto !important;
+}
+
+/* Unintrusive, small download link style */
+a.media-download {
+    font-size: 0.65rem;
+    color: var(--muted);
+    opacity: 0.8;
+    text-decoration: none;
+    display: inline-block;
+	/*margin-top: -12px;*/
+}
+
+a.media-download:hover {
+    color: var(--accent);
+    opacity: 1;
+    text-decoration: underline;
+}
+/* =========================
+   TIGHTEN MEDIA & DOWNLOAD SPACING
+   ========================= */
+
+/* Remove excess bottom margin from sections containing media */
+.media-card section {
+    margin: 0 0 0.2rem 0 !important;
+}
+
+/* Snug the download container right up against the media player */
+.media-card div.download-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: right; /* Optional: Aligns download link to the right, remove if you prefer left */
+}
+
+/* Adjust download link size and remove any remaining spacing */
+a.media-download {
+    font-size: 0.65rem;
+    color: var(--muted);
+    opacity: 0.8;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 0;
+}
