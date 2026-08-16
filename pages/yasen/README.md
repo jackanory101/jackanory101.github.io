@@ -1,17 +1,19 @@
-A script that takes folders from e.g. src dir and compiles index,html
+# Readme
 
-Each folder is a separate div of audio maybe nby date
+`html_snip_from_media.py` process media files in 'media' folder, ignoring `_DEV` folder.
 
-Each folder may have a text file description of folder contents
+Media folders name will be used as title for all files in that folder except where folder name ends in hyphen, in which case no title is written.
 
-Each has:
+`description.txt` files provided title for each media file where `<filename<tab><description>`.
 
-expiry date: 2wks
-tags: funk jazz other
+Script generates file `media_snippet.html` which is inserted into `index.html` with JavaScript in latter file and placeholder `<main id="main">Loading media...</main>`.
+
 
 ---
 
-A script to convert audio video into standard size / format
+TODO:
+
+- script to standardize media file format and size
 
 
 
