@@ -8,7 +8,11 @@
 <!--- [Yasen & Pete](/pages/yasen/)-->
 <!--- [zoom audio](pages/zoom/zoom.html)-->
 
+:::{.submenu}
+- [mischa maisky](misc/mischa.html)
+- [el equipo nocturno](el equipo nocturno/index.html)
 
+:::
 
 
 
