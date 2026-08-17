@@ -2,29 +2,377 @@
 <html lang="">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=yes"
+		/>
+
 		<title>index</title>
+
 		<link rel="stylesheet" href="hero_glass.css" media="screen" />
+
+		<style>
+			/* Electric edge canvas */
+			#electric-edge {
+				position: fixed !important;
+				inset: 0 !important;
+
+				width: 100vw !important;
+				height: 100vh !important;
+
+				max-width: none !important;
+				margin: 0 !important;
+				padding: 0 !important;
+
+				background: transparent !important;
+				border: none !important;
+				border-radius: 0 !important;
+				box-shadow: none !important;
+
+				backdrop-filter: none !important;
+				-webkit-backdrop-filter: none !important;
+
+				pointer-events: none !important;
+
+				z-index: 9999 !important;
+			}
+		</style>
 	</head>
+
 	<body>
-		<a class="home-sigil" href="/" aria-label="Home"> ∴ ⊢ ⟡ HOME / INDEX ⟡ ⊣ ∴ </a>
+		<!-- Must exist before the electric-edge JavaScript runs -->
+		<canvas id="electric-edge"></canvas>
+
+		<a class="home-sigil" href="/" aria-label="Home">
+			∴ ⊢ ⟡ HOME / INDEX ⟡ ⊣ ∴
+		</a>
+
 		<h1 id="index">PTY Media</h1>
+
 		<main id="main">Loading media...</main>
 
-		<style></style>
+		<!-- Load media snippet -->
 		<script>
 			fetch("media_snippet.html")
 				.then((response) => {
-					if (!response.ok) throw new Error("Network response was not ok");
+					if (!response.ok) {
+						throw new Error("Network response was not ok");
+					}
+
 					return response.text();
 				})
 				.then((html) => {
 					document.getElementById("main").innerHTML = html;
 				})
 				.catch((error) => {
-					document.getElementById("main").innerHTML = "<p>Could not load media snippet.</p>";
+					document.getElementById("main").innerHTML =
+						"<p>Could not load media snippet.</p>";
+
 					console.error("Error loading snippet:", error);
 				});
 		</script>
+
+		<!-- Electric edge effect -->
+		
+<script>
+(() => {
+	const canvas = document.getElementById("electric-edge");
+
+	if (!canvas) {
+		console.error("electric-edge canvas not found");
+		return;
+	}
+
+	const ctx = canvas.getContext("2d");
+
+	if (!ctx) {
+		console.error("Could not get canvas context");
+		return;
+	}
+
+	let width;
+	let height;
+	let dpr;
+
+	const arcs = [];
+
+	function resize() {
+		dpr = window.devicePixelRatio || 1;
+
+		width = window.innerWidth;
+		height = window.innerHeight;
+
+		canvas.width = width * dpr;
+		canvas.height = height * dpr;
+
+		canvas.style.width = width + "px";
+		canvas.style.height = height + "px";
+
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+	}
+
+	window.addEventListener("resize", resize);
+	resize();
+
+
+	/*
+	 * Create a short electrical arc.
+	 */
+	function createArc() {
+
+		const edge = Math.floor(Math.random() * 4);
+
+		const length = 80 + Math.random() * 250;
+		const segments = 8;
+
+		const points = [];
+
+		let x;
+		let y;
+
+		if (edge === 0) {
+			// TOP
+			x = Math.random() * width;
+			y = 0;
+
+			for (let i = 0; i <= segments; i++) {
+				points.push({
+					x: x + i * length / segments,
+					y: y + (Math.random() - 0.5) * 12
+				});
+			}
+
+		} else if (edge === 1) {
+			// RIGHT
+			x = width;
+			y = Math.random() * height;
+
+			for (let i = 0; i <= segments; i++) {
+				points.push({
+					x: x + (Math.random() - 0.5) * 12,
+					y: y + i * length / segments
+				});
+			}
+
+		} else if (edge === 2) {
+			// BOTTOM
+			x = Math.random() * width;
+			y = height;
+
+			for (let i = 0; i <= segments; i++) {
+				points.push({
+					x: x + i * length / segments,
+					y: y + (Math.random() - 0.5) * 12
+				});
+			}
+
+		} else {
+			// LEFT
+			x = 0;
+			y = Math.random() * height;
+
+			for (let i = 0; i <= segments; i++) {
+				points.push({
+					x: x + (Math.random() - 0.5) * 12,
+					y: y + i * length / segments
+				});
+			}
+		}
+
+		arcs.push({
+			points,
+			age: 0,
+			life: 120 + Math.random() * 300
+		});
+	}
+
+
+	function drawArc(arc) {
+
+		const p = arc.age / arc.life;
+
+		/*
+		 * Strong visible fade.
+		 */
+		let alpha;
+
+		if (p < 0.1) {
+			alpha = p / 0.1;
+		} else {
+			alpha = 1 - ((p - 0.1) / 0.9);
+		}
+
+		/*
+		 * Aggressive random electrical flickering.
+		 */
+		alpha *= Math.random() < 0.25
+			? 0.2
+			: 0.8 + Math.random() * 0.2;
+
+
+		/*
+		 * LARGE BLUE AURA
+		 */
+		ctx.save();
+
+		ctx.beginPath();
+
+		ctx.moveTo(
+			arc.points[0].x,
+			arc.points[0].y
+		);
+
+		for (let i = 1; i < arc.points.length; i++) {
+			ctx.lineTo(
+				arc.points[i].x,
+				arc.points[i].y
+			);
+		}
+
+		ctx.strokeStyle =
+			`rgba(0, 80, 255, ${alpha})`;
+
+		ctx.lineWidth = 14;
+
+		ctx.shadowColor =
+			`rgba(0, 80, 255, ${alpha})`;
+
+		ctx.shadowBlur = 35;
+
+		ctx.stroke();
+
+		ctx.restore();
+
+
+		/*
+		 * BRIGHT BLUE CORE
+		 */
+		ctx.save();
+
+		ctx.beginPath();
+
+		ctx.moveTo(
+			arc.points[0].x,
+			arc.points[0].y
+		);
+
+		for (let i = 1; i < arc.points.length; i++) {
+			ctx.lineTo(
+				arc.points[i].x,
+				arc.points[i].y
+			);
+		}
+
+		ctx.strokeStyle =
+			`rgba(80, 200, 255, ${alpha})`;
+
+		ctx.lineWidth = 3;
+
+		ctx.shadowColor =
+			`rgba(0, 150, 255, ${alpha})`;
+
+		ctx.shadowBlur = 12;
+
+		ctx.stroke();
+
+		ctx.restore();
+
+
+		/*
+		 * WHITE/BLUE HOT CENTRE
+		 */
+		ctx.save();
+
+		ctx.beginPath();
+
+		ctx.moveTo(
+			arc.points[0].x,
+			arc.points[0].y
+		);
+
+		for (let i = 1; i < arc.points.length; i++) {
+			ctx.lineTo(
+				arc.points[i].x,
+				arc.points[i].y
+			);
+		}
+
+		ctx.strokeStyle =
+			`rgba(180, 235, 255, ${alpha * 0.9})`;
+
+		ctx.lineWidth = 1;
+
+		ctx.stroke();
+
+		ctx.restore();
+	}
+
+
+	let lastTime = performance.now();
+	let spawnTimer = 0;
+
+
+	function animate(now) {
+
+		const delta = now - lastTime;
+
+		lastTime = now;
+
+		ctx.clearRect(
+			0,
+			0,
+			width,
+			height
+		);
+
+
+		/*
+		 * Spawn frequently enough that the effect
+		 * should be unmistakable.
+		 */
+		spawnTimer += delta;
+
+		if (spawnTimer > 70) {
+
+			createArc();
+
+			/*
+			 * Frequently make several arcs simultaneously.
+			 */
+			if (Math.random() < 0.35) {
+				createArc();
+			}
+
+			spawnTimer = 0;
+		}
+
+
+		/*
+		 * Draw existing arcs.
+		 */
+		for (let i = arcs.length - 1; i >= 0; i--) {
+
+			const arc = arcs[i];
+
+			arc.age += delta;
+
+			if (arc.age >= arc.life) {
+				arcs.splice(i, 1);
+				continue;
+			}
+
+			drawArc(arc);
+		}
+
+
+		requestAnimationFrame(animate);
+	}
+
+
+	requestAnimationFrame(animate);
+
+})();
+</script>
 	</body>
 </html>
+
