@@ -4,7 +4,7 @@
 :::
 
 :::{#content}
-- [qr codes](qr-codes.html)
+- [qr codes](pages/misc/qr-codes.html)
 - [ai images](pages/ai-images/index.html)
 - [townacarra](pages/townacarra/index.html)
 - [ouroboros](pages/ouroboros/index.html)
