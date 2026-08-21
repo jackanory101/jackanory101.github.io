@@ -1,0 +1,2 @@
+.nojekyll without this, github refuses to acknowledge folders beginning with "_"
+index.html REMOVE LOCAL FILE LINKS AND AUTHOR etc WITH VIM SCRIPT!
