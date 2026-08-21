@@ -155,10 +155,10 @@ h4 {
 }
 
 h1 {
-	padding-bottom: 170px !important;
+	padding-bottom: 120px !important;
+	padding-top:30px !important;
 	font-size: clamp(2rem, 4vw, 2.6rem); /* Scales smoothly from mobile to PC */
 }
-
 h2 {
 	border-bottom: 1px solid var(--border);
 	padding-bottom: 0.3rem;
