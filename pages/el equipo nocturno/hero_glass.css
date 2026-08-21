@@ -137,7 +137,10 @@ video.inline {
 	height: auto;
 	border-radius: 0.75rem; /* ~12px */
 }
-
+/* If the <section> is a sibling anywhere AFTER the <p>, with possible elements in between */
+p.date ~ section video {
+	margin-top:16px;
+}
 /* =========================
    TYPOGRAPHY (FLUID CLAMP SIZING)
    ========================= */
