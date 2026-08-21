@@ -4,7 +4,7 @@
 
 Media folders name will be used as title for all files in that folder except where folder name ends in hyphen, in which case no title is written.
 
-`descript.ion` files provided title for each media file where `<filename<tab><description>`.
+`descript.ion` files provided title for each media file where filename is either one word or enclosed in quotes, followed by file description.
 
 Script generates file `media_snippet.html` which is inserted into `index.html` with JavaScript in latter file and placeholder `<main id="main">Loading media...</main>`.
 

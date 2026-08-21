@@ -3,4 +3,4 @@
 
 > _DEv is not processed  
 > "-" is no title  
-> descript.ion is each media file's description: `<media name><tab><description>`  
+`descript.ion` provides title for each media file where filename is either one word or enclosed in quotes, followed by file description.
