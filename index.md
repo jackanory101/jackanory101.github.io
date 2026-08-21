@@ -14,7 +14,7 @@
 - [video tv demo](pages/misc/tv-video.html)
 - [bibliomancy](pages/misc/bibliomancy.html)
 <!--- [triangulate](pages/triangulate/gps-triangulate-calculate-height-scripts.html)-->
-- [leaflets](pages/maps/)
+- [leaflets](pages/leaflets)
 - [... other links](pages/index.html)
 <!--- [zoom audio](pages/zoom/zoom.html)-->
 
