@@ -11,7 +11,7 @@
 :::{.submenu}
 - [mischa maisky](misc/mischa.html)
 - [el equipo nocturno](el equipo nocturno/index.html)
-
+- [taboos in science](misc/260903-scientific-subjects-taboos.html)
 :::
 
 
