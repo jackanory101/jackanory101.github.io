@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="ExifTool-JSON-to-GPX">
+	<wpt lat="-32.2286666666667" lon="115.800605555556">
+		<ele>-13.5</ele>
+		<time>2026-06-01T09:16:59Z</time>
+		<name>Cassie on the Kwinana Loop</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260601_011659125.jpg</filename>
+			<heading>60</heading>
+		</extensions>
+		<link href="img/PXL_20260601_011659125.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2290277777778" lon="115.797819444444">
+		<ele>3.05</ele>
+		<time>2026-06-03T08:10:17Z</time>
+		<name>View to Thomas Road and Kwinana tip</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260603_001017295.jpg</filename>
+			<heading>105</heading>
+		</extensions>
+		<link href="img/PXL_20260603_001017295.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2312694444444" lon="115.795494444444">
+		<ele>-24.2</ele>
+		<time>2026-06-07T08:44:20Z</time>
+		<name>Early morning</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260607_004420202.jpg</filename>
+			<heading>237</heading>
+		</extensions>
+		<link href="img/PXL_20260607_004420202.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2304527777778" lon="115.796477777778">
+		<ele>-1.21</ele>
+		<time>2026-06-07T08:49:32Z</time>
+		<name>Australian shelduck (Tadorna tadornoides),</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260607_004932068.jpg</filename>
+			<heading>37</heading>
+		</extensions>
+		<link href="img/PXL_20260607_004932068.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2287416666667" lon="115.796275">
+		<ele>0.79</ele>
+		<time>2026-06-08T09:47:52Z</time>
+		<name>View over Thomas Rd and the Kwinana tip</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_014752937.jpg</filename>
+			<heading>347</heading>
+		</extensions>
+		<link href="img/PXL_20260608_014752937.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2270472222222" lon="115.8037">
+		<ele>-14.12</ele>
+		<time>2026-06-08T09:59:43Z</time>
+		<name>Cassie</name>
+		<desc/>
+		<extensions>
+			<filename>PXL_20260608_015943874.jpg</filename>
+			<heading>77</heading>
+		</extensions>
+		<link href="img/PXL_20260608_015943874.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.241475" lon="115.788333333333">
+		<ele>-30.87</ele>
+		<time>2026-09-03T08:59:18Z</time>
+		<name>Flooded track</name>
+		<desc>Near Aurizon train depot</desc>
+		<extensions>
+			<filename>PXL_20260903_005918853.jpg</filename>
+			<heading>255</heading>
+		</extensions>
+		<link href="img/PXL_20260903_005918853.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2426333333333" lon="115.787125">
+		<ele>-28.03</ele>
+		<time>2026-09-04T09:06:28Z</time>
+		<name>Monarch butterfly (Danaus plexippus)</name>
+		<desc>Medina bushland</desc>
+		<extensions>
+			<filename>PXL_20260904_010628351.PORTRAIT.ORIGINAL.jpg</filename>
+			<heading>0</heading>
+		</extensions>
+		<link href="img/PXL_20260904_010628351.PORTRAIT.ORIGINAL.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2410027777778" lon="115.787052777778">
+		<ele>-23.64</ele>
+		<time>2026-09-04T09:09:36Z</time>
+		<name>Agave americana</name>
+		<desc>Medina bushland</desc>
+		<extensions>
+			<filename>PXL_20260904_010936313.jpg</filename>
+			<heading>77</heading>
+		</extensions>
+		<link href="img/PXL_20260904_010936313.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+	<wpt lat="-32.2351666666667" lon="115.786519444444">
+		<ele>-28.04</ele>
+		<time>2026-09-04T09:19:27Z</time>
+		<name>Pair of old Norfolk Island pine</name>
+		<desc>Medina bushland</desc>
+		<extensions>
+			<filename>PXL_20260904_011927666.jpg</filename>
+			<heading>321</heading>
+		</extensions>
+		<link href="img/PXL_20260904_011927666.jpg">
+			<type>image/jpeg</type>
+		</link>
+	</wpt>
+</gpx>
