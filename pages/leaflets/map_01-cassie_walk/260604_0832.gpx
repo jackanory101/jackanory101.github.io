@@ -16,6 +16,7 @@ xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/
 <desc><![CDATA[]]></desc>
 <type><![CDATA[cycling]]></type>
 <extensions>
+	<selected>false</selected>
 <topografix:color>c0c0c0</topografix:color>
 <opentracks:trackid>7d9f07fe-305e-4668-971f-2a13a8e6b761</opentracks:trackid>
 <opentracks:typeTranslated><![CDATA[cycling]]></opentracks:typeTranslated>

@@ -5,6 +5,7 @@
     <desc />
     <type>cycling</type>
     <extensions>
+		<selected>false</selected>
       <topografix:color>c0c0c0</topografix:color>
       <opentracks:trackid>9844d100-79c0-41c6-b438-216c9b095d79</opentracks:trackid>
       <opentracks:typeTranslated>cycling</opentracks:typeTranslated>
