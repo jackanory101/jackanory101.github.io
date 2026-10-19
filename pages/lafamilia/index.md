@@ -15,6 +15,7 @@
 
 
 
+
 > [second is next paradox](docs/second-is-next-paradox.html)  
 
 <!--links end-->

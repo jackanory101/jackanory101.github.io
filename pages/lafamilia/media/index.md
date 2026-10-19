@@ -25,6 +25,22 @@
 
 
 
+
+<div class="media-card">
+  <h3>artifact 02</h3>
+  <audio controls src="artifact_02.m4a"></audio>
+</div>
+
+<div class="media-card">
+  <h3>groaning audio final</h3>
+  <audio controls src="groaning-audio_final.m4a"></audio>
+</div>
+
+<div class="media-card">
+  <h3>shiftingMindfuck 04 01 16bit</h3>
+  <audio controls src="shiftingMindfuck_04_01_16bit.m4a"></audio>
+</div>
+
 <!--media end-->
 
 <a class="home-sigil" href="../" aria-label="Home">
