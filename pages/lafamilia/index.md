@@ -1,53 +1,30 @@
-<!DOCTYPE html>
-<html lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>index</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* override style defined above for columns.lua */
-    div.columns { display: inherit ; gap: inherit ; }
-    /* override style defined above for numbered source code */
-    pre.numberSource { margin-left: inherit !important ; border-left: none !important ; padding-left: inherit !important ; }
-  </style>
-  <link rel="stylesheet" href="/_styles/baskerville-panam.css" />
-  <style>
-  /* Styles added by the columns.lua pandoc filter */
-    .columns :first-child {margin-top: 0;}
-    .column-span + * {margin-top: 0;}
-  </style>
-  <link rel="icon" type="image/png" href="/favicon.svg">
-</head>
-<body>
-<div id="main">
-<h1 id="index">Index</h1>
-<blockquote>
-<p><a href="calcium.txt.html">calcium.txt.html</a><br />
-<a href="hba1c.txt.html">hba1c.txt.html</a><br />
-<a href="histo.txt.html">histo.txt.html</a><br />
-<a href="iron.txt.html">iron.txt.html</a><br />
-<a href="lipids.txt.html">lipids.txt.html</a><br />
-<a href="liver.txt.html">liver.txt.html</a><br />
-<a href="psa.txt.html">psa.txt.html</a><br />
-<a href="vitD.txt.html">vitD.txt.html</a></p>
-</blockquote>
-<p><a class="home-sigil" href="/" aria-label="Home"> ∴ ⊢ ⟡ HOME / INDEX
-⟡ ⊣ ∴ </a></p>
+## Docs
+
+<!--links start-->
+
+
+
+
+
+
+
+
+
+
+
+
+> [second is next paradox](docs/second-is-next-paradox.html)  
+
+<!--links end-->
+
+## Media
+
+> [AUDIO & VIDEO](media/index.html)
+
+<a class="home-sigil" href="/" aria-label="Home">
+  ∴ ⊢ ⟡ HOME / INDEX ⟡ ⊣ ∴
+</a>
+
 <style>
 /* ===== HOME SIGIL (GLITCH CONTROL NODE) ===== */
 
@@ -176,6 +153,5 @@
   100% { transform: translate(-2px, 0); clip-path: inset(60% 0 0 0); }
 }
 </style>
-</div>
-</body>
-</html>
+
+

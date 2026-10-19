@@ -1,0 +1,111 @@
+/* ==========================================================================
+   Classy Centered Glassmorphism Theme for Media Index
+   ========================================================================== */
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.4);
+  --glass-blur: blur(16px);
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #818cf8;
+  --accent-glow: rgba(129, 140, 248, 0.2);
+  --radius: 20px;
+}
+
+/* Base Body Styles - Constrained and Centered */
+body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Page Header */
+#title-block-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+h1.title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 0%, var(--text-muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Individual Glass Media Cards */
+.media-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.media-card:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+/* Media Item Titles */
+.media-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  color: var(--text-main);
+  letter-spacing: 0.01em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 0.75rem;
+}
+
+/* Responsive Video Player inside Card */
+.media-card video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: calc(var(--radius) - 6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #000;
+  display: block;
+}
+
+/* Audio Player inside Card */
+.media-card audio {
+  width: 100%;
+  border-radius: 30px;
+  outline: none;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
