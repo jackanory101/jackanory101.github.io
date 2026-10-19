@@ -13,6 +13,8 @@
 
 
 
+
+
 > [second is next paradox](docs/second-is-next-paradox.html)  
 
 <!--links end-->
@@ -24,6 +26,10 @@
 <a class="home-sigil" href="/" aria-label="Home">
   ∴ ⊢ ⟡ HOME / INDEX ⟡ ⊣ ∴
 </a>
+
+<style>
+header { margin-top:80px; }
+</style>
 
 <style>
 /* ===== HOME SIGIL (GLITCH CONTROL NODE) ===== */
