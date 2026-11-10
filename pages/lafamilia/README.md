@@ -1,4 +1,15 @@
-## La Familia jackanory101 
+# La Familia jackanory101 
+## Update
+
+Media files in `media` folder (including audio, video and images) automatically inserted into generated [media_snippet.html](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/media/media_snippet.html) file via script [html_snip_from_media.py](file:///c:/cygwin64/home/tom/bin/programming/html/html_snip_from_media.py) and called by `.bat` script [html_snip_from_media.bat](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/media/html_snip_from_media.bat). See [README.md](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/el equipo nocturno/README.md). This snippet *included* in [index.html](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/media/index.html) by javascript.
+
+Media index uses [hero_glass.css](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/media/hero_glass.css) and [nasa-space-sunset.jpg](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/media/nasa-space-sunset.jpg) image.
+
+Files in `docs` folder of [lafamilia](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/) are automatically parsed for [index.md](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/index.md), (inserted at right spot in file), and converted to HTML using [process_files_la_familia.bat](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/process_files_la_familia.bat) (script also calls [pandoc_convert_md2html.sh](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/pandoc_convert_md2html.sh)).
+
+this script [process_files_la_familia.bat](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/process_files_la_familia.bat) *also* runs media files script [html_snip_from_media.bat](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/lafamilia/media/html_snip_from_media.bat) at the same time.
+
+## Older notes
 
 Quickly hacked up scripts to process files in [La Familia](file:///c:/xampp/htdocs/github/jackanory101.github.io/pages/_lafamilia/) dir of Jackanory101.
 

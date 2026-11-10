@@ -16,13 +16,29 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+> [I Am Legend (novel)   Wikipedia 2026 11 10](docs/I Am Legend (novel) - Wikipedia 2026-11-10.html)  
 > [second is next paradox](docs/second-is-next-paradox.html)  
 
 <!--links end-->
 
 ## Media
 
-> [AUDIO & VIDEO](media/index.html)
+> [AUDIO, VIDEO & IMAGES](media/index.html)
 
 <a class="home-sigil" href="/" aria-label="Home">
   ∴ ⊢ ⟡ HOME / INDEX ⟡ ⊣ ∴

@@ -1,0 +1,2 @@
+process_files_la_familia.bat This processes files in 'docs' folder and writes links to MD which is then converted to HTML\n\nNote that other folders are ignored. Files found in 'docs' are *inserted* into MD file. Other links (to eg Media) need to be manually written.Â
+pandoc_convert_md2html.sh This is used by .bat script 

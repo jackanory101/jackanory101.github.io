@@ -8,6 +8,11 @@ Media folders name will be used as title for all files in that folder except whe
 
 Script generates file `media_snippet.html` which is inserted into `index.html` with JavaScript in latter file and placeholder `<main id="main">Loading media...</main>`.
 
+About order:
+
+- alphanumeric (ignoring case) in reverse (e.g. `02` comes before `01`)
+- `_` comes after digits in natural sort so comes before in reverse sort
+
 
 ---
 
